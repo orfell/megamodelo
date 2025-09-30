@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Modalidad Virtual - TEdU</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        :root {
+            --unicomfa-blue: #0055A4;
+            --unicomfa-orange: #FF6600;
+            --unicomfa-green: #78BE20;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        .slide-container {
+            padding: 20px 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
+            flex-shrink: 0;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+    
+        .slide {
+            width: 1280px;
+            height: calc(100vh - 8px);
+            background-color: white;
+            color: #333;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .slide-header {
+            flex-shrink: 0;
+            padding: 20px 16px 10px 16px;
+        }
+        .slide-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 0 16px 20px 16px;
+        }
+        .footer-logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            height: 40px;
+        }
+        .container-box {
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 3px solid;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .container-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        .container-title {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            color: white;
+            font-weight: 600;
+        }
+        .container-title i {
+            background-color: rgba(255, 255, 255, 0.3);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+        .container-content {
+            background-color: white;
+            padding: 16px;
+        }
+        .inner-content {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 12px;
+            border-radius: 6px;
+            color: #000000;
+        }
+        /* Colores específicos para cada tipo de contenedor */
+        .blue-container {
+            border-color: var(--unicomfa-blue);
+        }
+        .blue-container .container-title {
+            background-color: rgba(0, 85, 164, 0.9);
+        }
+        .orange-container {
+            border-color: var(--unicomfa-orange);
+        }
+        .orange-container .container-title {
+            background-color: rgba(255, 102, 0, 0.9);
+        }
+        .green-container {
+            border-color: var(--unicomfa-green);
+        }
+        .green-container .container-title {
+            background-color: rgba(120, 190, 32, 0.9);
+        }
+        .tpack-cell {
+            transition: all 0.2s ease;
+        }
+        .tpack-cell:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+        .table-header {
+            font-weight: 600;
+            text-align: center;
+            padding: 10px;
+        }
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        /* Personalización de la barra de desplazamiento */
+        .slide-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .slide-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .slide-content::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        .slide-content::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header bar -->
+<!-- Main slide -->
+<div class="slide"><div class="header-bar"></div>
+<!-- Fixed header -->
+<div class="slide-header">
+<!-- Title with icon -->
+<div class="flex items-center mb-4">
+<div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: var(--unicomfa-blue);">
+<i class="fas fa-laptop text-white text-2xl"></i>
+</div>
+<div>
+<h1 class="text-4xl font-bold">Modalidad Virtual</h1>
+<div class="h-1 w-24 bg-gray-600 mt-2"></div>
+</div>
+</div>
+</div>
+<!-- Scrollable content -->
+<div class="slide-content">
+<!-- Two-column layout -->
+<div class="flex flex-1">
+<!-- Left column - Definition and Pedagogy -->
+<div class="w-1/2 pr-8">
+<!-- Definition -->
+<div class="container-box blue-container">
+<div class="container-title">
+<i class="fas fa-info-circle"></i>
+<h2>Definición</h2>
+</div>
+<div class="container-content">
+<div class="inner-content">
+<p class="text-lg mb-4">
+<span class="font-bold">Proceso 100%</span> mediante tecnologías digitales, 
+                                        <span class="font-bold">sin presencia física simultánea</span> entre estudiantes y docentes.
+                                    </p>
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-gray-100 p-2 rounded text-center">
+<i class="fas fa-cloud text-blue-500 text-xl mb-1"></i>
+<p class="text-sm">LMS / Plataformas</p>
+</div>
+<div class="bg-gray-100 p-2 rounded text-center">
+<i class="fas fa-history text-blue-500 text-xl mb-1"></i>
+<p class="text-sm">Asincronía / Sincronía</p>
+</div>
+<div class="bg-gray-100 p-2 rounded text-center">
+<i class="fas fa-file-alt text-blue-500 text-xl mb-1"></i>
+<p class="text-sm">Recursos Digitales</p>
+</div>
+<div class="bg-gray-100 p-2 rounded text-center">
+<i class="fas fa-headset text-blue-500 text-xl mb-1"></i>
+<p class="text-sm">Soporte Constante</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pedagogical Approach -->
+<div class="container-box orange-container">
+<div class="container-title">
+<i class="fas fa-chalkboard-teacher"></i>
+<h2>Enfoque Pedagógico</h2>
+</div>
+<div class="container-content">
+<div class="inner-content space-y-4">
+<div class="flex">
+<div class="feature-icon">
+<i class="fas fa-user-graduate text-orange-600"></i>
+</div>
+<div>
+<h3 class="font-semibold text-lg">Centrado en el Estudiante</h3>
+<p class="text-sm text-gray-700">Diseño instruccional que prioriza las necesidades y ritmos del aprendiz</p>
+</div>
+</div>
+<div class="flex">
+<div class="feature-icon">
+<i class="fas fa-compass text-orange-600"></i>
+</div>
+<div>
+<h3 class="font-semibold text-lg">Autonomía</h3>
+<p class="text-sm text-gray-700">Fomento de la independencia y responsabilidad en el proceso de aprendizaje</p>
+</div>
+</div>
+<div class="flex">
+<div class="feature-icon">
+<i class="fas fa-tasks text-orange-600"></i>
+</div>
+<div>
+<h3 class="font-semibold text-lg">Autorregulación</h3>
+<p class="text-sm text-gray-700">Desarrollo de habilidades para gestionar tiempo y recursos de aprendizaje</p>
+</div>
+</div>
+<div class="flex">
+<div class="feature-icon">
+<i class="fas fa-clock text-orange-600"></i>
+</div>
+<div>
+<h3 class="font-semibold text-lg">Flexibilidad</h3>
+<p class="text-sm text-gray-700">Adaptación a diferentes contextos, horarios y necesidades individuales</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right column - Relevance and TPACK Table -->
+<div class="w-1/2 pl-8">
+<!-- Relevance for Unicomfacauca -->
+<div class="container-box green-container">
+<div class="container-title">
+<i class="fas fa-bullseye"></i>
+<h2>Pertinencia para Unicomfacauca</h2>
+</div>
+<div class="container-content">
+<div class="inner-content">
+<ul class="space-y-3">
+<li class="flex items-start">
+<div class="w-8 h-8 rounded-full flex items-center justify-center mr-3 bg-green-100">
+<i class="fas fa-map-marked-alt text-green-600"></i>
+</div>
+<div>
+<h3 class="font-medium">Supera barreras físicas</h3>
+<p class="text-sm text-gray-700">Permite acceso a educación desde cualquier lugar con conectividad</p>
+</div>
+</li>
+<li class="flex items-start">
+<div class="w-8 h-8 rounded-full flex items-center justify-center mr-3 bg-green-100">
+<i class="fas fa-universal-access text-green-600"></i>
+</div>
+<div>
+<h3 class="font-medium">Entornos inclusivos</h3>
+<p class="text-sm text-gray-700">Adaptación a diferentes capacidades y situaciones personales</p>
+</div>
+</li>
+<li class="flex items-start">
+<div class="w-8 h-8 rounded-full flex items-center justify-center mr-3 bg-green-100">
+<i class="fas fa-globe-americas text-green-600"></i>
+</div>
+<div>
+<h3 class="font-medium">Respuesta a multiculturalidad</h3>
+<p class="text-sm text-gray-700">Acoge diversidad cultural y saberes territoriales</p>
+</div>
+</li>
+<li class="flex items-start">
+<div class="w-8 h-8 rounded-full flex items-center justify-center mr-3 bg-green-100">
+<i class="fas fa-mountain text-green-600"></i>
+</div>
+<div>
+<h3 class="font-medium">Geografía diversa</h3>
+<p class="text-sm text-gray-700">Ideal para regiones con acceso limitado a campus físicos</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- TPACK Application Table -->
+<div class="container-box blue-container">
+<div class="container-title">
+<i class="fas fa-th"></i>
+<h2>Aplicación del Modelo TPACK</h2>
+</div>
+<div class="container-content">
+<div class="inner-content">
+<div class="rounded-lg overflow-hidden border border-gray-200">
+<!-- Table headers -->
+<div class="grid grid-cols-4">
+<div class="table-header bg-blue-100 text-blue-900 border-b border-gray-200">Dimensión</div>
+<div class="table-header bg-blue-100 text-blue-900 border-b border-gray-200">Contenido (CK)</div>
+<div class="table-header bg-blue-100 text-blue-900 border-b border-gray-200">Pedagogía (PK)</div>
+<div class="table-header bg-blue-100 text-blue-900 border-b border-gray-200">Tecnología (TK)</div>
+</div>
+<!-- Table rows -->
+<div class="grid grid-cols-4 text-sm">
+<div class="p-2 font-medium bg-gray-100 border-b border-gray-200">Planificación</div>
+<div class="p-2 tpack-cell bg-gray-50 border-b border-gray-200">
+                                                Secuenciación didáctica modular
+                                            </div>
+<div class="p-2 tpack-cell bg-gray-50 border-b border-gray-200">
+                                                Diseño instruccional para autonomía
+                                            </div>
+<div class="p-2 tpack-cell bg-gray-50 border-b border-gray-200">
+                                                Moodle, herramientas para organización
+                                            </div>
+</div>
+<div class="grid grid-cols-4 text-sm">
+<div class="p-2 font-medium bg-gray-100 border-b border-gray-200">Interacción</div>
+<div class="p-2 tpack-cell bg-gray-50 border-b border-gray-200">
+                                                Foros, discusiones temáticas aplicadas
+                                            </div>
+<div class="p-2 tpack-cell bg-gray-50 border-b border-gray-200">
+                                                Aprendizaje colaborativo asincrónico
+                                            </div>
+<div class="p-2 tpack-cell bg-gray-50 border-b border-gray-200">
+                                                Videoconferencias, mensajería, chats
+                                            </div>
+</div>
+<div class="grid grid-cols-4 text-sm">
+<div class="p-2 font-medium bg-gray-100 border-b border-gray-200">Recursos</div>
+<div class="p-2 tpack-cell bg-gray-50 border-b border-gray-200">
+                                                REA/RED específicos para cada tema
+                                            </div>
+<div class="p-2 tpack-cell bg-gray-50 border-b border-gray-200">
+                                                Microaprendizaje, multimedia adaptada
+                                            </div>
+<div class="p-2 tpack-cell bg-gray-50 border-b border-gray-200">
+                                                H5P, videos interactivos, simuladores
+                                            </div>
+</div>
+<div class="grid grid-cols-4 text-sm">
+<div class="p-2 font-medium bg-gray-100">Evaluación</div>
+<div class="p-2 tpack-cell bg-gray-50">
+                                                Evaluación por competencias específicas
+                                            </div>
+<div class="p-2 tpack-cell bg-gray-50">
+                                                Retroalimentación personalizada
+                                            </div>
+<div class="p-2 tpack-cell bg-gray-50">
+                                                Cuestionarios adaptativos, e-portafolios
+                                            </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

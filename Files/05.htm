@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Componentes Base del TPACK - TEdU</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" as="style">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --unicomfa-blue: #0055A4;
+            --unicomfa-orange: #FF6600;
+            --unicomfa-green: #78BE20;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+        .slide-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 20px 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow: hidden;
+        }
+        .slide {
+            width: 1280px;
+            height: 720px;
+            max-width: 1280px;
+            height: 100vh;
+            background-color: #fff;
+            color: #333;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+        .header-bar {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            height: 8px;
+            background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
+            flex-shrink: 0;
+        }
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 16px 16px;
+        }
+        .component-card {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            border: 3px solid;
+            margin-bottom: 20px;
+            will-change: transform, box-shadow;
+        }
+        .component-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .component-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            opacity: 0.9;
+        }
+        .component-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 12px;
+            background-color: rgba(255, 255, 255, 0.3) !important;
+        }
+        .component-icon i {
+            color: white;
+        }
+        .component-header h2, 
+        .component-header p {
+            color: white !important;
+        }
+        .component-content {
+            padding: 15px;
+            background-color: white;
+        }
+        .content-inner {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 12px;
+            border-radius: 6px;
+        }
+        .content-inner p, 
+        .content-inner span, 
+        .content-inner strong {
+            color: #000000 !important;
+        }
+        .example-item {
+            transition: all 0.2s ease;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid #edf2f7;
+        }
+        .example-item:hover {
+            transform: translateX(5px);
+            background-color: #f7fafc;
+        }
+        /* Scrollbar styling */
+        .main-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .main-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .main-content::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+        .main-content::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .component-header {
+                padding: 12px;
+            }
+            .component-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+                margin-right: 10px;
+            }
+            .component-header h2 {
+                font-size: 1.8rem;
+            }
+            .component-header p {
+                font-size: 0.9rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+            .component-card {
+                margin-bottom: 16px;
+            }
+            .component-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            .component-header h2 {
+                font-size: 1.6rem;
+            }
+            .pt-8 {
+                padding-top: 1.5rem;
+            }
+            .pb-6 {
+                padding-bottom: 1rem;
+            }
+            .px-16 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide">
+            <!-- Fixed header bar -->
+            <div class="header-bar w-full"></div>
+            
+            <!-- Scrollable main content -->
+            <div class="main-content">
+                <!-- Title -->
+                <div class="pt-6 pb-4 px-4 md:pt-8 md:pb-6 md:px-16">
+                    <h1 class="text-2xl md:text-4xl font-bold text-gray-800">Componentes Base del TPACK</h1>
+                    <div class="h-1 w-16 md:w-24 bg-gray-600 mt-2"></div>
+                </div>
+                
+                <!-- Component Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 px-4 md:px-16 pb-6 md:pb-8">
+                    <!-- Technological Knowledge (TK) -->
+                    <div class="component-card" style="border-color: var(--unicomfa-blue);">
+                        <div class="component-header" style="background-color: var(--unicomfa-blue);">
+                            <div class="component-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl md:text-3xl font-bold">TK</h2>
+                                <p class="text-sm md:text-base">Conocimiento Tecnológico</p>
+                            </div>
+                        </div>
+                        <div class="component-content">
+                            <div class="content-inner">
+                                <p class="font-medium mb-3 text-sm md:text-base">Uso <span class="font-bold">adecuado y crítico</span> de herramientas digitales</p>
+                                <div class="space-y-1 mb-4">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-500 mt-1 mr-2 text-xs md:text-sm"></i>
+                                        <p class="text-xs md:text-sm">Dominio de plataformas LMS</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-500 mt-1 mr-2 text-xs md:text-sm"></i>
+                                        <p class="text-xs md:text-sm">Selección adecuada de herramientas</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-500 mt-1 mr-2 text-xs md:text-sm"></i>
+                                        <p class="text-xs md:text-sm">Solución a problemas técnicos</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-blue-500 mt-1 mr-2 text-xs md:text-sm"></i>
+                                        <p class="text-xs md:text-sm">Adaptación a nuevas tecnologías</p>
+                                    </div>
+                                </div>
+                                <div class="border-t border-gray-200 pt-3 mt-4">
+                                    <h3 class="font-semibold mb-2 text-blue-600 text-sm md:text-base">Ejemplos en Unicomfacauca:</h3>
+                                    <div class="space-y-2">
+                                        <div class="example-item p-2">
+                                            <div class="flex items-center">
+                                                <div class="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center bg-blue-100 mr-2">
+                                                    <i class="fas fa-desktop text-xs text-blue-700"></i>
+                                                </div>
+                                                <span class="text-xs md:text-sm"><strong>Virtual:</strong> Manejo avanzado de Moodle</span>
+                                            </div>
+                                        </div>
+                                        <div class="example-item p-2">
+                                            <div class="flex items-center">
+                                                <div class="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center bg-blue-100 mr-2">
+                                                    <i class="fas fa-video text-xs text-blue-700"></i>
+                                                </div>
+                                                <span class="text-xs md:text-sm"><strong>Híbrida:</strong> Configuración equipos multisitio</span>
+                                            </div>
+                                        </div>
+                                        <div class="example-item p-2">
+                                            <div class="flex items-center">
+                                                <div class="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center bg-blue-100 mr-2">
+                                                    <i class="fas fa-seedling text-xs text-blue-700"></i>
+                                                </div>
+                                                <span class="text-xs md:text-sm"><strong>U. Campo:</strong> Apps funcionales offline</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pedagogical Knowledge (PK) -->
+                    <div class="component-card" style="border-color: var(--unicomfa-orange);">
+                        <div class="component-header" style="background-color: var(--unicomfa-orange);">
+                            <div class="component-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl md:text-3xl font-bold">PK</h2>
+                                <p class="text-sm md:text-base">Conocimiento Pedagógico</p>
+                            </div>
+                        </div>
+                        <div class="component-content">
+                            <div class="content-inner">
+                                <p class="font-medium mb-3 text-sm md:text-base">Estrategias de <span class="font-bold">enseñanza efectivas</span> adaptadas al contexto</p>
+                                <div class="space-y-1 mb-4">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-orange-500 mt-1 mr-2 text-xs md:text-sm"></i>
+                                        <p class="text-xs md:text-sm">Diseño didáctico pertinente</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-orange-500 mt-1 mr-2 text-xs md:text-sm"></i>
+                                        <p class="text-xs md:text-sm">Evaluación formativa y sumativa</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-orange-500 mt-1 mr-2 text-xs md:text-sm"></i>
+                                        <p class="text-xs md:text-sm">Gestión del aprendizaje</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-orange-500 mt-1 mr-2 text-xs md:text-sm"></i>
+                                        <p class="text-xs md:text-sm">Motivación y retroalimentación</p>
+                                    </div>
+                                </div>
+                                <div class="border-t border-gray-200 pt-3 mt-4">
+                                    <h3 class="font-semibold mb-2 text-orange-600 text-sm md:text-base">Ejemplos en Unicomfacauca:</h3>
+                                    <div class="space-y-2">
+                                        <div class="example-item p-2">
+                                            <div class="flex items-center">
+                                                <div class="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center bg-orange-100 mr-2">
+                                                    <i class="fas fa-sync-alt text-xs text-orange-700"></i>
+                                                </div>
+                                                <span class="text-xs md:text-sm"><strong>Blended:</strong> Aprendizaje invertido</span>
+                                            </div>
+                                        </div>
+                                        <div class="example-item p-2">
+                                            <div class="flex items-center">
+                                                <div class="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center bg-orange-100 mr-2">
+                                                    <i class="fas fa-industry text-xs text-orange-700"></i>
+                                                </div>
+                                                <span class="text-xs md:text-sm"><strong>Dual:</strong> Aprendizaje basado en retos</span>
+                                            </div>
+                                        </div>
+                                        <div class="example-item p-2">
+                                            <div class="flex items-center">
+                                                <div class="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center bg-orange-100 mr-2">
+                                                    <i class="fas fa-users text-xs text-orange-700"></i>
+                                                </div>
+                                                <span class="text-xs md:text-sm"><strong>Presencial:</strong> Aprendizaje colaborativo</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Content Knowledge (CK) -->
+                    <div class="component-card" style="border-color: var(--unicomfa-green);">
+                        <div class="component-header" style="background-color: var(--unicomfa-green);">
+                            <div class="component-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl md:text-3xl font-bold">CK</h2>
+                                <p class="text-sm md:text-base">Conocimiento del Contenido</p>
+                            </div>
+                        </div>
+                        <div class="component-content">
+                            <div class="content-inner">
+                                <p class="font-medium mb-3 text-sm md:text-base"><span class="font-bold">Dominio de los temas</span> a enseñar, explicados de forma clara</p>
+                                <div class="space-y-1 mb-4">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2 text-xs md:text-sm"></i>
+                                        <p class="text-xs md:text-sm">Experticia disciplinar actualizada</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2 text-xs md:text-sm"></i>
+                                        <p class="text-xs md:text-sm">Organización lógica de saberes</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2 text-xs md:text-sm"></i>
+                                        <p class="text-xs md:text-sm">Identificación de conceptos clave</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2 text-xs md:text-sm"></i>
+                                        <p class="text-xs md:text-sm">Conexión con aplicaciones reales</p>
+                                    </div>
+                                </div>
+                                <div class="border-t border-gray-200 pt-3 mt-4">
+                                    <h3 class="font-semibold mb-2 text-green-600 text-sm md:text-base">Ejemplos en Unicomfacauca:</h3>
+                                    <div class="space-y-2">
+                                        <div class="example-item p-2">
+                                            <div class="flex items-center">
+                                                <div class="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center bg-green-100 mr-2">
+                                                    <i class="fas fa-code text-xs text-green-700"></i>
+                                                </div>
+                                                <span class="text-xs md:text-sm"><strong>Ingeniería:</strong> Dominio lenguajes programación</span>
+                                            </div>
+                                        </div>
+                                        <div class="example-item p-2">
+                                            <div class="flex items-center">
+                                                <div class="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center bg-green-100 mr-2">
+                                                    <i class="fas fa-chart-line text-xs text-green-700"></i>
+                                                </div>
+                                                <span class="text-xs md:text-sm"><strong>Administración:</strong> Análisis financiero contextual</span>
+                                            </div>
+                                        </div>
+                                        <div class="example-item p-2">
+                                            <div class="flex items-center">
+                                                <div class="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center bg-green-100 mr-2">
+                                                    <i class="fas fa-paint-brush text-xs text-green-700"></i>
+                                                </div>
+                                                <span class="text-xs md:text-sm"><strong>Diseño:</strong> Teoría del color y composición</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bottom integration message -->
+                <div class="mx-4 md:mx-16 mb-6 p-3 md:p-4 rounded-lg bg-gray-100 border border-gray-200">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center mr-3 md:mr-4 bg-white border border-gray-300">
+                            <i class="fas fa-puzzle-piece text-gray-700 text-sm md:text-base"></i>
+                        </div>
+                        <div>
+                            <p class="text-base md:text-lg font-medium text-gray-800">La verdadera innovación educativa surge cuando estos tres conocimientos se integran estratégicamente</p>
+                            <p class="text-xs md:text-sm text-gray-600">El modelo TEdU acompaña al docente en esta integración para las diferentes modalidades</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

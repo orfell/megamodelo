@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Articulación Interinstitucional Estratégica - TEdU</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        :root {
+            --unicomfa-blue: #0055A4;
+            --unicomfa-orange: #FF6600;
+            --unicomfa-green: #78BE20;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            align-items: flex-start;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            background-color: white;
+            color: #000000;
+            position: relative;
+            overflow: hidden;
+
+        }
+        .header-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
+        }
+        .footer-logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            height: 40px;
+        }
+        
+        /* Contenedor Necesidad de Integración modificado */
+        .concept-box {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 3px solid var(--unicomfa-blue); /* Borde azul como estaba */
+            background-color: white; /* Fondo general blanco */
+            overflow: hidden;
+        }
+        .concept-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .concept-header {
+            padding: 12px 15px;
+            background-color: var(--unicomfa-blue); /* Fondo azul institucional */
+            color: white; /* Texto blanco */
+        }
+        .concept-content {
+            padding: 15px;
+            background-color: white; /* Fondo blanco */
+            color: #000000; /* Texto negro */
+        }
+        
+        /* Resto de estilos (se mantienen igual) */
+        .area-card {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            height: 100%;
+            border: 3px solid;
+            background-color: white;
+        }
+        .area-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .area-header {
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        .blue-header {
+            background-color: rgba(0, 85, 164, 0.9);
+            border-bottom: 3px solid var(--unicomfa-blue);
+        }
+        .orange-header {
+            background-color: rgba(255, 102, 0, 0.9);
+            border-bottom: 3px solid var(--unicomfa-orange);
+        }
+        .green-header {
+            background-color: rgba(120, 190, 32, 0.9);
+            border-bottom: 3px solid var(--unicomfa-green);
+        }
+        .area-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            margin-right: 10px;
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+        .area-title {
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.1;
+        }
+        .area-content {
+            padding: 15px;
+            font-size: 0.85rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            color: #000000;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            padding: 5px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            color: #000000;
+        }
+        .feature-item:hover {
+            background-color: rgba(0, 0, 0, 0.03);
+            transform: translateX(5px);
+        }
+        .annex-tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            background-color: rgba(0, 0, 0, 0.1);
+            margin-top: 6px;
+            color: #000000;
+        }
+        .blue-icon {
+            color: var(--unicomfa-blue);
+        }
+        .orange-icon {
+            color: var(--unicomfa-orange);
+        }
+        .green-icon {
+            color: var(--unicomfa-green);
+        }
+        .blue-border {
+            border-color: var(--unicomfa-blue);
+        }
+        .orange-border {
+            border-color: var(--unicomfa-orange);
+        }
+        .green-border {
+            border-color: var(--unicomfa-green);
+        }
+    </style>
+</head>
+<body style="background-color: #f3f4f6; margin: 0; padding: 0; overflow: hidden; display: flex; justify-content: center; align-items: flex-start;">
+<div class="slide flex flex-col" style="margin-top: 20px; border-radius: 12px"><div class="header-bar w-full"></div>
+<!-- Header bar -->
+
+<!-- Main content -->
+<div class="flex flex-col px-16 py-8 h-full">
+<!-- Title (left-aligned with underline) -->
+<div class="mb-4 text-left">
+<h1 class="text-4xl font-bold text-gray-900">Articulación Interinstitucional Estratégica</h1>
+<div class="h-1 w-24 bg-gray-800 mt-2"></div>
+</div>
+<!-- Introduction (centered) - Contenedor modificado -->
+<div class="concept-box mb-5 z-10 mx-auto max-w-4xl">
+<div class="concept-header">
+<div class="flex items-center">
+<div class="area-icon">
+<i class="fas fa-link"></i>
+</div>
+<div>
+<h2 class="text-xl font-bold mb-1">Necesidad de Integración</h2>
+</div>
+</div>
+</div>
+<div class="concept-content">
+<p>
+                        TEdU debe <span class="font-semibold">operar en sintonía</span> con las políticas y estructuras institucionales
+                        para garantizar coherencia, sostenibilidad y calidad.
+                    </p>
+</div>
+</div>
+<!-- Area Cards (se mantienen igual) -->
+<div class="grid grid-cols-5 gap-4 mt-4 mx-auto max-w-6xl">
+<!-- Sistema de Calidad (SIAC) -->
+<div class="area-card blue-border">
+<div class="area-header blue-header">
+<div class="area-icon">
+<i class="fas fa-award"></i>
+</div>
+<div class="area-title">Sistema de Calidad (SIAC)</div>
+</div>
+<div class="area-content">
+<div class="feature-item">
+<i class="fas fa-file-alt blue-icon mt-1 mr-2"></i>
+<span>Políticas institucionales</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-chart-bar blue-icon mt-1 mr-2"></i>
+<span>Indicadores específicos</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-folder-open blue-icon mt-1 mr-2"></i>
+<span>Expedientes formativos</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-clipboard-check blue-icon mt-1 mr-2"></i>
+<span>Validación académica</span>
+</div>
+<div class="text-center">
+
+<a href="../Doc/PDF/Anexo_I.pdf" target="_blank" class="annex-tag"><b>Anexo I</b></a>
+
+</div>
+</div>
+</div>
+<!-- Bienestar Universitario -->
+<div class="area-card orange-border">
+<div class="area-header orange-header">
+<div class="area-icon">
+<i class="fas fa-heart"></i>
+</div>
+<div class="area-title">Bienestar Universitario</div>
+</div>
+<div class="area-content">
+<div class="feature-item">
+<i class="fas fa-user-friends orange-icon mt-1 mr-2"></i>
+<span>Diseño centrado en usuario</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-hands-helping orange-icon mt-1 mr-2"></i>
+<span>Acompañamiento online</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-smile orange-icon mt-1 mr-2"></i>
+<span>Bienestar digital</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-exclamation-triangle orange-icon mt-1 mr-2"></i>
+<span>Alertas tempranas</span>
+</div>
+<div class="text-center">
+
+<a href="../Doc/PDF/Anexo_F.pdf" target="_blank" class="annex-tag"><b>Anexo F</b></a>
+
+</div>
+</div>
+</div>
+<!-- Investigación -->
+<div class="area-card green-border">
+<div class="area-header green-header">
+<div class="area-icon">
+<i class="fas fa-microscope"></i>
+</div>
+<div class="area-title">Investigación</div>
+</div>
+<div class="area-content">
+<div class="feature-item">
+<i class="fas fa-search green-icon mt-1 mr-2"></i>
+<span>Cursos con indagación</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-users green-icon mt-1 mr-2"></i>
+<span>Semilleros virtuales</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-laptop-code green-icon mt-1 mr-2"></i>
+<span>REDs de investigación</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-chalkboard-teacher green-icon mt-1 mr-2"></i>
+<span>Formación docente</span>
+</div>
+<div class="text-center">
+
+<a href="../Doc/PDF/Anexo_G.pdf" target="_blank" class="annex-tag"><b>Anexo G</b></a>
+
+</div>
+</div>
+</div>
+<!-- Proyección Social -->
+<div class="area-card blue-border">
+<div class="area-header blue-header">
+<div class="area-icon">
+<i class="fas fa-hands-helping"></i>
+</div>
+<div class="area-title">Proyección Social</div>
+</div>
+<div class="area-content">
+<div class="feature-item">
+<i class="fas fa-city blue-icon mt-1 mr-2"></i>
+<span>Proyectos comunitarios</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-laptop blue-icon mt-1 mr-2"></i>
+<span>Extensión tecno-pedagógica</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-handshake blue-icon mt-1 mr-2"></i>
+<span>Alianzas territoriales</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-globe blue-icon mt-1 mr-2"></i>
+<span>Impacto regional</span>
+</div>
+<div class="text-center">
+
+<a href="../Doc/PDF/Anexo_H.pdf" target="_blank" class="annex-tag"><b>Anexo H</b></a>
+
+</div>
+</div>
+</div>
+<!-- Gestión Académica -->
+<div class="area-card orange-border">
+<div class="area-header orange-header">
+<div class="area-icon">
+<i class="fas fa-graduation-cap"></i>
+</div>
+<div class="area-title">Gestión Académica</div>
+</div>
+<div class="area-content">
+<div class="feature-item">
+<i class="fas fa-user-plus orange-icon mt-1 mr-2"></i>
+<span>Matrícula diferenciada</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-chart-line orange-icon mt-1 mr-2"></i>
+<span>Seguimiento (analítica)</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-route orange-icon mt-1 mr-2"></i>
+<span>Rutas de apoyo</span>
+</div>
+<div class="feature-item">
+<i class="fas fa-medal orange-icon mt-1 mr-2"></i>
+<span>Reconocimiento saberes</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer note (centered) -->
+<div class="mt-4 p-3 rounded-lg mx-auto max-w-4xl bg-gray-100 text-center text-sm z-10">
+<i class="fas fa-cogs mr-2 text-blue-500"></i>
+                La efectiva <span class="font-semibold">coordinación entre las áreas estratégicas</span> garantiza un 
+                ecosistema educativo integrado y sostenible para todas las modalidades.
+            </div>
+</div>
+</div>
+</body>
+</html>

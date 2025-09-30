@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perpectiva General de las Modalidades - TEdU</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --unicomfa-blue: #0055A4;
+            --unicomfa-orange: #FF6600;
+            --unicomfa-green: #78BE20;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        .slide-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 20px 0;
+        }
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background-color: white;
+            color: #000000;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+        .header-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
+            flex-shrink: 0;
+            width: 100%;
+        }
+        .fixed-header {
+            padding: 20px 16px 10px;
+            flex-shrink: 0;
+        }
+        .scrollable-content {
+            overflow-y: auto;
+            padding: 0 16px 16px;
+            flex-grow: 1;
+        }
+        .footer-logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            height: 40px;
+            color: #000000;
+        }
+        
+        /* Estilos específicos del contenido */
+        .container-title {
+            border: 3px solid;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .container-title.blue {
+            background-color: rgba(0, 85, 164, 0.9);
+            border-color: var(--unicomfa-blue);
+            color: white;
+        }
+        .container-title.orange {
+            background-color: rgba(255, 102, 0, 0.9);
+            border-color: var(--unicomfa-orange);
+            color: white;
+        }
+        .container-title.green {
+            background-color: rgba(120, 190, 32, 0.9);
+            border-color: var(--unicomfa-green);
+            color: white;
+        }
+        .title-icon {
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+        .title-icon i {
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .content-container {
+            background-color: white;
+            border: 3px solid;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .content-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .content-container.blue {
+            border-color: var(--unicomfa-blue);
+        }
+        .content-container.orange {
+            border-color: var(--unicomfa-orange);
+        }
+        .content-container.green {
+            border-color: var(--unicomfa-green);
+        }
+        .content-inner {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 6px;
+            padding: 12px;
+            color: #000000;
+        }
+        
+        .list-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            padding: 6px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        .list-item:hover {
+            background-color: rgba(0,0,0,0.05);
+            transform: translateX(5px);
+        }
+        .list-icon {
+            margin-right: 10px;
+            margin-top: 3px;
+            font-size: 0.9rem;
+        }
+        .list-icon.blue {
+            color: var(--unicomfa-blue);
+        }
+        .list-icon.orange {
+            color: var(--unicomfa-orange);
+        }
+        .list-icon.green {
+            color: var(--unicomfa-green);
+        }
+        
+        .modality-card {
+            border: 3px solid;
+            border-radius: 12px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+        .modality-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .modality-card.blue {
+            border-color: var(--unicomfa-blue);
+        }
+        .modality-card.orange {
+            border-color: var(--unicomfa-orange);
+        }
+        .modality-card.green {
+            border-color: var(--unicomfa-green);
+        }
+        .modality-icon {
+            height: 60px;
+            width: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            margin: 0 auto 12px;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .modality-icon i {
+            color: white;
+        }
+        .modality-icon.blue {
+            background-color: var(--unicomfa-blue);
+        }
+        .modality-icon.orange {
+            background-color: var(--unicomfa-orange);
+        }
+        .modality-icon.green {
+            background-color: var(--unicomfa-green);
+        }
+        .modality-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-right: 5px;
+            margin-top: 5px;
+        }
+        .modality-tag.blue {
+            background-color: var(--unicomfa-blue);
+            color: white;
+        }
+        .modality-tag.orange {
+            background-color: var(--unicomfa-orange);
+            color: white;
+        }
+        .modality-tag.green {
+            background-color: var(--unicomfa-green);
+            color: white;
+        }
+        
+        /* Barra de desplazamiento personalizada */
+        .scrollable-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .scrollable-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        .scrollable-content::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide">
+            <!-- Barra de colores -->
+            <div class="header-bar"></div>
+            
+            <!-- Header fijo -->
+            <div class="fixed-header">
+                <h1 class="text-4xl font-bold text-gray-800">Perspectiva General de las Modalidades</h1>
+                <div class="h-1 w-24 bg-gray-800 mt-2"></div>
+            </div>
+            
+            <!-- Contenido principal -->
+            <div class="scrollable-content">
+                <!-- Two-column layout -->
+                <div class="flex flex-1 pb-8">
+                    <!-- Left column - Why Multimodal -->
+                    <div class="w-1/3 pr-8">
+                        <div class="container-title orange">
+                            <div class="title-icon">
+                                <i class="fas fa-question"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold">¿Por qué un enfoque multimodal?</h2>
+                        </div>
+                        
+                        <div class="content-container blue">
+                            <div class="content-inner">
+                                <div class="flex items-center mb-3">
+                                    <i class="fas fa-users mr-3 text-lg" style="color: var(--unicomfa-blue);"></i>
+                                    <h3 class="font-semibold text-lg">Diversidad de Estudiantes</h3>
+                                </div>
+                                <ul class="space-y-2">
+                                    <li class="list-item">
+                                        <i class="fas fa-map-marker-alt list-icon blue"></i>
+                                        <span>Contextos geográficos diversos</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <i class="fas fa-theater-masks list-icon blue"></i>
+                                        <span>Diversidad cultural</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <i class="fas fa-hand-holding-usd list-icon blue"></i>
+                                        <span>Realidades económicas distintas</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <i class="fas fa-map-marker-alt list-icon blue"></i>
+                                        <span>Con múltiples roles: académico, laboral y familiar.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="content-container orange">
+                            <div class="content-inner">
+                                <div class="flex items-center mb-3">
+                                    <i class="fas fa-ban mr-3 text-lg" style="color: var(--unicomfa-orange);"></i>
+                                    <h3 class="font-semibold text-lg">Superación de Barreras</h3>
+                                </div>
+                                <ul class="space-y-2">
+                                    <li class="list-item">
+                                        <i class="fas fa-wifi list-icon orange"></i>
+                                        <span>Limitaciones de conectividad</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <i class="fas fa-building list-icon orange"></i>
+                                        <span>Aprovechamiento de la infraestructura existente en lo rural</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <i class="fas fa-clock list-icon orange"></i>
+                                        <span>Restricciones de tiempo/horario</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                    <!-- Right column - The 5 Modalities -->
+                    <div class="w-2/3 pl-8">
+                        <div class="container-title green">
+                            <div class="title-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold">Las 5 Modalidades TEdU</h2>
+                        </div>
+                        
+                        <div class="grid grid-cols-3 gap-5">
+                            <!-- Virtual -->
+                            <div class="modality-card blue">
+                                <div class="modality-icon blue">
+                                    <i class="fas fa-laptop"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-center mb-3" style="color: var(--unicomfa-blue);">Virtual</h3>
+                                <p class="text-sm text-center text-gray-700 mb-3">Proceso 100% mediante tecnologías digitales, sin presencia física simultánea</p>
+                                <div class="flex flex-wrap justify-center">
+                                    <span class="modality-tag blue">Autonomía</span>
+                                    <span class="modality-tag blue">Flexibilidad</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Blended -->
+                            <div class="modality-card orange">
+                                <div class="modality-icon orange">
+                                    <i class="fas fa-sync-alt"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-center mb-3" style="color: var(--unicomfa-orange);">Blended</h3>
+                                <p class="text-sm text-center text-gray-700 mb-3">Combinación equilibrada de componentes presenciales y virtuales</p>
+                                <div class="flex flex-wrap justify-center">
+                                    <span class="modality-tag orange">Aprendizaje activo</span>
+                                    <span class="modality-tag orange">Mixto</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Híbrida -->
+                            <div class="modality-card green">
+                                <div class="modality-icon green">
+                                    <i class="fas fa-video"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-center mb-3" style="color: var(--unicomfa-green);">Híbrida</h3>
+                                <p class="text-sm text-center text-gray-700 mb-3">Integra componentes presenciales y virtuales de manera simultánea</p>
+                                <div class="flex flex-wrap justify-center">
+                                    <span class="modality-tag green">Sincronía</span>
+                                    <span class="modality-tag green">Interacción</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Dual -->
+                            <div class="modality-card blue">
+                                <div class="modality-icon blue">
+                                    <i class="fas fa-industry"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-center mb-3" style="color: var(--unicomfa-blue);">Dual</h3>
+                                <p class="text-sm text-center text-gray-700 mb-3">Articula formación teórica con formación práctica en contextos reales de trabajo</p>
+                                <div class="flex flex-wrap justify-center">
+                                    <span class="modality-tag blue">Experiencial</span>
+                                    <span class="modality-tag blue">Empleabilidad</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Universidad en el Campo -->
+                            <div class="modality-card orange col-span-2">
+                                <div class="modality-icon orange">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-center mb-3" style="color: var(--unicomfa-orange);">Universidad en el Campo</h3>
+                                <p class="text-sm text-center text-gray-700 mb-3">Lleva educación superior a zonas rurales/periféricas sin desarraigo, articulando saberes académicos y locales</p>
+                                <div class="flex flex-wrap justify-center">
+                                    <span class="modality-tag orange">Territorial</span>
+                                    <span class="modality-tag orange">Inclusivo</span>
+                                    <span class="modality-tag orange">Intercultural</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quote -->
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

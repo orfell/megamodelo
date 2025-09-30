@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción y Propósito - TEdU</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --unicomfa-blue: #0055A4;
+            --unicomfa-orange: #FF6600;
+            --unicomfa-green: #78BE20;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        .slide-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 20px 0;
+        }
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background-color: white;
+            color: #000000;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+        .header-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
+            flex-shrink: 0;
+            width: 100%;
+        }
+        .fixed-header {
+            padding: 20px 16px 10px;
+            flex-shrink: 0;
+        }
+        .scrollable-content {
+            overflow-y: auto;
+            padding: 0 16px 16px;
+            flex-grow: 1;
+        }
+        .footer-logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            height: 40px;
+            color: #000000;
+        }
+        
+        /* Estilos específicos del contenido */
+        .title-accent {
+            color: var(--unicomfa-orange);
+        }
+        .card {
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #e2e8f0;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 15px;
+        }
+        .tpack-circle {
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            font-weight: 600;
+            color: white;
+        }
+        .border-l {
+            border-color: #e2e8f0;
+        }
+        .bg-opacity-50 {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #e2e8f0;
+        }
+        .h-1 {
+            background-color: var(--unicomfa-orange);
+        }
+        
+        /* Personalización de la barra de desplazamiento */
+        .scrollable-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .scrollable-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        .scrollable-content::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide">
+            <!-- Barra de colores estandarizada -->
+            <div class="header-bar"></div>
+            
+            <!-- Header fijo -->
+            <div class="fixed-header">
+                <h1 class="text-4xl font-bold text-gray-800">Introducción y Propósito</h1>
+                <div class="h-1 w-24 mt-2"></div>
+            </div>
+            
+            <!-- Contenido principal -->
+            <div class="scrollable-content">
+                <!-- Two-column layout -->
+                <div class="flex flex-1 justify-between" style="min-height: calc(100% - 20px);">
+                    <!-- Left column -->
+                    <div class="w-5/12 pr-8">
+                        <div class="mb-8">
+                            <h2 class="text-3xl font-semibold mb-4 text-gray-800">¿Qué es <span class="title-accent">TEdU</span>?</h2>
+                            <p class="text-lg mb-4 text-gray-700 text-justify">Un <strong class="text-gray-900">enfoque integrador</strong> que articula:</p>
+                            <ul class="space-y-3">
+                                <li class="flex items-center">
+                                    <div class="h-8 w-8 rounded-full flex items-center justify-center mr-3" style="background-color: var(--unicomfa-blue);">
+                                        <i class="fas fa-chalkboard-teacher text-white"></i>
+                                    </div>
+                                    <span class="text-lg text-gray-700">Docencia</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="h-8 w-8 rounded-full flex items-center justify-center mr-3" style="background-color: var(--unicomfa-orange);">
+                                        <i class="fas fa-microscope text-white"></i>
+                                    </div>
+                                    <span class="text-lg text-gray-700">Investigación</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="h-8 w-8 rounded-full flex items-center justify-center mr-3" style="background-color: var(--unicomfa-green);">
+                                        <i class="fas fa-hands-helping text-white"></i>
+                                    </div>
+                                    <span class="text-lg text-gray-700">Proyección Social</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- TPACK model visual -->
+                        <div>
+                            <h2 class="text-2xl font-semibold mb-4 text-gray-800">Eje Transversal: Modelo <span class="title-accent">TPACK</span></h2>
+                            <div class="relative h-64 mt-4">
+                                <!-- TPACK circles -->
+                                <div class="tpack-circle" style="width: 120px; height: 120px; background-color: var(--unicomfa-blue); top: 20px; left: 20px;">
+                                    <div class="text-center">
+                                        <div class="text-xl">TK</div>
+                                        <div class="text-xs">Tecnológico</div>
+                                    </div>
+                                </div>
+                                <div class="tpack-circle" style="width: 120px; height: 120px; background-color: var(--unicomfa-orange); top: 20px; left: 150px;">
+                                    <div class="text-center">
+                                        <div class="text-xl">PK</div>
+                                        <div class="text-xs">Pedagógico</div>
+                                    </div>
+                                </div>
+                                <div class="tpack-circle" style="width: 120px; height: 120px; background-color: var(--unicomfa-green); top: 110px; left: 85px;">
+                                    <div class="text-center">
+                                        <div class="text-xl">CK</div>
+                                        <div class="text-xs">Contenido</div>
+                                    </div>
+                                </div>
+                                <div class="tpack-circle" style="width: 60px; height: 60px; background-color: rgba(255, 255, 255, 0.9); border: 2px solid #e2e8f0; color: #333; top: 90px; left: 110px; z-index: 10;">
+                                    <div class="text-center">
+                                        <div class="text-xs font-bold">TPACK</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right column -->
+                    <div class="w-7/12 pl-8 border-l">
+                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">Modalidades Educativas</h2>
+                        
+                        <div class="grid grid-cols-3 gap-4 mb-10">
+                            <div class="card p-4 text-center" style="border-color: var(--unicomfa-blue);">
+                                <div class="icon-circle" style="background-color: var(--unicomfa-blue);">
+                                    <i class="fas fa-laptop text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-medium text-gray-800">Virtual</h3>
+                            </div>
+                            <div class="card p-4 text-center" style="border-color: var(--unicomfa-orange);">
+                                <div class="icon-circle" style="background-color: var(--unicomfa-orange);">
+                                    <i class="fas fa-sync-alt text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-medium text-gray-800">Blended</h3>
+                            </div>
+                            <div class="card p-4 text-center" style="border-color: var(--unicomfa-green);">
+                                <div class="icon-circle" style="background-color: var(--unicomfa-green);">
+                                    <i class="fas fa-video text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-medium text-gray-800">Híbrida</h3>
+                            </div>
+                            <div class="card p-4 text-center" style="border-color: var(--unicomfa-blue);">
+                                <div class="icon-circle" style="background-color: var(--unicomfa-blue);">
+                                    <i class="fas fa-industry text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-medium text-gray-800">Dual</h3>
+                            </div>
+                            <div class="card p-4 text-center col-span-2" style="border-color: var(--unicomfa-orange);">
+                                <div class="icon-circle" style="background-color: var(--unicomfa-orange);">
+                                    <i class="fas fa-seedling text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-medium text-gray-800">Universidad en el Campo</h3>
+                            </div>
+                        </div>
+                        
+                        <h2 class="text-2xl font-semibold mb-3 text-gray-800">Objetivos Estratégicos</h2>
+                        <div class="bg-opacity-50 p-4 rounded-lg">
+                            <div class="flex items-center mb-2">
+                                <div class="h-6 w-6 rounded-full flex items-center justify-center mr-3" style="background-color: var(--unicomfa-orange);">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                                <span class="text-lg text-gray-700 text-justify">Sistema <strong class="text-gray-900">flexible</strong> y de <strong class="text-gray-900">alta calidad</strong></span>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <div class="h-6 w-6 rounded-full flex items-center justify-center mr-3" style="background-color: var(--unicomfa-orange);">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                                <span class="text-lg text-gray-700 text-justify">Promoción de la <strong class="text-gray-900">equidad</strong> y la <strong class="text-gray-900">inclusión</strong></span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="h-6 w-6 rounded-full flex items-center justify-center mr-3" style="background-color: var(--unicomfa-orange);">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                                <span class="text-lg text-gray-700 text-justify">Respuesta a las <strong class="text-gray-900">demandas del siglo XXI</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>          
+        </div>
+    </div>
+</body>
+</html>

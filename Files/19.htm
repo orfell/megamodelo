@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Evaluación del Diseño y Métricas - TEdU</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        :root {
+            --unicomfa-blue: #0055A4;
+            --unicomfa-orange: #FF6600;
+            --unicomfa-green: #78BE20;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        .slide-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            padding: 0;
+        }
+        .slide {
+            width: 1280px;
+            height: 100vh;
+            background-color: white;
+            color: #000000;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .header-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
+            flex-shrink: 0;
+        }
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 16px 16px 16px;
+        }
+        .fixed-header {
+            padding: 16px 16px 0 16px;
+            background-color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        /* ESTILOS PARA CONTENEDORES */
+        .container-title {
+            padding: 12px 16px;
+            border-radius: 8px 8px 0 0;
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .container-title i {
+            background-color: rgba(255, 255, 255, 0.3);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+        
+        .blue-container .container-title {
+            background-color: rgba(0, 85, 164, 0.9);
+            border: 3px solid var(--unicomfa-blue);
+        }
+        .orange-container .container-title {
+            background-color: rgba(255, 102, 0, 0.9);
+            border: 3px solid var(--unicomfa-orange);
+        }
+        .green-container .container-title {
+            background-color: rgba(120, 190, 32, 0.9);
+            border: 3px solid var(--unicomfa-green);
+        }
+        
+        .content-box {
+            background-color: white;
+            padding: 16px;
+            border-radius: 0 0 8px 8px;
+            border-left: 3px solid;
+            border-right: 3px solid;
+            border-bottom: 3px solid;
+            transition: all 0.3s ease;
+        }
+        .blue-container .content-box {
+            border-color: var(--unicomfa-blue);
+        }
+        .orange-container .content-box {
+            border-color: var(--unicomfa-orange);
+        }
+        .green-container .content-box {
+            border-color: var(--unicomfa-green);
+        }
+        
+        .inner-content {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 12px;
+            border-radius: 6px;
+            color: #000000;
+        }
+        
+        /* Efectos hover */
+        .blue-container:hover, .orange-container:hover, .green-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Componentes específicos */
+        .concept-box {
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+        .concept-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .dimension-card {
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #eee;
+        }
+        .dimension-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .rubric-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            margin-right: 10px;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .modality-tag {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            margin-right: 4px;
+            margin-bottom: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid;
+        }
+        .modality-tag:hover {
+            transform: scale(1.1);
+        }
+        
+        .metrics-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .metrics-table th, .metrics-table td {
+            padding: 8px;
+            text-align: center;
+            border: 2px solid #eee;
+        }
+        .metrics-table th {
+            font-weight: 600;
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+        .metrics-table tr:hover td {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        
+        /* Estilos generales */
+        .title-divider {
+            height: 3px;
+            width: 80px;
+            margin-top: 8px;
+            background-color: #666;
+        }
+        
+        /* Personalización de la barra de desplazamiento */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container" style=" padding-top: 20px;">
+<div class="slide" style=" border-radius: 8px;">
+<!-- Header bar -->
+<div class="header-bar w-full"></div>
+<!-- Fixed header -->
+<div class="fixed-header">
+<!-- Title -->
+<div class="mb-4 text-left">
+<h1 class="text-4xl font-bold text-gray-800">Evaluación del Diseño y Métricas</h1>
+<div class="title-divider"></div>
+</div>
+</div>
+<!-- Main content with scroll -->
+<div class="main-content">
+<!-- Content grid -->
+<div class="grid grid-cols-5 gap-6 flex-1">
+<!-- Left Column: Evaluation Concept and Rubrics (3/5 width) -->
+<div class="col-span-3 space-y-5">
+<!-- Evaluation Concept - Contenedor Azul -->
+<div class="concept-box blue-container">
+<div class="container-title">
+<i class="fas fa-clipboard-check"></i>
+<h3>Evaluación del Diseño</h3>
+</div>
+<div class="content-box">
+<div class="inner-content">
+<p class="text-gray-700">
+                                        Proceso <span class="font-bold">reflexivo y formativo</span> para valorar 
+                                        la <span class="font-bold">calidad y coherencia</span> de la experiencia educativa
+                                    </p>
+</div>
+</div>
+</div>
+<!-- Rubrics - Contenedor Naranja -->
+<div class="concept-box orange-container">
+<div class="container-title">
+<i class="fas fa-th-list"></i>
+<h3>Rúbricas Diferenciadas</h3>
+</div>
+<div class="content-box">
+<div class="inner-content">
+<!-- Modalities -->
+<div class="mb-3">
+<span class="modality-tag" style="background-color: rgba(0,85,164,0.1); border-color: var(--unicomfa-blue); color: var(--unicomfa-blue);">
+<i class="fas fa-laptop text-xs mr-1"></i> Virtual
+                                        </span>
+<span class="modality-tag" style="background-color: rgba(255,102,0,0.1); border-color: var(--unicomfa-orange); color: var(--unicomfa-orange);">
+<i class="fas fa-sync-alt text-xs mr-1"></i> Blended
+                                        </span>
+<span class="modality-tag" style="background-color: rgba(120,190,32,0.1); border-color: var(--unicomfa-green); color: var(--unicomfa-green);">
+<i class="fas fa-video text-xs mr-1"></i> Híbrida
+                                        </span>
+<span class="modality-tag" style="background-color: rgba(0,85,164,0.1); border-color: var(--unicomfa-blue); color: var(--unicomfa-blue);">
+<i class="fas fa-industry text-xs mr-1"></i> Dual
+                                        </span>
+<span class="modality-tag" style="background-color: rgba(255,102,0,0.1); border-color: var(--unicomfa-orange); color: var(--unicomfa-orange);">
+<i class="fas fa-seedling text-xs mr-1"></i> U. en el Campo
+                                        </span>
+</div>
+<!-- Dimensions -->
+<div class="text-sm text-gray-700 mb-2">Cada rúbrica evalúa <span class="font-semibold">5 dimensiones</span> con escala de 4 niveles</div>
+<div class="grid grid-cols-3 gap-2 mt-2">
+<div class="dimension-card">
+<div class="flex items-center">
+<div class="rubric-icon" style="background-color: rgba(0,85,164,0.1);">
+<i class="fas fa-drafting-compass" style="color: var(--unicomfa-blue);"></i>
+</div>
+<span class="text-sm text-gray-700">Diseño Pedagógico</span>
+</div>
+</div>
+<div class="dimension-card">
+<div class="flex items-center">
+<div class="rubric-icon" style="background-color: rgba(255,102,0,0.1);">
+<i class="fas fa-laptop-code" style="color: var(--unicomfa-orange);"></i>
+</div>
+<span class="text-sm text-gray-700">Uso Tecnológico</span>
+</div>
+</div>
+<div class="dimension-card">
+<div class="flex items-center">
+<div class="rubric-icon" style="background-color: rgba(120,190,32,0.1);">
+<i class="fas fa-book" style="color: var(--unicomfa-green);"></i>
+</div>
+<span class="text-sm text-gray-700">Dominio Contenido</span>
+</div>
+</div>
+<div class="dimension-card">
+<div class="flex items-center">
+<div class="rubric-icon" style="background-color: rgba(0,85,164,0.1);">
+<i class="fas fa-tasks" style="color: var(--unicomfa-blue);"></i>
+</div>
+<span class="text-sm text-gray-700">Evaluación</span>
+</div>
+</div>
+<div class="dimension-card">
+<div class="flex items-center">
+<div class="rubric-icon" style="background-color: rgba(255,102,0,0.1);">
+<i class="fas fa-comments" style="color: var(--unicomfa-orange);"></i>
+</div>
+<span class="text-sm text-gray-700">Interacción</span>
+</div>
+</div>
+<div class="dimension-card flex items-center justify-center">
+<div class="flex items-center">
+<i class="fas fa-file-alt mr-2" style="color: var(--unicomfa-green);"></i>
+<span class="text-sm text-gray-700">Ver Anexos D</span>
+</div>
+</div>
+</div>
+<!-- Levels -->
+<div class="grid grid-cols-4 gap-1 mt-3">
+<div class="text-center p-1 rounded bg-green-50">
+<div class="text-xs font-semibold">Nivel 1</div>
+<div class="text-xs text-gray-600"><b>Inicial</b></div>
+</div>
+<div class="text-center p-1 rounded bg-green-50">
+<div class="text-xs font-semibold">Nivel 2</div>
+<div class="text-xs text-gray-600"><b>Emergente</b></div>
+</div>
+<div class="text-center p-1 rounded bg-green-50">
+<div class="text-xs font-semibold">Nivel 3</div>
+<div class="text-xs text-gray-600"><b>Establecido</b></div>
+</div>
+<div class="text-center p-1 rounded bg-green-50">
+<div class="text-xs font-semibold">Nivel 4</div>
+<div class="text-xs text-gray-600"><b>Transformador</b></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Metrics Table (2/5 width) - Contenedor Verde -->
+<div class="col-span-2">
+<div class="concept-box green-container h-full">
+<div class="container-title">
+<i class="fas fa-chart-line"></i>
+<h3>Métricas Orientadoras</h3>
+</div>
+<div class="content-box h-full flex flex-col" style="border-bottom: 3px solid var(--unicomfa-green);">
+<div class="inner-content flex-1">
+<p class="text-sm mb-3 text-gray-700">
+                                        Referentes para <span class="font-semibold">equilibrar la carga académica</span> según 
+                                        modalidad y duración del curso
+                                    </p>
+<!-- Metrics Table -->
+<div class="overflow-auto">
+<table bgcolor="white" class="metrics-table">
+<thead>
+<tr>
+<th class="text-xs">Modalidad</th>
+<th class="text-xs">Recursos</th>
+<th class="text-xs">Actividades</th>
+<th class="text-xs">Evaluaciones</th>
+</tr>
+</thead>
+<tbody class="text-xs">
+<tr>
+<td style="color: var(--unicomfa-blue);">
+<i class="fas fa-laptop mr-1"></i> <b>Virtual</b>
+</td>
+<td class="text-gray-700"><b>5-7</b></td>
+<td class="text-gray-700"><b>2-4</b></td>
+<td class="text-gray-700"><b>1-2</b></td>
+</tr>
+<tr>
+<td style="color: var(--unicomfa-orange);">
+<i class="fas fa-sync-alt mr-1"></i> <b>Blended</b>
+</td>
+<td class="text-gray-700"><b>4-6</b></td>
+<td class="text-gray-700"><b>2-3</b></td>
+<td class="text-gray-700"><b>1-2</b></td>
+</tr>
+<tr>
+<td style="color: var(--unicomfa-green);">
+<i class="fas fa-video mr-1"></i> <b>Híbrida</b>
+</td>
+<td class="text-gray-700"><b>3-5</b></td>
+<td class="text-gray-700"><b>2-3</b></td>
+<td class="text-gray-700"><b>1</b></td>
+</tr>
+<tr>
+<td style="color: var(--unicomfa-blue);">
+<i class="fas fa-industry mr-1"></i> <b>Dual</b>
+</td>
+<td class="text-gray-700"><b>2-4</b></td>
+<td class="text-gray-700"><b>1-3</b></td>
+<td class="text-gray-700"><b>1-2</b></td>
+</tr>
+<tr>
+<td style="color: var(--unicomfa-orange);">
+<i class="fas fa-seedling mr-1"></i> <b>U. Campo</b>
+</td>
+<td class="text-gray-700"><b>2-3</b></td>
+<td class="text-gray-700"><b>1-2</b></td>
+<td class="text-gray-700"><b>1</b></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Types -->
+<div class="grid grid-cols-3 gap-1 mt-4 text-center">
+<div class="p-2 rounded bg-gray-50">
+<div class="text-xs font-semibold" style="color: var(--unicomfa-blue);">Tipo Recursos</div>
+<div class="text-xs text-gray-600"><b>Lecturas, Videos, REA/RED</b></div>
+</div>
+<div class="p-2 rounded bg-gray-50">
+<div class="text-xs font-semibold" style="color: var(--unicomfa-orange);">Tipo Actividades</div>
+<div class="text-xs text-gray-600"><b>Foros, Talleres, Casos</b></div>
+</div>
+<div class="p-2 rounded bg-gray-50">
+<div class="text-xs font-semibold" style="color: var(--unicomfa-green);">Tipo Evaluaciones</div>
+<div class="text-xs text-gray-600"><b>Quiz, Proyecto, Exam</b></div>
+</div>
+</div>
+<!-- Note -->
+<div class="mt-3 p-2 bg-gray-100 rounded text-justify">
+<p class="text-xs italic text-gray-600">
+<i class="fas fa-info-circle mr-1" style="color: var(--unicomfa-green);"></i>
+<b>Datos para curso estándar de 16 semanas (1 crédito)</b>
+<br>
+<br>Según el Decreto 1330 de 2019 y normativa del CESU, en colombia un crédito académico equivale a 48 horas de trabajo del estudiante, distribuidas en:
+<br>- <b>Trabajo presencial</b> o con acompañamiento docente directo: 16 Horas    
+<br>- <b>Trabajo independiente</b> o autónomo 32 Horas
+
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Note -->
+<div class="mt-4 p-3 rounded-lg text-center bg-gray-400 text-sm">
+<i class="fas fa-balance-scale mr-2" style="color: var(--unicomfa-blue);"></i>
+<span class="text-gray-700"><b>Las métricas buscan un <span style="color: var(--unicomfa-orange);">equilibrio entre carga académica y profundidad</span>, 
+                    adaptándose a las características de cada modalidad.</b></span>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

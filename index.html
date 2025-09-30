@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MegaModelo - Visualizador</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .frame {
+            position: relative;
+            width: calc(100% - 1cm);
+            height: calc(100% - 1cm);
+            margin: 0.5cm;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+        }
+
+        .slide-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: white;
+            transform: scale(0.9);
+            transform-origin: center center;
+            transition: transform 0.3s ease;
+        }
+
+        /* Controles de navegación laterales */
+        .nav-side {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .nav-side:hover {
+            opacity: 1 !important;
+        }
+
+        .nav-left {
+            left: 0;
+        }
+
+        .nav-right {
+            right: 0;
+        }
+
+        .triangle-side {
+            width: 0;
+            height: 0;
+            border-top: 25px solid transparent;
+            border-bottom: 25px solid transparent;
+            transition: all 0.2s ease;
+            opacity: 0.5;
+        }
+
+        .triangle-left {
+            border-right: 35px solid #555;
+            margin-left: 10px;
+        }
+
+        .triangle-right {
+            border-left: 35px solid #555;
+            margin-right: 10px;
+        }
+
+        .triangle-side:hover {
+            opacity: 0.9;
+        }
+
+        /* Barra de controles flotante */
+        .floating-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .frame:hover .floating-controls,
+        .frame:hover .nav-side,
+        .frame:hover .fullscreen-btn {
+            opacity: 0.8;
+        }
+
+        .zoom-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 200px;
+        }
+
+        .zoom-slider {
+            flex-grow: 1;
+            -webkit-appearance: none;
+            height: 4px;
+            background: #d1d1d1;
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .zoom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #4a6fa5;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .zoom-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: #3a5a80;
+        }
+
+        .zoom-value {
+            font-size: 14px;
+            color: #555;
+            width: 40px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 3px;
+            background-color: #e0e0e0;
+            margin-top: 8px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #4a6fa5;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .counter {
+            position: absolute;
+            bottom: 20px;
+            left: 10px;
+            font-size: 14px;
+            font-weight: 300;
+            color: #555;
+            font-family: 'Courier New', monospace;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 5px 10px;
+            border-radius: 15px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .fullscreen-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 15px;
+            padding: 5px 10px;
+            font-size: 14px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #555;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .frame:hover .counter {
+            opacity: 0.8;
+        }
+
+        .fullscreen-btn:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .fullscreen-icon {
+            width: 16px;
+            height: 16px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23555'%3E%3Cpath d='M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z'/%3E%3C/svg%3E");
+            background-size: contain;
+        }
+
+        .exit-fullscreen-icon {
+            width: 16px;
+            height: 16px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23555'%3E%3Cpath d='M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z'/%3E%3C/svg%3E");
+            background-size: contain;
+            display: none;
+        }
+
+        /* Estilos para el logo */
+        .logo-link {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-corner {
+            height: 80px;
+            width: auto;
+        }
+
+        .logo-link:hover {
+            opacity: 1;
+        }
+
+        /* Estilos para pantalla completa */
+        :fullscreen .frame {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            border: none;
+        }
+
+        :fullscreen .fullscreen-btn .fullscreen-icon {
+            display: none;
+        }
+
+        :fullscreen .fullscreen-btn .exit-fullscreen-icon {
+            display: block;
+        }
+
+        :fullscreen .logo-link {
+            top: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <!-- Botón de pantalla completa -->
+        <button class="fullscreen-btn" id="fullscreenBtn">
+            <div class="fullscreen-icon"></div>
+            <div class="exit-fullscreen-icon"></div>
+            <span>Pantalla completa</span>
+        </button>
+
+        <!-- Logo Unicomfacauca -->
+        <a href="https://www.unicomfacauca.edu.co" target="_blank" class="logo-link">
+            <img src="Files/logo_unicomfacauca_html.png" alt="Logo Unicomfacauca" class="logo-corner">
+        </a>
+
+        <div class="slide-container">
+            <!-- Controles laterales -->
+            <div class="nav-side nav-left" id="navLeft">
+                <div class="triangle-side triangle-left"></div>
+            </div>
+            
+            <iframe class="slide-frame" id="slideFrame" src="" frameborder="0"></iframe>
+            
+            <div class="nav-side nav-right" id="navRight">
+                <div class="triangle-side triangle-right"></div>
+            </div>
+
+            <!-- Contador flotante -->
+            <div class="counter" id="slideCounter">00 / 25</div>
+        </div>
+        
+        <!-- Controles flotantes inferiores -->
+        <div class="floating-controls" id="floatingControls">
+            <div class="zoom-control">
+                <input type="range" min="50" max="100" value="90" step="5" class="zoom-slider" id="zoomSlider">
+                <div class="zoom-value" id="zoomValue">90%</div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuración de rutas
+        const basePath = "Files/";
+        const totalSlides = 24;
+
+        // Generar nombres de archivo (00.htm, 01.htm, ..., 23.htm)
+        const slides = Array.from({length: totalSlides}, (_, i) => {
+            return `${basePath}${i.toString().padStart(2, '0')}.htm`;
+        });
+
+        // Elementos del DOM
+        const slideFrame = document.getElementById('slideFrame');
+        const navLeft = document.getElementById('navLeft');
+        const navRight = document.getElementById('navRight');
+        const slideCounter = document.getElementById('slideCounter');
+        const progressBar = document.getElementById('progressBar');
+        const zoomSlider = document.getElementById('zoomSlider');
+        const zoomValue = document.getElementById('zoomValue');
+        const floatingControls = document.getElementById('floatingControls');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        const frame = document.querySelector('.frame');
+
+        // Estado del carrusel
+        let currentSlide = 0;
+        let hideControlsTimeout;
+
+        // Cargar diapositiva actual
+        function loadSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                currentSlide = index;
+                slideFrame.src = slides[index];
+                updateControls();
+                updateProgress();
+            }
+        }
+
+        // Actualizar controles
+        function updateControls() {
+            navLeft.style.display = currentSlide === 0 ? 'none' : 'flex';
+            navRight.style.display = currentSlide === slides.length - 1 ? 'none' : 'flex';
+            slideCounter.textContent = `${currentSlide.toString().padStart(2, '0')} / ${slides.length - 1}`;
+        }
+
+        // Actualizar barra de progreso
+        function updateProgress() {
+            const progress = ((currentSlide + 1) / slides.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Aplicar zoom
+        function applyZoom() {
+            const zoomLevel = zoomSlider.value / 100;
+            slideFrame.style.transform = `scale(${zoomLevel})`;
+            zoomValue.textContent = `${zoomSlider.value}%`;
+        }
+
+        // Mostrar controles temporalmente
+        function showControlsTemporarily() {
+            floatingControls.style.opacity = '0.9';
+            fullscreenBtn.style.opacity = '0.9';
+            clearTimeout(hideControlsTimeout);
+            hideControlsTimeout = setTimeout(() => {
+                floatingControls.style.opacity = '0';
+                fullscreenBtn.style.opacity = '0';
+            }, 2000);
+        }
+
+        // Alternar pantalla completa
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                frame.requestFullscreen().catch(err => {
+                    alert(`Error al intentar pantalla completa: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Actualizar texto del botón según el estado
+        function updateFullscreenButton() {
+            if (document.fullscreenElement) {
+                fullscreenBtn.querySelector('span').textContent = 'Salir pantalla completa';
+            } else {
+                fullscreenBtn.querySelector('span').textContent = 'Pantalla completa';
+            }
+        }
+
+        // Event listeners
+        navLeft.addEventListener('click', (e) => {
+            e.stopPropagation();
+            loadSlide(currentSlide - 1);
+        });
+
+        navRight.addEventListener('click', (e) => {
+            e.stopPropagation();
+            loadSlide(currentSlide + 1);
+        });
+
+        zoomSlider.addEventListener('input', applyZoom);
+
+        fullscreenBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleFullscreen();
+        });
+
+        document.addEventListener('fullscreenchange', updateFullscreenButton);
+
+        // Mostrar controles al interactuar
+        document.addEventListener('mousemove', () => {
+            showControlsTemporarily();
+        });
+
+        // Navegación por teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                loadSlide(currentSlide - 1);
+            } else if (e.key === 'ArrowRight' && currentSlide < slides.length - 1) {
+                loadSlide(currentSlide + 1);
+            } else if (e.key === 'F11') {
+                e.preventDefault();
+                toggleFullscreen();
+            }
+        });
+
+        // Inicializar
+        loadSlide(0);
+        applyZoom();
+        showControlsTemporarily();
+        updateFullscreenButton();
+    </script>
+</body>
+</html>

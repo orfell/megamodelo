@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      color: #000;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .barra-superior {
+      display: flex;
+      height: 8px;
+    }
+
+    .barra-superior div {
+      flex: 1;
+    }
+
+    .azul { background-color: #0055A4; }
+    .naranja { background-color: #f47c20; }
+    .verde { background-color: #78be20; }
+
+    .contenedor {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 8px);
+      text-align: center;
+      padding: 40px;
+      box-sizing: border-box;
+      gap: 60px;
+    }
+
+    .izquierda, .derecha {
+      flex: 0 0 auto;
+    }
+
+    .izquierda img.logo {
+      width: 560px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .izquierda img.acreditacion {
+      margin-top: 20px;
+      width: 100px;
+    }
+
+    .separador {
+      width: 4px;
+      height: 80%;
+      background-color: #f47c20;
+    }
+
+    .derecha h1 {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .derecha h2 {
+      font-size: 28px;
+      margin: 0;
+    }
+
+    .derecha h3 {
+      font-size: 26px;
+      margin: 10px 0;
+    }
+
+    .derecha p {
+      font-size: 20px;
+      margin-top: 40px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="barra-superior">
+    <div class="azul"></div>
+    <div class="naranja"></div>
+    <div class="verde"></div>
+  </div>
+
+  <div class="contenedor">
+    <div class="izquierda">
+      <img src="https://www.unicomfacauca.edu.co/wp-content/uploads/Logo-Unicomfacauca_Mesa-de-trabajo-1-copia-1.png" alt="Logo Unicomfacauca" class="logo">
+      <br>
+      <img src="https://www.unicomfacauca.edu.co/wp-content/uploads/2022/03/Acreditacion-Institucional.png"  class="acreditacion">
+    </div>
+
+    <div class="separador"></div>
+
+    <div class="derecha">
+      <h1>Mega modelo</h1>
+      <h2>Tecnologías Educativas</h2>
+      <h3>Unicomfacauca – TEdU</h3>
+      <p>Julio Ricardo Martínez Montezuma</p>
+    </div>
+  </div>
+
+</body>
+</html>

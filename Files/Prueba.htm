@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estructura Funcional del TEdU</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --unicomfa-blue: #0055A4;
+      --unicomfa-orange: #FF6600;
+      --unicomfa-green: #78BE20;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .header-bar {
+      height: 8px;
+      background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
+    }
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+    }
+    .org-chart-container {
+      background-color: #f8fafc;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      margin-top: 16px;
+    }
+    .custom-box {
+      border: 2px solid #d1d5db;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: white;
+    }
+    .blue-header {
+      background-color: #0055A4;
+      color: white;
+      padding: 8px 16px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+    .green-header {
+      background-color: #78BE20;
+      color: white;
+      padding: 8px 16px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="header-bar"></div>
+    <div class="content">
+      <h1 class="text-4xl font-bold text-gray-800 mb-4">Estructura Funcional del TEdU</h1>
+
+      <!-- Contenedores de necesidad y objetivos con estilo visual exacto -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="custom-box">
+          <div class="blue-header">
+            <i class="fas fa-puzzle-piece mr-2"></i> Necesidad
+          </div>
+          <div class="p-4 text-gray-800">
+            <p class="font-semibold">Garantizar gestión eficiente y articulada</p>
+            <p class="text-sm mb-4">en cuatro dimensiones clave:</p>
+            <div class="grid grid-cols-2 gap-3 text-sm">
+              <div class="flex items-center bg-gray-100 p-2 rounded shadow-sm">
+                <i class="fas fa-graduation-cap text-blue-900 mr-2"></i>
+                <div>
+                  <p class="font-bold text-blue-900">Académica</p>
+                  <p>Coherencia curricular</p>
+                </div>
+              </div>
+              <div class="flex items-center bg-gray-100 p-2 rounded shadow-sm">
+                <i class="fas fa-chalkboard-teacher text-blue-900 mr-2"></i>
+                <div>
+                  <p class="font-bold text-blue-900">Pedagógica</p>
+                  <p>Metodologías efectivas</p>
+                </div>
+              </div>
+              <div class="flex items-center bg-gray-100 p-2 rounded shadow-sm">
+                <i class="fas fa-laptop text-blue-900 mr-2"></i>
+                <div>
+                  <p class="font-bold text-blue-900">Tecnológica</p>
+                  <p>Plataformas integradas</p>
+                </div>
+              </div>
+              <div class="flex items-center bg-gray-100 p-2 rounded shadow-sm">
+                <i class="fas fa-cogs text-blue-900 mr-2"></i>
+                <div>
+                  <p class="font-bold text-blue-900">Administrativa</p>
+                  <p>Procesos eficientes</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="custom-box">
+          <div class="green-header">
+            <i class="fas fa-bullseye mr-2"></i> Objetivos de la Estructura
+          </div>
+          <div class="p-4 text-gray-800 text-sm">
+            <ul class="space-y-2">
+              <li><i class="fas fa-check-circle mr-2 text-green-600"></i><strong>Asegurar calidad</strong> según lineamientos del MEN y estándares internacionales</li>
+              <li><i class="fas fa-sync-alt mr-2 text-green-600"></i><strong>Implementar ciclos de mejora continua</strong> basados en evaluación y retroalimentación</li>
+              <li><i class="fas fa-sliders-h mr-2 text-green-600"></i><strong>Desarrollar estrategias flexibles</strong> adaptadas a cada modalidad y contexto</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Organigrama -->
+      <div class="org-chart-container">
+        <h2 class="text-xl font-bold mb-3 text-center text-orange-600">
+          <i class="fas fa-sitemap mr-2"></i> Organigrama Funcional TEdU
+        </h2>
+        <div class="mermaid" id="orgChart" style="min-height: 200px;">
+          flowchart TD
+              A[Dirección General TEdU] --> B[Unidad de Gestión de Modalidades]
+              A --> C[Unidad de Diseño y Producción de Contenidos]
+              A --> D[Unidad de Soporte Tecnológico y Plataformas]
+              A --> E[Unidad de Innovación Pedagógica TPACK]
+              A -.-> F[Comité Técnico-Pedagógico TEdU]
+
+              style A fill:#FF6600,color:#fff,stroke:#FF6600
+              style B fill:#0055A4,color:#fff,stroke:#0055A4
+              style C fill:#0055A4,color:#fff,stroke:#0055A4
+              style D fill:#0055A4,color:#fff,stroke:#0055A4
+              style E fill:#0055A4,color:#fff,stroke:#0055A4
+              style F fill:#78BE20,color:#fff,stroke:#78BE20
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: 'default',
+        themeVariables: {
+          primaryColor: '#FF6600',
+          primaryTextColor: '#fff',
+          primaryBorderColor: '#FF6600',
+          lineColor: '#333',
+          secondaryColor: '#0055A4',
+          tertiaryColor: '#78BE20'
+        },
+        flowchart: {
+          htmlLabels: true,
+          curve: 'linear'
+        }
+      });
+    });
+  </script>
+</body>
+</html>

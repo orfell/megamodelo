@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organigrama Dirección General TEdU</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .organigrama {
+            position: relative;
+            width: 800px;
+            margin-top: 50px;
+        }
+        
+        .nivel-1 {
+            position: relative;
+            width: 250px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+        
+        .nivel-2 {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .nivel-3 {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 40px;
+        }
+        
+        .box {
+            border: 2px solid #000;
+            border-radius: 5px;
+            padding: 10px;
+            width: 180px;
+            text-align: center;
+            background-color: white;
+            position: relative;
+        }
+        
+        .azul {
+            background-color: #0070C0;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .naranja {
+            background-color: #FFC000;
+            font-weight: bold;
+        }
+        
+        .verde {
+            background-color: #70AD47;
+            font-weight: bold;
+        }
+        
+        /* Líneas de conexión */
+        .conexion-vertical {
+            position: absolute;
+            width: 2px;
+            background-color: black;
+            left: 50%;
+            top: 100%;
+            height: 40px;
+        }
+        
+        .conexion-horizontal {
+            position: absolute;
+            height: 2px;
+            background-color: black;
+            top: -20px;
+        }
+        
+        .conexion-punteada {
+            position: absolute;
+            height: 2px;
+            border-top: 2px dashed black;
+            top: -20px;
+        }
+        
+        .conexion-vertical-punteada {
+            position: absolute;
+            width: 2px;
+            border-left: 2px dashed black;
+            left: 50%;
+            top: 100%;
+            height: 40px;
+        }
+        
+        /* Posicionamiento específico de las líneas */
+        #linea-superior {
+            width: 800px;
+            left: -275px;
+        }
+        
+        #linea-izquierda {
+            width: 135px;
+            left: -135px;
+        }
+        
+        #linea-derecha {
+            width: 135px;
+            right: -135px;
+        }
+        
+        #linea-izquierda-interna {
+            width: 90px;
+            left: -90px;
+        }
+        
+        #linea-derecha-interna {
+            width: 90px;
+            right: -90px;
+        }
+        
+        #linea-verde {
+            width: 90px;
+            right: -90px;
+        }
+    </style>
+</head>
+<body>
+    <div class="organigrama">
+        <!-- Nivel 1 -->
+        <div class="nivel-1">
+            <div class="box azul">Dirección General TEdU</div>
+            <div class="conexion-vertical"></div>
+        </div>
+        
+        <!-- Nivel 2 -->
+        <div class="nivel-2">
+            <div style="position: relative;">
+                <div class="conexion-horizontal" id="linea-izquierda"></div>
+                <div class="box naranja">Comité Técnico-Pedagógico</div>
+                <div class="conexion-vertical-punteada"></div>
+            </div>
+            
+            <div style="position: relative;">
+                <div class="conexion-horizontal" id="linea-derecha"></div>
+                <div class="box azul">Unidad de Gestión de Modalidades</div>
+                <div class="conexion-vertical"></div>
+            </div>
+        </div>
+        
+        <!-- Nivel 3 -->
+        <div class="nivel-3">
+            <div style="position: relative;">
+                <div class="conexion-horizontal" id="linea-izquierda-interna"></div>
+                <div class="box azul">Unidad de Diseño y Producción de Contenidos</div>
+            </div>
+            
+            <div style="position: relative;">
+                <div class="conexion-horizontal" id="linea-derecha-interna"></div>
+                <div class="box azul">Unidad de Soporte Tecnológico y Plataformas</div>
+            </div>
+            
+            <div style="position: relative;">
+                <div class="conexion-punteada" id="linea-verde"></div>
+                <div class="box verde">Unidad de Innovación Pedagógica TPACK</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamento Metodológico: TPACK - TEdU</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" as="style">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --unicomfa-blue: #0055A4; /* Azul */
+            --unicomfa-orange: #FF6600; /* Naranja*/
+            --unicomfa-green: #78BE20; /* Verde */
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        .slide-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 20px 0;
+        }
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background-color: white;
+            color: #000000;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+        .header-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
+            flex-shrink: 0;
+            width: 100%;
+        }
+        .title-container {
+            padding: 20px 20px 10px;
+            flex-shrink: 0;
+            background-color: white;
+            z-index: 10;
+        }
+        .footer-logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            height: 40px;
+        }
+        /* Estilos actualizados para contenedores */
+        .container-title {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            border: 3px solid;
+        }
+        .container-title.blue {
+            background-color: rgba(0, 85, 164, 0.9);
+            border-color: var(--unicomfa-blue);
+        }
+        .container-title.orange {
+            background-color: rgba(255, 102, 0, 0.9);
+            border-color: var(--unicomfa-orange);
+        }
+        .container-title.green {
+            background-color: rgba(120, 190, 32, 0.9);
+            border-color: var(--unicomfa-green);
+        }
+        .container-title i {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            padding: 8px;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        .container-content {
+            background-color: white;
+            padding: 15px;
+            border-radius: 0 0 8px 8px;
+            border: 3px solid;
+            border-top: none;
+            color: #000000;
+        }
+        .container-content.blue {
+            border-color: var(--unicomfa-blue);
+        }
+        .container-content.orange {
+            border-color: var(--unicomfa-orange);
+        }
+        .container-content.green {
+            border-color: var(--unicomfa-green);
+        }
+        .inner-content {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .focus-box {
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            overflow: hidden;
+            will-change: transform, box-shadow;
+        }
+        .focus-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        /* TPACK Diagram Styles */
+        .tpack-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 100%;
+            max-height: 500px;
+            margin: auto;
+        }
+        .tpack-circle {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-weight: 600;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .tpack-circle:hover {
+            opacity: 1;
+            transform: scale(1.05);
+            z-index: 10;
+        }
+        .tpack-heading {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        .tpack-subtext {
+            font-size: 0.9rem;
+            font-weight: normal;
+            text-align: center;
+            max-width: 80%;
+        }
+        .tpack-pk {
+            width: 60%;
+            height: 60%;
+            max-width: 250px;
+            max-height: 250px;
+            background-color: #FF6600;
+            top: 10%;
+            left: 5%;
+            color: white;
+        }
+        .tpack-ck {
+            width: 60%;
+            height: 60%;
+            max-width: 250px;
+            max-height: 250px;
+            background-color: #78BE20;
+            top: 10%;
+            right: 5%;
+            color: white;
+        }
+        .tpack-tk {
+            width: 60%;
+            height: 60%;
+            max-width: 250px;
+            max-height: 250px;
+            background-color: #0055A4;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+        }
+        .tpack-center {
+            width: 14%;
+            height: 14%;
+            max-width: 70px;
+            max-height: 70px;
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #222;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            border: 2px solid #ddd;
+        }
+        .circle-label {
+            position: absolute;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .label-tpck {
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--unicomfa-blue);
+        }
+        .label-tck {
+            bottom: 30%;
+            right: 20%;
+            color: #FFFF00;
+        }
+        .label-tpk {
+            bottom: 30%;
+            left: 20%;
+            color: #FFFF00;
+        }
+        .label-pck {
+            top: 25%;
+            right: 25%;
+            color: #FFFF00;
+        }
+        /* Knowledge Component Cards */
+        .knowledge-card {
+            border-radius: 8px;
+            padding: 12px;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 3px solid;
+            background-color: white;
+        }
+        .knowledge-card.blue {
+            border-color: var(--unicomfa-blue);
+        }
+        .knowledge-card.orange {
+            border-color: var(--unicomfa-orange);
+        }
+        .knowledge-card.green {
+            border-color: var(--unicomfa-green);
+        }
+        .knowledge-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .knowledge-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.5rem;
+            color: white;
+        }
+        .icon-circle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            transition: all 0.3s ease;
+        }
+        .focus-box:hover .icon-circle {
+            transform: rotate(15deg) scale(1.1);
+        }
+        /* New styles for scrollable content */
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            flex-direction: column;
+            padding: 0 16px 16px;
+        }
+        .left-column {
+            width: 100%;
+            overflow-y: auto;
+        }
+        .right-column {
+            width: 100%;
+            display: flex;
+            height: auto;
+            min-height: 300px;
+        }
+        .tpack-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        /* Estilos para elementos de lista */
+        .content-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 8px;
+            border-radius: 5px;
+        }
+        .content-item i {
+            color: inherit;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            padding: 6px;
+            margin-right: 8px;
+            font-size: 0.9rem;
+        }
+        /* Context Border */
+        .context-border {
+            position: absolute;
+            border-radius: 50%;
+            border: 3px dashed rgba(0,0,0,0.2);
+            width: 105%;
+            height: 105%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .context-label {
+            position: absolute;
+            color: #666;
+            font-size: 0.9rem;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .main-content {
+                flex-direction: row;
+                padding: 0 30px 20px;
+            }
+            .left-column {
+                width: 40%;
+                padding-right: 20px;
+            }
+            .right-column {
+                width: 60%;
+                height: calc(100% - 80px);
+                padding-left: 20px;
+            }
+            .title-container {
+                padding: 20px 30px 10px;
+            }
+            .container-title i {
+                padding: 10px;
+                font-size: 1.4rem;
+            }
+            .tpack-pk {
+                top: 15%;
+                left: 10%;
+            }
+            .tpack-ck {
+                top: 15%;
+                right: 10%;
+            }
+            .tpack-tk {
+                bottom: 10%;
+                left: 50%;
+            }
+            .label-tpck {
+                top: 20%;
+                left: 50%;
+            }
+            .label-tck {
+                bottom: 35%;
+                right: 25%;
+            }
+            .label-tpk {
+                bottom: 35%;
+                left: 25%;
+            }
+            .label-pck {
+                top: 30%;
+                right: 30%;
+            }
+        }
+        @media (min-width: 1024px) {
+            .tpack-heading {
+                font-size: 1.8rem;
+            }
+            .tpack-subtext {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="slide">
+            <!-- Barra de colores -->
+            <div class="header-bar"></div>
+            
+            <!-- Header fijo -->
+            <div class="title-container">
+                <h1 class="text-4xl font-bold text-gray-800">Fundamento Metodológico: TPACK</h1>
+                <div class="h-1 w-24 bg-gray-800 mt-2"></div>
+            </div>
+            
+            <!-- Contenido principal -->
+            <div class="main-content">
+                <!-- Left column (scrollable) -->
+                <div class="left-column">
+                    <!-- What is TPACK -->
+                    <div class="focus-box">
+                        <div class="container-title blue">
+                            <i class="fas fa-question-circle"></i>
+                            <h2 class="text-2xl font-bold">¿Qué es TPACK?</h2>
+                        </div>
+                        <div class="container-content blue">
+                            <div class="inner-content">
+                                <p class="mb-2"><span class="font-bold text-lg">T</span>echnological <span class="font-bold text-lg">P</span>edagogical <span class="font-bold text-lg">C</span>ontent <span class="font-bold text-lg">K</span>nowledge</p>
+                                <p class="mb-4 italic">(Conocimiento Tecnológico Pedagógico del Contenido)</p>
+                            </div>
+                            <div class="content-item">
+                                <i class="fas fa-users"></i>
+                                <div>
+                                    <p>Modelo desarrollado por <span class="font-semibold">Mishra y Koehler (2006)</span></p>
+                                    <p class="text-sm">Integra tres conocimientos fundamentales para la enseñanza efectiva con tecnología</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Purpose in TEdU -->
+                    <div class="focus-box">
+                        <div class="container-title orange">
+                            <i class="fas fa-bullseye"></i>
+                            <h2 class="text-2xl font-bold">Propósito en TEdU</h2>
+                        </div>
+                        <div class="container-content orange">
+                            <ul class="space-y-3">
+                                <li class="content-item">
+                                    <i class="fas fa-cog"></i>
+                                    <p>Guiar la <span class="font-semibold">integración efectiva de las TIC</span> en todas las modalidades educativas</p>
+                                </li>
+                                <li class="content-item">
+                                    <i class="fas fa-magic"></i>
+                                    <p>Diseñar <span class="font-semibold">experiencias de aprendizaje significativas</span> y pertinentes</p>
+                                </li>
+                                <li class="content-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <p>Potenciar la <span class="font-semibold">efectividad docente</span> en entornos educativos digitales</p>
+                                </li>
+                                <li class="content-item">
+                                    <i class="fas fa-tasks"></i>
+                                    <p>Establecer un <span class="font-semibold">marco común</span> para todas las modalidades TEdU</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- The 3 Base Components -->
+                    <div class="grid grid-cols-3 gap-3 mb-6">
+                        <div class="knowledge-card orange">
+                            <div class="knowledge-icon" style="background-color: var(--unicomfa-orange);">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h3 class="text-center font-semibold mb-1">PK</h3>
+                            <p class="text-xs text-center">Conocimiento Pedagógico<br>Estrategias y métodos de enseñanza</p>
+                        </div>
+                        <div class="knowledge-card green">
+                            <div class="knowledge-icon" style="background-color: var(--unicomfa-green);">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h3 class="text-center font-semibold mb-1">CK</h3>
+                            <p class="text-xs text-center">Conocimiento del Contenido<br>Dominio de la materia</p>
+                        </div>
+                        <div class="knowledge-card blue">
+                            <div class="knowledge-icon" style="background-color: var(--unicomfa-blue);">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3 class="text-center font-semibold mb-1">TK</h3>
+                            <p class="text-xs text-center">Conocimiento Tecnológico<br>Manejo de herramientas digitales</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right column (static TPACK diagram) -->
+                <div class="right-column">
+                    <div class="tpack-wrapper">
+                        <div class="tpack-container">
+                            <!-- TPACK Circles -->
+                            <div class="tpack-circle tpack-pk">
+                                <span class="tpack-heading">PK</span>
+                                <span class="tpack-subtext">Conocimiento Pedagógico</span>
+                            </div>
+                            <div class="tpack-circle tpack-ck">
+                                <span class="tpack-heading">CK</span>
+                                <span class="tpack-subtext">Conocimiento del Contenido</span>
+                            </div>
+                            <div class="tpack-circle tpack-tk">
+                                <span class="tpack-heading">TK</span>
+                                <span class="tpack-subtext">Conocimiento Tecnológico</span>
+                            </div>
+                            <div class="tpack-circle tpack-center">
+                                <span class="text-lg font-bold">TPACK</span>
+                            </div>
+                            <!-- Intersection Labels -->
+                            <div class="circle-label label-pck">PCK</div>
+                            <div class="circle-label label-tck">TCK</div>
+                            <div class="circle-label label-tpk">TPK</div>
+                            <!-- Context Border -->
+                            <div class="context-border"></div>
+                            <div class="context-label">CONTEXTO</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

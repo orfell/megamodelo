@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Transición entre Modalidades - TEdU</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.min.js"></script>
+<style>
+        :root {
+            --unicomfa-blue: #0055A4;
+            --unicomfa-orange: #FF6600;
+            --unicomfa-green: #78BE20;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .slide-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+        }
+        .slide {
+            width: 1280px;
+            height: 100%;
+            background-color: white;
+            color: #000000;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .header-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
+            flex-shrink: 0;
+        }
+        .footer-logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            height: 40px;
+            color: #333;
+        }
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 16px 20px;
+        }
+        .fixed-title {
+            padding: 20px 16px 0;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        /* ========== ESTILOS PARA CONTENEDORES ========== */
+        .concept-box, .requirement-card {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 3px solid;
+            background-color: white;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        
+        .concept-box:hover, .requirement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Estilos para títulos de contenedores */
+        .container-title {
+            color: white !important;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .container-title .icon-wrapper {
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+        
+        .container-title i {
+            color: white;
+            font-size: 1.1rem;
+        }
+        
+        /* Estilos para contenido de contenedores */
+        .container-content {
+            background-color: white;
+            padding: 16px;
+        }
+        
+        .container-inner {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 12px;
+            border-radius: 6px;
+        }
+        
+        .container-inner p, .container-inner li {
+            color: #000000;
+            font-size: 0.95rem;
+        }
+        
+        /* ========== ESQUEMA DE COLORES POR CATEGORÍA ========== */
+        /* Categoría Académica (Azul) */
+        .category-academic {
+            border-color: var(--unicomfa-blue) !important;
+        }
+        
+        .category-academic .container-title {
+            background-color: rgba(0, 85, 164, 0.9);
+        }
+        
+        /* Categoría Tecnológica (Naranja) */
+        .category-tech {
+            border-color: var(--unicomfa-orange) !important;
+        }
+        
+        .category-tech .container-title {
+            background-color: rgba(255, 102, 0, 0.9);
+        }
+        
+        /* Categoría Recursos (Verde) */
+        .category-resources {
+            border-color: var(--unicomfa-green) !important;
+        }
+        
+        .category-resources .container-title {
+            background-color: rgba(120, 190, 32, 0.9);
+        }
+        
+        /* ========== ESTILOS PARA CÍRCULOS ========== */
+        .student-journey {
+            position: relative;
+            height: 100px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .journey-node {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            background-color: white;
+            border: 3px solid;
+        }
+        
+        /* Virtual y Dual (Azul) */
+        .journey-node:nth-child(1),
+        .journey-node:nth-child(4) {
+            border-color: var(--unicomfa-blue);
+            color: var(--unicomfa-blue);
+        }
+        
+        /* Blended y U. Campo (Naranja) */
+        .journey-node:nth-child(2),
+        .journey-node:nth-child(5) {
+            border-color: var(--unicomfa-orange);
+            color: var(--unicomfa-orange);
+        }
+        
+        /* Híbrida (Verde) */
+        .journey-node:nth-child(3) {
+            border-color: var(--unicomfa-green);
+            color: var(--unicomfa-green);
+        }
+        
+        .journey-node:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mermaid {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            height: 100%;
+            min-height: 300px;
+        }
+        
+        .elements-container {
+            margin-top: 1.5rem;
+        }
+        
+        .evaluation-container {
+            height: calc(100% - 40px);
+        }
+        
+        /* Personalización del scroll */
+        .main-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .main-content::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<div class="slide-container" style="padding-top: 20px;"><div class="slide" style="border-radius: 8px;">
+<!-- Header bar -->
+<div class="header-bar w-full"></div>
+<!-- Fixed Title -->
+<div class="fixed-title">
+<h1 class="text-4xl font-bold text-gray-800">Transición entre Modalidades</h1>
+<h2 class="text-xl text-gray-600">Acompañamiento y Evaluación</h2>
+<div class="h-1 w-24 bg-gray-600 mt-2"></div>
+</div>
+<!-- Main content with scroll -->
+<div class="main-content">
+<!-- Description Box -->
+<div class="concept-box mb-6 mt-4 category-academic">
+<div class="container-title">
+<div class="icon-wrapper">
+<i class="fas fa-exchange-alt text-xl"></i>
+</div>
+<h2 class="text-2xl font-bold">Transición Estructural</h2>
+</div>
+<div class="container-content">
+<div class="container-inner">
+<p class="text-lg">
+                                Opción integrada al sistema que <span class="font-bold">fortalece la permanencia</span> y promueve la <span class="font-bold">autonomía</span> del estudiante
+                            </p>
+</div>
+</div>
+</div>
+<!-- Student Journey Visualization -->
+<div class="student-journey">
+<!-- Journey Nodes -->
+<div class="journey-node">
+<i class="fas fa-laptop text-2xl mb-1"></i>
+<span class="text-xs">Virtual</span>
+</div>
+<div class="journey-node">
+<i class="fas fa-sync-alt text-2xl mb-1"></i>
+<span class="text-xs">Blended</span>
+</div>
+<div class="journey-node">
+<i class="fas fa-video text-2xl mb-1"></i>
+<span class="text-xs">Híbrida</span>
+</div>
+<div class="journey-node">
+<i class="fas fa-industry text-2xl mb-1"></i>
+<span class="text-xs">Dual</span>
+</div>
+<div class="journey-node">
+<i class="fas fa-seedling text-2xl mb-1"></i>
+<span class="text-xs">U. Campo</span>
+</div>
+</div>
+<!-- Main content grid -->
+<div class="grid grid-cols-2 gap-6">
+<!-- Left Column: Requirements and Elements -->
+<div class="space-y-4">
+<h2 class="text-2xl font-bold text-left" style="color: var(--unicomfa-orange);">
+<i class="fas fa-clipboard-list mr-2"></i> Requisitos para la Transición
+                        </h2>
+<!-- Curriculum Equivalence -->
+<div class="requirement-card category-tech">
+<div class="container-title">
+<div class="icon-wrapper">
+<i class="fas fa-book text-xl"></i>
+</div>
+<h3 class="text-lg font-bold">Currículo con Equivalencia</h3>
+</div>
+<div class="container-content">
+<div class="container-inner">
+<p class="text-sm"><i class="fas fa-check-circle text-orange-500 mr-2"></i>Competencias similares entre modalidades</p>
+<p class="text-sm mt-2"><i class="fas fa-check-circle text-orange-500 mr-2"></i>Resultados de aprendizaje homologables</p>
+<p class="text-sm mt-2"><i class="fas fa-check-circle text-orange-500 mr-2"></i>Validación y reconocimiento automático</p>
+</div>
+</div>
+</div>
+<!-- Centralized Platforms -->
+<div class="requirement-card category-academic">
+<div class="container-title">
+<div class="icon-wrapper">
+<i class="fas fa-server text-xl"></i>
+</div>
+<h3 class="text-lg font-bold">Plataformas Centralizadas</h3>
+</div>
+<div class="container-content">
+<div class="container-inner">
+<p class="text-sm"><i class="fas fa-check-circle text-blue-500 mr-2"></i>Moodle como núcleo tecnológico común</p>
+<p class="text-sm mt-2"><i class="fas fa-check-circle text-blue-500 mr-2"></i>Registro académico integrado</p>
+<p class="text-sm mt-2"><i class="fas fa-check-circle text-blue-500 mr-2"></i>Portabilidad de recursos y actividades</p>
+</div>
+</div>
+</div>
+<!-- Inter-area Coordination -->
+<div class="requirement-card category-resources">
+<div class="container-title">
+<div class="icon-wrapper">
+<i class="fas fa-users-cog text-xl"></i>
+</div>
+<h3 class="text-lg font-bold">Coordinación Inter-áreas</h3>
+</div>
+<div class="container-content">
+<div class="container-inner">
+<div class="flex items-center">
+<div class="w-6 h-6 rounded-full flex items-center justify-center mr-1" style="background-color: rgba(120,190,32,0.40); border: 4px solid rgba(120,190,32,0.40);">
+<i class="fas fa-graduation-cap text-green-500 text-xs"></i>
+</div>
+<span class="text-sm">Académica</span>
+<span class="mx-2 text-gray-400">+</span>
+<div class="w-6 h-6 rounded-full flex items-center justify-center mr-1" style="background-color: rgba(120,190,32,0.40); border: 4px solid rgba(120,190,32,0.40);">
+<i class="fas fa-headset text-green-500 text-xs"></i>
+</div>
+<span class="text-sm">Soporte</span>
+<span class="mx-2 text-gray-400">+</span>
+<div class="w-6 h-6 rounded-full flex items-center justify-center mr-1" style="background-color: rgba(120,190,32,0.40); border: 4px solid rgba(120,190,32,0.40);">
+<i class="fas fa-heart text-green-500 text-xs"></i>
+</div>
+<span class="text-sm">Bienestar</span>
+</div>
+<p class="text-sm mt-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>Acompañamiento personalizado y seguimiento</p>
+</div>
+</div>
+</div>
+<!-- Elements Container -->
+<div class="elements-container grid grid-cols-2 gap-4">
+<!-- Common Elements -->
+<div class="p-4 rounded-lg bg-gray-100">
+<h3 class="text-lg font-semibold mb-2 flex items-center">
+<i class="fas fa-equals text-orange-500 mr-2"></i> Elementos Comunes
+                                </h3>
+<ul class="space-y-2">
+<li class="flex items-start">
+<i class="fas fa-th-list text-orange-500 mt-1 mr-2"></i>
+<span class="text-sm text-gray-700">Rúbricas estandarizadas</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-ruler-combined text-orange-500 mt-1 mr-2"></i>
+<span class="text-sm text-gray-700">Criterios de desempeño unificados</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-clipboard-check text-orange-500 mt-1 mr-2"></i>
+<span class="text-sm text-gray-700">Estructura de cortes evaluativos</span>
+</li>
+</ul>
+</div>
+<!-- Adapted Elements -->
+<div class="p-4 rounded-lg bg-gray-100">
+<h3 class="text-lg font-semibold mb-2 flex items-center">
+<i class="fas fa-sliders-h text-blue-500 mr-2"></i> Elementos Adaptados
+                                </h3>
+<ul class="space-y-2">
+<li class="flex items-start">
+<i class="fas fa-tools text-blue-500 mt-1 mr-2"></i>
+<span class="text-sm text-gray-700">Instrumentos según modalidad</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-comments text-blue-500 mt-1 mr-2"></i>
+<span class="text-sm text-gray-700">Retroalimentación contextualizada</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-clock text-blue-500 mt-1 mr-2"></i>
+<span class="text-sm text-gray-700">Temporalidad (sincrónica/asincrónica)</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Right Column: Evaluation -->
+<div class="evaluation-container">
+<h2 class="text-2xl font-bold mb-4 text-left" style="color: var(--unicomfa-green);">
+<i class="fas fa-tasks mr-2"></i> Evaluación Flexible
+                        </h2>
+<div class="concept-box category-resources h-full">
+<div class="container-title">
+<div class="icon-wrapper">
+<i class="fas fa-check-circle text-xl"></i>
+</div>
+<h3 class="text-lg font-bold">Criterios de Evaluación</h3>
+</div>
+<div class="container-content h-full">
+<div class="container-inner h-full">
+<p class="mb-3">
+                                        Combina <span class="font-bold">criterios estandarizados</span> con <span class="font-bold">herramientas adaptadas</span>
+                                        al contexto específico de cada modalidad
+                                    </p>
+<div class="mermaid" id="evalFlowchart">
+                                        graph TD
+                                            A[Criterios Comunes] --&gt;|Adaptados a| B[Contextos Específicos]
+                                            B --&gt; C{Instrumentos<br/>Flexibles}
+                                            C --&gt;|Presencial| D[Evaluación sincrónica]
+                                            C --&gt;|Virtual| E[Evaluación asincrónica]
+                                            C --&gt;|Campo| F[Evaluación práctica]
+                                            D &amp; E &amp; F --&gt; G[Resultados equivalentes]
+                                            
+                                            style A fill:#78BE20,color:#ffffff,stroke:#78BE20
+                                            style B fill:#0055A4,color:#ffffff,stroke:#0055A4,font-weight:bold
+                                            style C fill:#FF6600,color:#ffffff,stroke:#FF6600
+                                            style G fill:#78BE20,color:#ffffff,stroke:#78BE20
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer logo -->
+<div class="footer-logo">
+<i class="fas fa-university text-3xl"></i>
+</div>
+</div></div>
+</div>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'default',
+                themeVariables: {
+                    primaryColor: '#78BE20',
+                    primaryTextColor: '#fff',
+                    primaryBorderColor: '#78BE20',
+                    lineColor: '#333',
+                    secondaryColor: '#0055A4',
+                    tertiaryColor: '#f8fafc'
+                },
+                flowchart: {
+                    htmlLabels: true,
+                    curve: 'basis'
+                }
+            });
+        });
+    </script>
+</body>
+</html>

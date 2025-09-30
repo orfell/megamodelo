@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Roles y Unidades Clave - TEdU</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        :root {
+            --unicomfa-blue: #0055A4;
+            --unicomfa-orange: #FF6600;
+            --unicomfa-green: #78BE20;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background-color: #fff;
+            color: #333;
+            position: relative;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.40);
+        }
+        .header-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
+            flex-shrink: 0;
+        }
+        .fixed-header {
+            padding: 20px 40px 10px;
+            flex-shrink: 0;
+            background: white;
+            z-index: 10;
+        }
+        .scrollable-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 0 40px 20px;
+        }
+        .footer-logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            height: 40px;
+        }
+        
+        /* Estilos actualizados para las tarjetas */
+        .unit-card {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            height: 100%;
+            overflow: hidden;
+            border: 3px solid;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+        }
+        .unit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        .unit-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border-radius: 12px 12px 0 0;
+            color: white;
+        }
+        .unit-header.blue {
+            background-color: rgba(0, 85, 164, 0.9);
+            border-color: var(--unicomfa-blue);
+        }
+        .unit-header.orange {
+            background-color: rgba(255, 102, 0, 0.9);
+            border-color: var(--unicomfa-orange);
+        }
+        .unit-header.green {
+            background-color: rgba(120, 190, 32, 0.9);
+            border-color: var(--unicomfa-green);
+        }
+        .unit-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+        .unit-content {
+            padding: 15px;
+            background-color: white;
+            flex-grow: 1;
+        }
+        .responsibility-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        .responsibility-item:hover {
+            transform: translateX(5px);
+            background-color: rgba(245, 245, 245, 0.9);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .responsibility-item i {
+            margin-top: 3px;
+            margin-right: 12px;
+            font-size: 1.1rem;
+        }
+        .blue-item i {
+            color: var(--unicomfa-blue);
+        }
+        .orange-item i {
+            color: var(--unicomfa-orange);
+        }
+        .green-item i {
+            color: var(--unicomfa-green);
+        }
+        .responsibility-item p {
+            color: #000000;
+        }
+        .unit-card.blue {
+            border-color: var(--unicomfa-blue);
+        }
+        .unit-card.orange {
+            border-color: var(--unicomfa-orange);
+        }
+        .unit-card.green {
+            border-color: var(--unicomfa-green);
+        }
+        
+        /* Barra de desplazamiento personalizada */
+        .scrollable-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .scrollable-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        .scrollable-content::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container" style="padding-top: 20px;"><div class="slide" style="border-radius: 8px;">
+<!-- Barra de colores fija -->
+<div class="header-bar"></div>
+<!-- Encabezado fijo con título alineado a la izquierda -->
+<div class="fixed-header">
+<h1 class="text-4xl font-bold text-gray-800 text-left">Roles y Unidades Clave</h1>
+<div class="h-1 w-24 bg-gray-600 mt-2" style="margin-left: 0;"></div>
+</div>
+<!-- Contenido desplazable -->
+<div class="scrollable-content">
+<!-- Grid de 2 filas x 3 columnas -->
+<div class="grid grid-cols-3 gap-5 pb-6">
+<!-- Dirección General TEdU -->
+<div class="unit-card orange">
+<div class="unit-header orange">
+<div class="unit-icon">
+<i class="fas fa-user-tie"></i>
+</div>
+<div>
+<h2 class="text-xl font-bold">Dirección General TEdU</h2>
+<p class="text-sm opacity-90">Conducción estratégica</p>
+</div>
+</div>
+<div class="unit-content">
+<div class="responsibility-item orange-item">
+<i class="fas fa-compass"></i>
+<div>
+<p class="font-medium">Liderazgo estratégico</p>
+<p class="text-xs">Dirección del modelo multimodal y toma de decisiones</p>
+</div>
+</div>
+<div class="responsibility-item orange-item">
+<i class="fas fa-object-group"></i>
+<div>
+<p class="font-medium">Alineación con PEI</p>
+<p class="text-xs">Garantiza coherencia con misión y visión institucional</p>
+</div>
+</div>
+<div class="responsibility-item orange-item">
+<i class="fas fa-handshake"></i>
+<div>
+<p class="font-medium">Articulación institucional</p>
+<p class="text-xs">Coordinación con facultades y departamentos</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Comité Técnico-Pedagógico -->
+<div class="unit-card green">
+<div class="unit-header green">
+<div class="unit-icon">
+<i class="fas fa-users-cog"></i>
+</div>
+<div>
+<h2 class="text-lg font-bold">Comité Técnico-Pedagógico</h2>
+<p class="text-sm opacity-90">Asesoría y validación</p>
+</div>
+</div>
+<div class="unit-content">
+<div class="responsibility-item green-item">
+<i class="fas fa-gavel"></i>
+<div>
+<p class="font-medium">Órgano asesor</p>
+<p class="text-xs">Apoyo consultivo multidisciplinario</p>
+</div>
+</div>
+<div class="responsibility-item green-item">
+<i class="fas fa-clipboard-check"></i>
+<div>
+<p class="font-medium">Validación de propuestas</p>
+<p class="text-xs">Aprobación de lineamientos y recursos</p>
+</div>
+</div>
+<div class="responsibility-item green-item">
+<i class="fas fa-comment-dots"></i>
+<div>
+<p class="font-medium">Recomendaciones estratégicas</p>
+<p class="text-xs">Orientación para la mejora continua</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Unidad de Gestión de Modalidades -->
+<div class="unit-card blue">
+<div class="unit-header blue">
+<div class="unit-icon">
+<i class="fas fa-sitemap"></i>
+</div>
+<div>
+<h2 class="text-lg font-bold">Gestión de Modalidades</h2>
+<p class="text-sm opacity-90">Coordinación operativa</p>
+</div>
+</div>
+<div class="unit-content">
+<div class="responsibility-item blue-item">
+<i class="fas fa-cogs"></i>
+<div>
+<p class="font-medium">Coordinación operativa</p>
+<p class="text-xs">Implementación de las 5 modalidades</p>
+</div>
+</div>
+<div class="responsibility-item blue-item">
+<i class="fas fa-chart-line"></i>
+<div>
+<p class="font-medium">Seguimiento y evaluación</p>
+<p class="text-xs">Monitoreo de indicadores de calidad</p>
+</div>
+</div>
+<div class="responsibility-item blue-item">
+<i class="fas fa-balance-scale"></i>
+<div>
+<p class="font-medium">Coherencia metodológica</p>
+<p class="text-xs">Articulación entre modalidades</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Unidad de Diseño y Producción de Contenidos -->
+<div class="unit-card blue">
+<div class="unit-header blue">
+<div class="unit-icon">
+<i class="fas fa-pencil-ruler"></i>
+</div>
+<div>
+<h2 class="text-lg font-bold">Diseño y Producción</h2>
+<p class="text-sm opacity-90">Contenidos y recursos</p>
+</div>
+</div>
+<div class="unit-content">
+<div class="responsibility-item blue-item">
+<i class="fas fa-drafting-compass"></i>
+<div>
+<p class="font-medium">Diseño pedagógico (TPACK)</p>
+<p class="text-xs">Creación de experiencias de aprendizaje</p>
+</div>
+</div>
+<div class="responsibility-item blue-item">
+<i class="fas fa-photo-video"></i>
+<div>
+<p class="font-medium">Producción de RED/REA</p>
+<p class="text-xs">Desarrollo de recursos educativos digitales</p>
+</div>
+</div>
+<div class="responsibility-item blue-item">
+<i class="fas fa-palette"></i>
+<div>
+<p class="font-medium">Diseño instruccional</p>
+<p class="text-xs">Estructuración didáctica de cursos</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Unidad de Soporte Tecnológico y Plataformas -->
+<div class="unit-card blue">
+<div class="unit-header blue">
+<div class="unit-icon">
+<i class="fas fa-server"></i>
+</div>
+<div>
+<h2 class="text-lg font-bold">Soporte Tecnológico</h2>
+<p class="text-sm opacity-90">Infraestructura y asistencia</p>
+</div>
+</div>
+<div class="unit-content">
+<div class="responsibility-item blue-item">
+<i class="fas fa-desktop"></i>
+<div>
+<p class="font-medium">Operatividad técnica</p>
+<p class="text-xs">Administración de Moodle y LMS</p>
+</div>
+</div>
+<div class="responsibility-item blue-item">
+<i class="fas fa-headset"></i>
+<div>
+<p class="font-medium">Soporte a usuarios</p>
+<p class="text-xs">Mesa de ayuda para docentes y estudiantes</p>
+</div>
+</div>
+<div class="responsibility-item blue-item">
+<i class="fas fa-shield-alt"></i>
+<div>
+<p class="font-medium">Seguridad y accesibilidad</p>
+<p class="text-xs">Protección de datos y usabilidad</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Unidad de Innovación Pedagógica -->
+<div class="unit-card blue">
+<div class="unit-header blue">
+<div class="unit-icon">
+<i class="fas fa-lightbulb"></i>
+</div>
+<div>
+<h2 class="text-lg font-bold">Innovación Pedagógica</h2>
+<p class="text-sm opacity-90">Investigación e implementación</p>
+</div>
+</div>
+<div class="unit-content">
+<div class="responsibility-item blue-item">
+<i class="fas fa-rocket"></i>
+<div>
+<p class="font-medium">Impulso a la innovación</p>
+<p class="text-xs">Investigación en tecnología educativa</p>
+</div>
+</div>
+<div class="responsibility-item blue-item">
+<i class="fas fa-map"></i>
+<div>
+<p class="font-medium">Orientación metodológica</p>
+<p class="text-xs">Guía para implementación del TPACK</p>
+</div>
+</div>
+<div class="responsibility-item blue-item">
+<i class="fas fa-stamp"></i>
+<div>
+<p class="font-medium">Validación pedagógica</p>
+<p class="text-xs">Revisión de propuestas e intervenciones</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Logo del footer -->
+<div class="footer-logo">
+<!-- Aquí iría tu logo -->
+</div>
+</div></div>
+</body>
+</html>

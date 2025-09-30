@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Modalidad Híbrida - TEdU</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        :root {
+            --unicomfa-blue: #0055A4;
+            --unicomfa-orange: #FF6600;
+            --unicomfa-green: #78BE20;
+            --content-padding: 60px;
+            --slide-width: 1280px;
+            --slide-height: 720px;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        .presentation-container {
+            padding: 20px 0;
+            width: var(--slide-width);
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .color-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
+            flex-shrink: 0;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+    
+        .slide {
+            width: var(--slide-width);
+            height: var(--slide-height);
+            background-color: white;
+            color: #333;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .footer-logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            height: 40px;
+        }
+        .focus-box {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 3px solid;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: white;
+        }
+        .focus-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .box-blue {
+            border-color: var(--unicomfa-blue);
+        }
+        .box-orange {
+            border-color: var(--unicomfa-orange);
+        }
+        .box-green {
+            border-color: var(--unicomfa-green);
+        }
+        .box-header {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: -20px -20px 20px -20px;
+            display: flex;
+            align-items: center;
+        }
+        .box-header-blue {
+            background-color: rgba(0, 85, 164, 0.9);
+            color: white;
+        }
+        .box-header-orange {
+            background-color: rgba(255, 102, 0, 0.9);
+            color: white;
+        }
+        .box-header-green {
+            background-color: rgba(120, 190, 32, 0.9);
+            color: white;
+        }
+        .box-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+        .box-icon i {
+            color: white;
+        }
+        .box-content {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            color: #000000;
+        }
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        .tpack-cell {
+            transition: all 0.2s ease;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        .tpack-cell:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+        .table-header {
+            font-weight: 600;
+            text-align: center;
+            padding: 10px;
+            color: white;
+        }
+        .hybrid-visual {
+            position: relative;
+            height: 180px;
+            width: 100%;
+        }
+        .classroom-icon {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            left: 60px;
+            top: 40px;
+            background-color: rgba(120, 190, 32, 0.2);
+            border: 2px solid rgba(120, 190, 32, 0.6);
+        }
+        .remote-icon {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            right: 80px;
+            top: 20px;
+            background-color: rgba(0, 85, 164, 0.2);
+            border: 2px solid rgba(0, 85, 164, 0.6);
+        }
+        .remote-icon-2 {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            right: 40px;
+            bottom: 30px;
+            background-color: rgba(255, 102, 0, 0.2);
+            border: 2px solid rgba(255, 102, 0, 0.6);
+        }
+        .connection-line {
+            position: absolute;
+            height: 4px;
+            background: linear-gradient(to right, var(--unicomfa-green), var(--unicomfa-blue));
+            transform-origin: left center;
+            z-index: 0;
+        }
+        .connection-line-2 {
+            position: absolute;
+            height: 4px;
+            background: linear-gradient(to right, var(--unicomfa-green), var(--unicomfa-orange));
+            transform-origin: left center;
+            z-index: 0;
+        }
+        .pulse {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--unicomfa-blue);
+            z-index: 1;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.4;
+            }
+            100% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+        }
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px var(--content-padding);
+        }
+        .title-container {
+            position: sticky;
+            top: 8px;
+            background-color: white;
+            z-index: 99;
+            padding: 20px var(--content-padding) 10px var(--content-padding);
+            margin: 0 calc(-1 * var(--content-padding));
+        }
+        /* Scrollbar styling */
+        .main-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .main-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        .main-content::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        .main-content::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+<div class="presentation-container">
+<div class="slide">
+<!-- Barra de colores unificada -->
+<div class="color-bar"></div>
+<!-- Title with icon -->
+<div class="title-container flex items-center">
+<div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: var(--unicomfa-green);">
+<i class="fas fa-video text-white text-2xl"></i>
+</div>
+<div>
+<h1 class="text-4xl font-bold text-gray-800">Modalidad Híbrida</h1>
+<div class="h-1 w-24 bg-gray-300 mt-2"></div>
+</div>
+</div>
+<!-- Main content with scroll -->
+<div class="main-content">
+<!-- Two-column layout -->
+<div class="flex flex-1 pb-8">
+<!-- Left column - Definition and Pedagogy -->
+<div class="w-1/2 pr-8">
+<!-- Definition with visual -->
+<div class="focus-box box-green">
+<div class="box-header box-header-green">
+<div class="box-icon">
+<i class="fas fa-info-circle"></i>
+</div>
+<h2 class="text-2xl font-bold">Definición</h2>
+</div>
+<div class="box-content">
+<p class="text-lg mb-4">
+<span class="font-bold">Integra</span> componentes presenciales y virtuales de manera 
+                                    <span class="font-bold">simultánea o alternada</span> en tiempo real
+                                </p>
+<!-- Visual representation of hybrid modality -->
+<div class="hybrid-visual mt-4">
+<!-- Classroom and remote participants -->
+<div class="classroom-icon">
+<i class="fas fa-users" style="color: var(--unicomfa-green); text-3xl mb-2"></i>
+<span class="text-xs text-gray-700">Aula física</span>
+</div>
+<div class="remote-icon">
+<i class="fas fa-user-circle" style="color: var(--unicomfa-blue); text-2xl mb-2"></i>
+<span class="text-xs text-gray-700">Remoto</span>
+</div>
+<div class="remote-icon-2">
+<i class="fas fa-user-circle" style="color: var(--unicomfa-orange); text-2xl mb-2"></i>
+<span class="text-xs text-gray-700">Remoto</span>
+</div>
+<!-- Connection lines between participants -->
+<div class="connection-line" style="width: 180px; top: 90px; left: 160px; transform: rotate(-5deg);">
+<div class="pulse" style="left: 40%; top: -6px;"></div>
+</div>
+<div class="connection-line-2" style="width: 150px; top: 140px; left: 160px; transform: rotate(25deg);">
+<div class="pulse" style="left: 60%; top: -6px;"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 mt-4">
+<div class="bg-white p-2 rounded text-center border border-gray-200">
+<i class="fas fa-video-slash" style="color: var(--unicomfa-green); mb-1"></i>
+<p class="text-xs">Aula extendida</p>
+</div>
+<div class="bg-white p-2 rounded text-center border border-gray-200">
+<i class="fas fa-stream" style="color: var(--unicomfa-green); mb-1"></i>
+<p class="text-xs">Hiflex</p>
+</div>
+<div class="bg-white p-2 rounded text-center border border-gray-200">
+<i class="fas fa-random" style="color: var(--unicomfa-green); mb-1"></i>
+<p class="text-xs">Comodal</p>
+</div>
+<div class="bg-white p-2 rounded text-center border border-gray-200">
+<i class="fas fa-broadcast-tower" style="color: var(--unicomfa-green); mb-1"></i>
+<p class="text-xs">Transmisión multisitio</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Pedagogical Approach -->
+<div class="focus-box box-blue">
+<div class="box-header box-header-blue">
+<div class="box-icon">
+<i class="fas fa-chalkboard-teacher"></i>
+</div>
+<h2 class="text-2xl font-bold">Enfoque Pedagógico</h2>
+</div>
+<div class="box-content space-y-4">
+<div class="flex">
+<div class="feature-icon">
+<i class="fas fa-sliders-h" style="color: var(--unicomfa-blue);"></i>
+</div>
+<div>
+<h3 class="font-semibold text-lg">Aprendizaje Flexible</h3>
+<p class="text-sm">Opciones de participación según posibilidades de cada estudiante</p>
+</div>
+</div>
+<div class="flex">
+<div class="feature-icon">
+<i class="fas fa-laptop" style="color: var(--unicomfa-blue);"></i>
+</div>
+<div>
+<h3 class="font-semibold text-lg">Apoyo en TIC</h3>
+<p class="text-sm">Tecnologías para integrar participantes presenciales y remotos</p>
+</div>
+</div>
+<div class="flex">
+<div class="feature-icon">
+<i class="fas fa-comments" style="color: var(--unicomfa-blue);"></i>
+</div>
+<div>
+<h3 class="font-semibold text-lg">Interacción Sincrónica</h3>
+<p class="text-sm">Comunicación en tiempo real entre todos los participantes</p>
+</div>
+</div>
+<div class="flex">
+<div class="feature-icon">
+<i class="fas fa-map-marked-alt" style="color: var(--unicomfa-blue);"></i>
+</div>
+<div>
+<h3 class="font-semibold text-lg">Multiespacial</h3>
+<p class="text-sm">Participación desde diversos lugares con experiencia equivalente</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right column - Relevance and TPACK Table -->
+<div class="w-1/2 pl-8">
+<!-- Relevance for Unicomfacauca -->
+<div class="focus-box box-orange">
+<div class="box-header box-header-orange">
+<div class="box-icon">
+<i class="fas fa-bullseye"></i>
+</div>
+<h2 class="text-2xl font-bold">Pertinencia para Unicomfacauca</h2>
+</div>
+<div class="box-content">
+<ul class="space-y-3">
+<li class="flex items-start">
+<div class="w-8 h-8 rounded-full flex items-center justify-center mr-3" style="background-color: rgba(255,102,0,0.2);">
+<i class="fas fa-virus-slash" style="color: var(--unicomfa-orange);"></i>
+</div>
+<div>
+<h3 class="font-medium">Evolución post-pandemia</h3>
+<p class="text-sm">Consolidación de aprendizajes y capacidades desarrolladas</p>
+</div>
+</li>
+<li class="flex items-start">
+<div class="w-8 h-8 rounded-full flex items-center justify-center mr-3" style="background-color: rgba(255,102,0,0.2);">
+<i class="fas fa-door-open" style="color: var(--unicomfa-orange);"></i>
+</div>
+<div>
+<h3 class="font-medium">Flexibiliza acceso</h3>
+<p class="text-sm">Mantiene vínculo humano con opciones de participación remota</p>
+</div>
+</li>
+<li class="flex items-start">
+<div class="w-8 h-8 rounded-full flex items-center justify-center mr-3" style="background-color: rgba(255,102,0,0.2);">
+<i class="fas fa-wifi" style="color: var(--unicomfa-orange);"></i>
+</div>
+<div>
+<h3 class="font-medium">Áreas con conectividad emergente</h3>
+<p class="text-sm">Ideal para zonas con conectividad creciente pero no plena</p>
+</div>
+</li>
+<li class="flex items-start">
+<div class="w-8 h-8 rounded-full flex items-center justify-center mr-3" style="background-color: rgba(255,102,0,0.2);">
+<i class="fas fa-user-shield" style="color: var(--unicomfa-orange);"></i>
+</div>
+<div>
+<h3 class="font-medium">Educación resiliente</h3>
+<p class="text-sm">Preparación para situaciones emergentes o disruptivas</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<!-- TPACK Application Table -->
+<div class="focus-box box-green">
+<div class="box-header box-header-green">
+<div class="box-icon">
+<i class="fas fa-th"></i>
+</div>
+<h2 class="text-2xl font-bold">Modelo TPACK en Híbrido</h2>
+</div>
+<div class="box-content">
+<div class="rounded-lg overflow-hidden">
+<!-- Table headers -->
+<div class="grid grid-cols-4">
+<div class="table-header bg-green-800">Dimensión</div>
+<div class="table-header bg-green-800">Contenido (CK)</div>
+<div class="table-header bg-green-800">Pedagogía (PK)</div>
+<div class="table-header bg-green-800">Tecnología (TK)</div>
+</div>
+<!-- Table rows -->
+<div class="grid grid-cols-4 text-sm">
+<div class="p-2 font-medium bg-gray-100">Planificación</div>
+<div class="p-2 tpack-cell">
+                                            Diseño de experiencias equivalentes
+                                        </div>
+<div class="p-2 tpack-cell">
+                                            Estrategias para atención multisitio
+                                        </div>
+<div class="p-2 tpack-cell">
+                                            Cámaras HD, micrófonos ambientales
+                                        </div>
+</div>
+<div class="grid grid-cols-4 text-sm">
+<div class="p-2 font-medium bg-gray-100">Interacción</div>
+<div class="p-2 tpack-cell">
+                                            Actividades inclusivas para todos
+                                        </div>
+<div class="p-2 tpack-cell">
+                                            Didácticas para participación integrada
+                                        </div>
+<div class="p-2 tpack-cell">
+                                            Plataformas de comunicación sincrónica
+                                        </div>
+</div>
+<div class="grid grid-cols-4 text-sm">
+<div class="p-2 font-medium bg-gray-100">Recursos</div>
+<div class="p-2 tpack-cell">
+                                            Materiales disponibles simultáneamente
+                                        </div>
+<div class="p-2 tpack-cell">
+                                            Orientación para uso contextualizado
+                                        </div>
+<div class="p-2 tpack-cell">
+                                            Pantallas táctiles, pizarras virtuales
+                                        </div>
+</div>
+<div class="grid grid-cols-4 text-sm">
+<div class="p-2 font-medium bg-gray-100">Evaluación</div>
+<div class="p-2 tpack-cell">
+                                            Instrumentos equitativos multipresencia
+                                        </div>
+<div class="p-2 tpack-cell">
+                                            Técnicas de valoración diferenciadas
+                                        </div>
+<div class="p-2 tpack-cell">
+                                            Herramientas de proctoring, supervisión
+                                        </div>
+</div>
+</div>
+<div class="mt-4 p-2 rounded bg-white text-sm border border-gray-200">
+<i class="fas fa-lightbulb mr-2" style="color: var(--unicomfa-orange);"></i>
+<span>La modalidad híbrida requiere inversión en tecnología e infraestructura específica para garantizar la equidad en la experiencia educativa de todos los estudiantes.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Proceso de Creación y Virtualización de Cursos - TEdU</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+:root {
+    --unicomfa-blue: #0055A4;
+    --unicomfa-orange: #FF6600;
+    --unicomfa-green: #78BE20;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+.slide-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 0;
+}
+.slide {
+    width: 1280px;
+    height: 720px;
+    background-color: white;
+    color: #000000;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+.header-bar {
+    height: 8px;
+    background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
+    flex-shrink: 0;
+    width: 100%;
+}
+.scrollable-content::-webkit-scrollbar {
+    width: 8px;
+}
+.scrollable-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+.scrollable-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+        :root {
+            --unicomfa-blue: #0055A4;
+            --unicomfa-orange: #FF6600;
+            --unicomfa-green: #78BE20;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            align-items: flex-start;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            background-color: white;
+            color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+        .header-bar {
+            height: 8px;
+            background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
+        }
+        .footer-logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            height: 40px;
+        }
+        .process-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Contenedores actualizados según especificaciones */
+        .objective-box {
+            border-radius: 12px;
+            padding: 0;
+            margin-bottom: 15px;
+            background: white;
+            border: 3px solid var(--unicomfa-blue);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .objective-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .objective-header {
+            background-color: rgba(0, 85, 164, 0.9);
+            padding: 12px 15px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        .objective-header i {
+            background-color: rgba(255, 255, 255, 0.3);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+        .objective-content {
+            padding: 15px;
+            background-color: white;
+        }
+        .objective-inner {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        /* Fases del proceso */
+        .phase-card {
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            height: 100%;
+            border: 3px solid;
+            background: white;
+        }
+        .phase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .phase-header {
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+            background-color: rgba(0, 85, 164, 0.9);
+        }
+        .phase-header.orange {
+            background-color: rgba(255, 102, 0, 0.9);
+            border-color: var(--unicomfa-orange);
+        }
+        .phase-header.green {
+            background-color: rgba(120, 190, 32, 0.9);
+            border-color: var(--unicomfa-green);
+        }
+        .phase-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 10px;
+            font-size: 1.1rem;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .phase-content {
+            padding: 15px;
+            font-size: 0.85rem;
+            background-color: white;
+        }
+        .phase-inner {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .key-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 6px;
+            color: #000000;
+        }
+        .document-tag {
+            display: inline-block;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            background-color: rgba(0, 0, 0, 0.1);
+            margin-right: 4px;
+            margin-bottom: 4px;
+            color: #000000;
+        }
+        
+        /* Diagrama de procesos */
+        .process-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px auto;
+            flex-wrap: nowrap;
+        }
+        .etapa {
+            color: white;
+            padding: 12px 20px;
+            border-radius: 4px;
+            min-width: 180px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 5px;
+            border: 2px solid;
+        }
+        .azul {
+            background-color: var(--unicomfa-blue);
+            border-color: var(--unicomfa-blue);
+        }
+        .naranja {
+            background-color: var(--unicomfa-orange);
+            border-color: var(--unicomfa-orange);
+        }
+        .verde {
+            background-color: var(--unicomfa-green);
+            border-color: var(--unicomfa-green);
+        }
+        .flecha {
+            font-size: 24px;
+            color: #666;
+            margin: 0 5px;
+        }
+        
+        /* Títulos y separadores */
+        .title-divider {
+            height: 1px;
+            width: 24px;
+            background-color: #000;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="slide-wrapper" style="padding-top: 20px; display: flex; justify-content: center;"><div class="slide flex flex-col">
+<!-- Header bar -->
+<div class="header-bar w-full"></div>
+<!-- Main content -->
+<div class="flex flex-col px-16 py-8 h-full">
+<!-- Title -->
+<div class="mb-4 text-left">
+<h1 class="process-title font-bold text-gray-900">Proceso de Creación y Virtualización de Cursos</h1>
+<div class="title-divider"></div>
+</div>
+<!-- Objetivo -->
+<div class="objective-box">
+<div class="objective-header">
+<i class="fas fa-bullseye"></i>
+<h2 class="text-xl font-bold">Objetivo del Proceso</h2>
+</div>
+<div class="objective-content">
+<div class="objective-inner">
+<div class="flex justify-between">
+<div class="flex items-center">
+<i class="fas fa-sitemap text-blue-600 mr-2"></i>
+<span>Estandarizar procesos</span>
+</div>
+<div class="flex items-center">
+<i class="fas fa-route text-blue-600 mr-2"></i>
+<span>Garantizar trazabilidad</span>
+</div>
+<div class="flex items-center">
+<i class="fas fa-hands-helping text-blue-600 mr-2"></i>
+<span>Facilitar colaboración</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Diagrama de Procesos -->
+<div class="process-flow">
+<div class="etapa azul">Planificación y Solicitud</div>
+<div class="flecha">→</div>
+<div class="etapa naranja">Diseño Instruccional</div>
+<div class="flecha">→</div>
+<div class="etapa verde">Validación Académica</div>
+<div class="flecha">→</div>
+<div class="etapa azul">Publicación e Implementación</div>
+<div class="flecha">→</div>
+<div class="etapa naranja">Seguimiento y Mejora</div>
+</div>
+<!-- Phases Detail Cards -->
+<div class="grid grid-cols-5 gap-3 flex-1 mx-auto w-full">
+<!-- Phase 1 -->
+<div class="phase-card">
+<div class="phase-header">
+<div class="phase-number">1</div>
+<div class="phase-title">Planificación y Solicitud</div>
+</div>
+<div class="phase-content">
+<div class="phase-inner">
+<div class="key-item">
+<i class="fas fa-search text-blue-600 mt-1 mr-2"></i>
+<span>Identificación necesidad</span>
+</div>
+<div class="key-item">
+<i class="fas fa-file-alt text-blue-600 mt-1 mr-2"></i>
+<span>Solicitud formal</span>
+</div>
+<div class="key-item">
+<i class="fas fa-check-double text-blue-600 mt-1 mr-2"></i>
+<span>Aprobación instancias</span>
+</div>
+<div class="mt-2">
+
+<a href="../Doc/PDF/Anexo_A.pdf" target="_blank" class="annex-tag"><b>Anexo A1</b></a>
+
+</div>
+</div>
+</div>
+</div>
+<!-- Phase 2 -->
+<div class="phase-card">
+<div class="phase-header orange">
+<div class="phase-number">2</div>
+<div class="phase-title">Diseño Instruccional</div>
+</div>
+<div class="phase-content">
+<div class="phase-inner">
+<div class="key-item">
+<i class="fas fa-users-cog text-orange-500 mt-1 mr-2"></i>
+<span>Trabajo colaborativo</span>
+</div>
+<div class="key-item">
+<i class="fas fa-drafting-compass text-orange-500 mt-1 mr-2"></i>
+<span>Diseño tecno-pedagógico</span>
+</div>
+<div class="key-item">
+<i class="fas fa-tasks text-orange-500 mt-1 mr-2"></i>
+<span>Generación productos</span>
+</div>
+<div class="mt-2">
+
+<a href="../Doc/PDF/Anexo_B.pdf" target="_blank" class="annex-tag"><b>Anexo B</b></a>
+
+<a href="../Doc/PDF/Anexo_C.pdf" target="_blank" class="annex-tag"><b>Anexo C</b></a>
+
+</div>
+</div>
+</div>
+</div>
+<!-- Phase 3 -->
+<div class="phase-card">
+<div class="phase-header green">
+<div class="phase-number">3</div>
+<div class="phase-title">Validación Académica</div>
+</div>
+<div class="phase-content">
+<div class="phase-inner">
+<div class="key-item">
+<i class="fas fa-clipboard-check text-green-500 mt-1 mr-2"></i>
+<span>Revisión por Comité TEdU</span>
+</div>
+<div class="key-item">
+<i class="fas fa-th-list text-green-500 mt-1 mr-2"></i>
+<span>Rúbricas Institucionales</span>
+</div>
+<div class="key-item">
+<i class="fas fa-link text-green-500 mt-1 mr-2"></i>
+<span>Articulación con Calidad</span>
+</div>
+<div class="mt-2">
+
+<a href="../Doc/PDF/Anexo_D.pdf" target="_blank" class="annex-tag"><b>Anexo D1-D5</b></a>
+
+</div>
+</div>
+</div>
+</div>
+<!-- Phase 4 -->
+<div class="phase-card">
+<div class="phase-header">
+<div class="phase-number">4</div>
+<div class="phase-title">Publicación e Implementación</div>
+</div>
+<div class="phase-content">
+<div class="phase-inner">
+<div class="key-item">
+<i class="fas fa-upload text-blue-600 mt-1 mr-2"></i>
+<span>Integración en Moodle</span>
+</div>
+<div class="key-item">
+<i class="fas fa-tools text-blue-600 mt-1 mr-2"></i>
+<span>Revisión técnica final</span>
+</div>
+<div class="key-item">
+<i class="fas fa-user-tie text-blue-600 mt-1 mr-2"></i>
+<span>Asignación docente</span>
+</div>
+<div class="mt-2">
+
+<a href="../Doc/PDF/Anexo_D.pdf" target="_blank" class="annex-tag"><b>Anexo D6</b></a>
+
+</div>
+</div>
+</div>
+</div>
+<!-- Phase 5 -->
+<div class="phase-card">
+<div class="phase-header orange">
+<div class="phase-number">5</div>
+<div class="phase-title">Seguimiento y Mejora Continua</div>
+</div>
+<div class="phase-content">
+<div class="phase-inner">
+<div class="key-item">
+<i class="fas fa-chart-line text-orange-500 mt-1 mr-2"></i>
+<span>Análisis uso plataforma</span>
+</div>
+<div class="key-item">
+<i class="fas fa-poll text-orange-500 mt-1 mr-2"></i>
+<span>Evaluación resultados</span>
+</div>
+<div class="key-item">
+<i class="fas fa-sync-alt text-orange-500 mt-1 mr-2"></i>
+<span>Acciones de mejora</span>
+</div>
+<div class="mt-2">
+
+<a href="../Doc/PDF/Anexo_E.pdf" target="_blank" class="annex-tag"><b>Anexo E</b></a>
+
+<a href="../Doc/PDF/Anexo_I.pdf" target="_blank" class="annex-tag"><b>Anexo I</b></a>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div></body>
+</html>
