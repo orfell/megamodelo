@@ -1,466 +1,522 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Evaluación del Diseño y Métricas - TEdU</title>
+<title>Proceso de Creación y Virtualización de Cursos - TEdU</title>
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
 <style>
-        :root {
-            --unicomfa-blue: #0055A4;
-            --unicomfa-orange: #FF6600;
-            --unicomfa-green: #78BE20;
+:root {
+    --unicomfa-blue: #0055A4;
+    --unicomfa-orange: #FF6600;
+    --unicomfa-green: #78BE20;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+.slide-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+}
+.slide {
+    width: 100%;
+    max-width: 1280px;
+    height: 100vh;
+    background-color: white;
+    color: #000000;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+.header-bar {
+    height: 8px;
+    background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
+    flex-shrink: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 80px 16px 16px 16px;
+}
+.fixed-header {
+    padding: 16px 16px 0 16px;
+    background-color: white;
+    position: fixed;
+    top: 8px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.scrollable-content::-webkit-scrollbar {
+    width: 8px;
+}
+.scrollable-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+.scrollable-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+        .footer-logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            height: 40px;
         }
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8fafc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-        .slide-container {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            height: 100vh;
-            padding: 0;
-        }
-        .slide {
-            width: 1280px;
-            height: 100vh;
-            background-color: white;
-            color: #000000;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            border-radius: 0;
-            display: flex;
-            flex-direction: column;
-        }
-        .header-bar {
-            height: 8px;
-            background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
-            flex-shrink: 0;
-        }
-        .main-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 0 16px 16px 16px;
-        }
-        .fixed-header {
-            padding: 16px 16px 0 16px;
-            background-color: white;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+        .process-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
         }
         
-        /* ESTILOS PARA CONTENEDORES */
-        .container-title {
-            padding: 12px 16px;
-            border-radius: 8px 8px 0 0;
-            color: white;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-        .container-title i {
-            background-color: rgba(255, 255, 255, 0.3);
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin-right: 10px;
-            font-size: 1rem;
-        }
-        
-        .blue-container .container-title {
-            background-color: rgba(0, 85, 164, 0.9);
+        /* Contenedores actualizados según especificaciones */
+        .objective-box {
+            border-radius: 12px;
+            padding: 0;
+            margin-bottom: 15px;
+            background: white;
             border: 3px solid var(--unicomfa-blue);
-        }
-        .orange-container .container-title {
-            background-color: rgba(255, 102, 0, 0.9);
-            border: 3px solid var(--unicomfa-orange);
-        }
-        .green-container .container-title {
-            background-color: rgba(120, 190, 32, 0.9);
-            border: 3px solid var(--unicomfa-green);
-        }
-        
-        .content-box {
-            background-color: white;
-            padding: 16px;
-            border-radius: 0 0 8px 8px;
-            border-left: 3px solid;
-            border-right: 3px solid;
-            border-bottom: 3px solid;
+            overflow: hidden;
             transition: all 0.3s ease;
         }
-        .blue-container .content-box {
-            border-color: var(--unicomfa-blue);
+        .objective-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .orange-container .content-box {
+        .objective-header {
+            background-color: rgba(0, 85, 164, 0.9);
+            padding: 12px 15px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        .objective-header i {
+            background-color: rgba(255, 255, 255, 0.3);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+        .objective-content {
+            padding: 15px;
+            background-color: white;
+        }
+        .objective-inner {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        /* Fases del proceso */
+        .phase-card {
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            height: 100%;
+            border: 3px solid;
+            background: white;
+        }
+        .phase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .phase-header {
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+            background-color: rgba(0, 85, 164, 0.9);
+        }
+        .phase-header.orange {
+            background-color: rgba(255, 102, 0, 0.9);
             border-color: var(--unicomfa-orange);
         }
-        .green-container .content-box {
+        .phase-header.green {
+            background-color: rgba(120, 190, 32, 0.9);
             border-color: var(--unicomfa-green);
         }
-        
-        .inner-content {
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 12px;
-            border-radius: 6px;
-            color: #000000;
-        }
-        
-        /* Efectos hover */
-        .blue-container:hover, .orange-container:hover, .green-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        /* Componentes específicos */
-        .concept-box {
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            margin-bottom: 20px;
-        }
-        .concept-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .dimension-card {
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            padding: 10px;
-            background-color: white;
-            border: 1px solid #eee;
-        }
-        .dimension-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .rubric-icon {
-            width: 40px;
-            height: 40px;
+        .phase-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            font-size: 1.2rem;
+            font-weight: 700;
             margin-right: 10px;
-            border: 3px solid rgba(0, 0, 0, 0.1);
+            font-size: 1.1rem;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .phase-content {
+            padding: 15px;
+            font-size: 0.85rem;
+            background-color: white;
+        }
+        .phase-inner {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .key-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 6px;
+            color: #000000;
+        }
+        .document-tag {
+            display: inline-block;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            background-color: rgba(0, 0, 0, 0.1);
+            margin-right: 4px;
+            margin-bottom: 4px;
+            color: #000000;
         }
         
-        .modality-tag {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            margin-right: 4px;
-            margin-bottom: 5px;
+        /* Diagrama de procesos */
+        .process-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px auto;
+            flex-wrap: wrap;
+        }
+        .etapa {
+            color: white;
+            padding: 12px 20px;
+            border-radius: 4px;
+            min-width: 180px;
+            text-align: center;
+            font-size: 14px;
             font-weight: 600;
-            transition: all 0.3s ease;
+            margin: 5px;
             border: 2px solid;
         }
-        .modality-tag:hover {
-            transform: scale(1.1);
+        .azul {
+            background-color: var(--unicomfa-blue);
+            border-color: var(--unicomfa-blue);
+        }
+        .naranja {
+            background-color: var(--unicomfa-orange);
+            border-color: var(--unicomfa-orange);
+        }
+        .verde {
+            background-color: var(--unicomfa-green);
+            border-color: var(--unicomfa-green);
+        }
+        .flecha {
+            font-size: 24px;
+            color: #666;
+            margin: 0 5px;
         }
         
-        .metrics-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .metrics-table th, .metrics-table td {
-            padding: 8px;
-            text-align: center;
-            border: 2px solid #eee;
-        }
-        .metrics-table th {
-            font-weight: 600;
-            background-color: rgba(0, 0, 0, 0.03);
-        }
-        .metrics-table tr:hover td {
-            background-color: rgba(0, 0, 0, 0.02);
-        }
-        
-        /* Estilos generales */
+        /* Títulos y separadores */
         .title-divider {
-            height: 3px;
-            width: 80px;
-            margin-top: 8px;
-            background-color: #666;
+            height: 1px;
+            width: 24px;
+            background-color: #000;
+            margin-top: 2px;
+        }
+
+        /* Media Queries para Responsive */
+        @media (max-width: 1024px) {
+            .phases-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
         }
         
-        /* Personalización de la barra de desplazamiento */
-        ::-webkit-scrollbar {
-            width: 8px;
+        @media (max-width: 768px) {
+            .fixed-header {
+                padding: 10px 10px 0 10px;
+            }
+            
+            .fixed-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .main-content {
+                padding: 120px 10px 10px 10px;
+            }
+            
+            .phases-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 15px;
+            }
+            
+            .process-flow {
+                flex-direction: column;
+                margin: 20px auto;
+            }
+            
+            .flecha {
+                transform: rotate(90deg);
+                margin: 5px 0;
+            }
+            
+            .etapa {
+                min-width: 200px;
+                margin: 2px;
+            }
+            
+            .objective-inner {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
+        
+        @media (max-width: 480px) {
+            .phases-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .etapa {
+                min-width: 90%;
+                font-size: 12px;
+                padding: 10px 15px;
+            }
+            
+            .phase-header {
+                padding: 10px 12px;
+            }
+            
+            .phase-content {
+                padding: 12px;
+            }
+            
+            .objective-header h2 {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
-<div class="slide-container" style=" padding-top: 20px;">
-<div class="slide" style=" border-radius: 8px;">
+
+<div class="slide-container">
+<div class="slide">
 <!-- Header bar -->
 <div class="header-bar w-full"></div>
 <!-- Fixed header -->
 <div class="fixed-header">
 <!-- Title -->
 <div class="mb-4 text-left">
-<h1 class="text-4xl font-bold text-gray-800">Evaluación del Diseño y Métricas</h1>
+<h1 class="process-title font-bold text-gray-900">Proceso de Creación y Virtualización de Cursos</h1>
 <div class="title-divider"></div>
 </div>
 </div>
 <!-- Main content with scroll -->
 <div class="main-content">
-<!-- Content grid -->
-<div class="grid grid-cols-5 gap-6 flex-1">
-<!-- Left Column: Evaluation Concept and Rubrics (3/5 width) -->
-<div class="col-span-3 space-y-5">
-<!-- Evaluation Concept - Contenedor Azul -->
-<div class="concept-box blue-container">
-<div class="container-title">
-<i class="fas fa-clipboard-check"></i>
-<h3>Evaluación del Diseño</h3>
+<!-- Objetivo -->
+<div class="objective-box">
+<div class="objective-header">
+<i class="fas fa-bullseye"></i>
+<h2 class="text-xl font-bold">Objetivo del Proceso</h2>
 </div>
-<div class="content-box">
-<div class="inner-content">
-<p class="text-gray-700">
-                                        Proceso <span class="font-bold">reflexivo y formativo</span> para valorar 
-                                        la <span class="font-bold">calidad y coherencia</span> de la experiencia educativa
-                                    </p>
-</div>
-</div>
-</div>
-<!-- Rubrics - Contenedor Naranja -->
-<div class="concept-box orange-container">
-<div class="container-title">
-<i class="fas fa-th-list"></i>
-<h3>Rúbricas Diferenciadas</h3>
-</div>
-<div class="content-box">
-<div class="inner-content">
-<!-- Modalities -->
-<div class="mb-3">
-<span class="modality-tag" style="background-color: rgba(0,85,164,0.1); border-color: var(--unicomfa-blue); color: var(--unicomfa-blue);">
-<i class="fas fa-laptop text-xs mr-1"></i> Virtual
-                                        </span>
-<span class="modality-tag" style="background-color: rgba(255,102,0,0.1); border-color: var(--unicomfa-orange); color: var(--unicomfa-orange);">
-<i class="fas fa-sync-alt text-xs mr-1"></i> Blended
-                                        </span>
-<span class="modality-tag" style="background-color: rgba(120,190,32,0.1); border-color: var(--unicomfa-green); color: var(--unicomfa-green);">
-<i class="fas fa-video text-xs mr-1"></i> Híbrida
-                                        </span>
-<span class="modality-tag" style="background-color: rgba(0,85,164,0.1); border-color: var(--unicomfa-blue); color: var(--unicomfa-blue);">
-<i class="fas fa-industry text-xs mr-1"></i> Dual
-                                        </span>
-<span class="modality-tag" style="background-color: rgba(255,102,0,0.1); border-color: var(--unicomfa-orange); color: var(--unicomfa-orange);">
-<i class="fas fa-seedling text-xs mr-1"></i> U. en el Campo
-                                        </span>
-</div>
-<!-- Dimensions -->
-<div class="text-sm text-gray-700 mb-2">Cada rúbrica evalúa <span class="font-semibold">5 dimensiones</span> con escala de 4 niveles</div>
-<div class="grid grid-cols-3 gap-2 mt-2">
-<div class="dimension-card">
+<div class="objective-content">
+<div class="objective-inner flex justify-between">
 <div class="flex items-center">
-<div class="rubric-icon" style="background-color: rgba(0,85,164,0.1);">
-<i class="fas fa-drafting-compass" style="color: var(--unicomfa-blue);"></i>
+<i class="fas fa-sitemap text-blue-600 mr-2"></i>
+<span>Estandarizar procesos</span>
 </div>
-<span class="text-sm text-gray-700">Diseño Pedagógico</span>
-</div>
-</div>
-<div class="dimension-card">
 <div class="flex items-center">
-<div class="rubric-icon" style="background-color: rgba(255,102,0,0.1);">
-<i class="fas fa-laptop-code" style="color: var(--unicomfa-orange);"></i>
+<i class="fas fa-route text-blue-600 mr-2"></i>
+<span>Garantizar trazabilidad</span>
 </div>
-<span class="text-sm text-gray-700">Uso Tecnológico</span>
-</div>
-</div>
-<div class="dimension-card">
 <div class="flex items-center">
-<div class="rubric-icon" style="background-color: rgba(120,190,32,0.1);">
-<i class="fas fa-book" style="color: var(--unicomfa-green);"></i>
-</div>
-<span class="text-sm text-gray-700">Dominio Contenido</span>
-</div>
-</div>
-<div class="dimension-card">
-<div class="flex items-center">
-<div class="rubric-icon" style="background-color: rgba(0,85,164,0.1);">
-<i class="fas fa-tasks" style="color: var(--unicomfa-blue);"></i>
-</div>
-<span class="text-sm text-gray-700">Evaluación</span>
-</div>
-</div>
-<div class="dimension-card">
-<div class="flex items-center">
-<div class="rubric-icon" style="background-color: rgba(255,102,0,0.1);">
-<i class="fas fa-comments" style="color: var(--unicomfa-orange);"></i>
-</div>
-<span class="text-sm text-gray-700">Interacción</span>
-</div>
-</div>
-<div class="dimension-card flex items-center justify-center">
-<div class="flex items-center">
-<i class="fas fa-file-alt mr-2" style="color: var(--unicomfa-green);"></i>
-<span class="text-sm text-gray-700">Ver Anexos D</span>
-</div>
-</div>
-</div>
-<!-- Levels -->
-<div class="grid grid-cols-4 gap-1 mt-3">
-<div class="text-center p-1 rounded bg-green-50">
-<div class="text-xs font-semibold">Nivel 1</div>
-<div class="text-xs text-gray-600"><b>Inicial</b></div>
-</div>
-<div class="text-center p-1 rounded bg-green-50">
-<div class="text-xs font-semibold">Nivel 2</div>
-<div class="text-xs text-gray-600"><b>Emergente</b></div>
-</div>
-<div class="text-center p-1 rounded bg-green-50">
-<div class="text-xs font-semibold">Nivel 3</div>
-<div class="text-xs text-gray-600"><b>Establecido</b></div>
-</div>
-<div class="text-center p-1 rounded bg-green-50">
-<div class="text-xs font-semibold">Nivel 4</div>
-<div class="text-xs text-gray-600"><b>Transformador</b></div>
+<i class="fas fa-hands-helping text-blue-600 mr-2"></i>
+<span>Facilitar colaboración</span>
 </div>
 </div>
 </div>
 </div>
+<!-- Diagrama de Procesos -->
+<div class="process-flow">
+<div class="etapa azul">Planificación y Solicitud</div>
+<div class="flecha">→</div>
+<div class="etapa naranja">Diseño Instruccional</div>
+<div class="flecha">→</div>
+<div class="etapa verde">Validación Académica</div>
+<div class="flecha">→</div>
+<div class="etapa azul">Publicación e Implementación</div>
+<div class="flecha">→</div>
+<div class="etapa naranja">Seguimiento y Mejora</div>
 </div>
+<!-- Phases Detail Cards -->
+<div class="phases-grid grid grid-cols-5 gap-3 mx-auto w-full">
+<!-- Phase 1 -->
+<div class="phase-card">
+<div class="phase-header">
+<div class="phase-number">1</div>
+<div class="phase-title">Planificación y Solicitud</div>
 </div>
-<!-- Right Column: Metrics Table (2/5 width) - Contenedor Verde -->
-<div class="col-span-2">
-<div class="concept-box green-container h-full">
-<div class="container-title">
-<i class="fas fa-chart-line"></i>
-<h3>Métricas Orientadoras</h3>
+<div class="phase-content">
+<div class="phase-inner">
+<div class="key-item">
+<i class="fas fa-search text-blue-600 mt-1 mr-2"></i>
+<span>Identificación necesidad</span>
 </div>
-<div class="content-box h-full flex flex-col" style="border-bottom: 3px solid var(--unicomfa-green);">
-<div class="inner-content flex-1">
-<p class="text-sm mb-3 text-gray-700">
-                                        Referentes para <span class="font-semibold">equilibrar la carga académica</span> según 
-                                        modalidad y duración del curso
-                                    </p>
-<!-- Metrics Table -->
-<div class="overflow-auto">
-<table bgcolor="white" class="metrics-table">
-<thead>
-<tr>
-<th class="text-xs">Modalidad</th>
-<th class="text-xs">Recursos</th>
-<th class="text-xs">Actividades</th>
-<th class="text-xs">Evaluaciones</th>
-</tr>
-</thead>
-<tbody class="text-xs">
-<tr>
-<td style="color: var(--unicomfa-blue);">
-<i class="fas fa-laptop mr-1"></i> <b>Virtual</b>
-</td>
-<td class="text-gray-700"><b>5-7</b></td>
-<td class="text-gray-700"><b>2-4</b></td>
-<td class="text-gray-700"><b>1-2</b></td>
-</tr>
-<tr>
-<td style="color: var(--unicomfa-orange);">
-<i class="fas fa-sync-alt mr-1"></i> <b>Blended</b>
-</td>
-<td class="text-gray-700"><b>4-6</b></td>
-<td class="text-gray-700"><b>2-3</b></td>
-<td class="text-gray-700"><b>1-2</b></td>
-</tr>
-<tr>
-<td style="color: var(--unicomfa-green);">
-<i class="fas fa-video mr-1"></i> <b>Híbrida</b>
-</td>
-<td class="text-gray-700"><b>3-5</b></td>
-<td class="text-gray-700"><b>2-3</b></td>
-<td class="text-gray-700"><b>1</b></td>
-</tr>
-<tr>
-<td style="color: var(--unicomfa-blue);">
-<i class="fas fa-industry mr-1"></i> <b>Dual</b>
-</td>
-<td class="text-gray-700"><b>2-4</b></td>
-<td class="text-gray-700"><b>1-3</b></td>
-<td class="text-gray-700"><b>1-2</b></td>
-</tr>
-<tr>
-<td style="color: var(--unicomfa-orange);">
-<i class="fas fa-seedling mr-1"></i> <b>U. Campo</b>
-</td>
-<td class="text-gray-700"><b>2-3</b></td>
-<td class="text-gray-700"><b>1-2</b></td>
-<td class="text-gray-700"><b>1</b></td>
-</tr>
-</tbody>
-</table>
+<div class="key-item">
+<i class="fas fa-file-alt text-blue-600 mt-1 mr-2"></i>
+<span>Solicitud formal</span>
 </div>
-<!-- Types -->
-<div class="grid grid-cols-3 gap-1 mt-4 text-center">
-<div class="p-2 rounded bg-gray-50">
-<div class="text-xs font-semibold" style="color: var(--unicomfa-blue);">Tipo Recursos</div>
-<div class="text-xs text-gray-600"><b>Lecturas, Videos, REA/RED</b></div>
+<div class="key-item">
+<i class="fas fa-check-double text-blue-600 mt-1 mr-2"></i>
+<span>Aprobación instancias</span>
 </div>
-<div class="p-2 rounded bg-gray-50">
-<div class="text-xs font-semibold" style="color: var(--unicomfa-orange);">Tipo Actividades</div>
-<div class="text-xs text-gray-600"><b>Foros, Talleres, Casos</b></div>
-</div>
-<div class="p-2 rounded bg-gray-50">
-<div class="text-xs font-semibold" style="color: var(--unicomfa-green);">Tipo Evaluaciones</div>
-<div class="text-xs text-gray-600"><b>Quiz, Proyecto, Exam</b></div>
-</div>
-</div>
-<!-- Note -->
-<div class="mt-3 p-2 bg-gray-100 rounded text-justify">
-<p class="text-xs italic text-gray-600">
-<i class="fas fa-info-circle mr-1" style="color: var(--unicomfa-green);"></i>
-<b>Datos para curso estándar de 16 semanas (1 crédito)</b>
-<br>
-<br>Según el Decreto 1330 de 2019 y normativa del CESU, en colombia un crédito académico equivale a 48 horas de trabajo del estudiante, distribuidas en:
-<br>- <b>Trabajo presencial</b> o con acompañamiento docente directo: 16 Horas    
-<br>- <b>Trabajo independiente</b> o autónomo 32 Horas
+<div class="mt-2">
 
-</p>
+<a href="../Doc/PDF/Anexo_A.pdf" target="_blank" class="annex-tag"><b>Anexo A1</b></a>
+
 </div>
 </div>
 </div>
 </div>
+<!-- Phase 2 -->
+<div class="phase-card">
+<div class="phase-header orange">
+<div class="phase-number">2</div>
+<div class="phase-title">Diseño Instruccional</div>
+</div>
+<div class="phase-content">
+<div class="phase-inner">
+<div class="key-item">
+<i class="fas fa-users-cog text-orange-500 mt-1 mr-2"></i>
+<span>Trabajo colaborativo</span>
+</div>
+<div class="key-item">
+<i class="fas fa-drafting-compass text-orange-500 mt-1 mr-2"></i>
+<span>Diseño tecno-pedagógico</span>
+</div>
+<div class="key-item">
+<i class="fas fa-tasks text-orange-500 mt-1 mr-2"></i>
+<span>Generación productos</span>
+</div>
+<div class="mt-2">
+
+<a href="../Doc/PDF/Anexo_B.pdf" target="_blank" class="annex-tag"><b>Anexo B</b></a>
+
+<a href="../Doc/PDF/Anexo_C.pdf" target="_blank" class="annex-tag"><b>Anexo C</b></a>
+
 </div>
 </div>
-<!-- Bottom Note -->
-<div class="mt-4 p-3 rounded-lg text-center bg-gray-400 text-sm">
-<i class="fas fa-balance-scale mr-2" style="color: var(--unicomfa-blue);"></i>
-<span class="text-gray-700"><b>Las métricas buscan un <span style="color: var(--unicomfa-orange);">equilibrio entre carga académica y profundidad</span>, 
-                    adaptándose a las características de cada modalidad.</b></span>
+</div>
+</div>
+<!-- Phase 3 -->
+<div class="phase-card">
+<div class="phase-header green">
+<div class="phase-number">3</div>
+<div class="phase-title">Validación Académica</div>
+</div>
+<div class="phase-content">
+<div class="phase-inner">
+<div class="key-item">
+<i class="fas fa-clipboard-check text-green-500 mt-1 mr-2"></i>
+<span>Revisión por Comité TEdU</span>
+</div>
+<div class="key-item">
+<i class="fas fa-th-list text-green-500 mt-1 mr-2"></i>
+<span>Rúbricas Institucionales</span>
+</div>
+<div class="key-item">
+<i class="fas fa-link text-green-500 mt-1 mr-2"></i>
+<span>Articulación con Calidad</span>
+</div>
+<div class="mt-2">
+
+<a href="../Doc/PDF/Anexo_D.pdf" target="_blank" class="annex-tag"><b>Anexo D1-D5</b></a>
+
+</div>
+</div>
+</div>
+</div>
+<!-- Phase 4 -->
+<div class="phase-card">
+<div class="phase-header">
+<div class="phase-number">4</div>
+<div class="phase-title">Publicación e Implementación</div>
+</div>
+<div class="phase-content">
+<div class="phase-inner">
+<div class="key-item">
+<i class="fas fa-upload text-blue-600 mt-1 mr-2"></i>
+<span>Integración en Moodle</span>
+</div>
+<div class="key-item">
+<i class="fas fa-tools text-blue-600 mt-1 mr-2"></i>
+<span>Revisión técnica final</span>
+</div>
+<div class="key-item">
+<i class="fas fa-user-tie text-blue-600 mt-1 mr-2"></i>
+<span>Asignación docente</span>
+</div>
+<div class="mt-2">
+
+<a href="../Doc/PDF/Anexo_D.pdf" target="_blank" class="annex-tag"><b>Anexo D6</b></a>
+
+</div>
+</div>
+</div>
+</div>
+<!-- Phase 5 -->
+<div class="phase-card">
+<div class="phase-header orange">
+<div class="phase-number">5</div>
+<div class="phase-title">Seguimiento y Mejora Continua</div>
+</div>
+<div class="phase-content">
+<div class="phase-inner">
+<div class="key-item">
+<i class="fas fa-chart-line text-orange-500 mt-1 mr-2"></i>
+<span>Análisis uso plataforma</span>
+</div>
+<div class="key-item">
+<i class="fas fa-poll text-orange-500 mt-1 mr-2"></i>
+<span>Evaluación resultados</span>
+</div>
+<div class="key-item">
+<i class="fas fa-sync-alt text-orange-500 mt-1 mr-2"></i>
+<span>Acciones de mejora</span>
+</div>
+<div class="mt-2">
+
+<a href="../Doc/PDF/Anexo_E.pdf" target="_blank" class="annex-tag"><b>Anexo E</b></a>
+
+<a href="../Doc/PDF/Anexo_I.pdf" target="_blank" class="annex-tag"><b>Anexo I</b></a>
+
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

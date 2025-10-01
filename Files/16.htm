@@ -18,18 +18,23 @@
             margin: 0;
             padding: 0;
             background-color: #f8fafc;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: hidden; /* Elimina barra de desplazamiento externa */
         }
         .slide-container {
-            display: flex;
-            justify-content: center;
             width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
             height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .slide {
-            margin-top: 20px;
-            width: 1280px;
+            width: 100%;
             height: 100%;
             background-color: white;
             color: #000000;
@@ -44,6 +49,11 @@
             height: 8px;
             background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
             flex-shrink: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
         }
         .footer-logo {
             position: absolute;
@@ -54,15 +64,19 @@
         }
         .main-content {
             flex: 1;
-            overflow-y: auto;
-            padding: 0 16px 20px;
+            overflow-y: auto; /* Barra de desplazamiento vertical interna */
+            padding: 100px 16px 20px;
+            box-sizing: border-box;
         }
         .fixed-title {
             padding: 20px 16px 0;
             background: white;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            position: fixed;
+            top: 8px;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
         /* Estilos generales para contenedores */
@@ -96,6 +110,7 @@
             justify-content: center;
             margin-right: 12px;
             background-color: rgba(255, 255, 255, 0.3);
+            flex-shrink: 0;
         }
         .box-icon {
             color: white;
@@ -173,6 +188,7 @@
         .document-icon:hover {
             transform: translateY(-5px);
         }
+        
         /* Personalización del scroll */
         .main-content::-webkit-scrollbar {
             width: 8px;
@@ -180,6 +196,106 @@
         .main-content::-webkit-scrollbar-thumb {
             background: #c1c1c1;
             border-radius: 4px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .slide-container {
+                padding: 15px;
+            }
+            .fixed-title h1 {
+                font-size: 2rem;
+            }
+            .box-header {
+                padding: 14px;
+            }
+            .box-content {
+                padding: 14px;
+            }
+            .main-content {
+                padding: 90px 14px 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .slide-container {
+                padding: 10px;
+            }
+            .fixed-title {
+                padding: 15px 16px 0;
+            }
+            .fixed-title h1 {
+                font-size: 1.7rem;
+            }
+            .main-content {
+                padding: 85px 12px 15px;
+            }
+            .grid.grid-cols-2 {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .box-header {
+                padding: 12px;
+            }
+            .box-content {
+                padding: 12px;
+            }
+            .box-title {
+                font-size: 1.1rem;
+            }
+            .bg-gray-100.p-3.rounded-lg.mb-4 {
+                padding: 12px;
+            }
+            .grid.grid-cols-2.gap-8 {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slide-container {
+                padding: 5px;
+            }
+            .fixed-title {
+                padding: 10px 12px 0;
+            }
+            .fixed-title h1 {
+                font-size: 1.4rem;
+            }
+            .main-content {
+                padding: 75px 10px 12px;
+            }
+            .box-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .box-icon-container {
+                margin-right: 0;
+                margin-bottom: 8px;
+            }
+            .box-title {
+                font-size: 1rem;
+            }
+            .box-header p {
+                font-size: 0.85rem;
+            }
+            .example-tag {
+                font-size: 0.75rem;
+                padding: 3px 6px;
+            }
+            .document-icon {
+                width: 50px;
+                height: 70px;
+            }
+            .document-icon i {
+                font-size: 1.5rem;
+            }
+            .text-center h4 {
+                font-size: 0.9rem;
+            }
+            .text-center p {
+                font-size: 0.75rem;
+            }
         }
     </style>
 </head>

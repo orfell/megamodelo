@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Las Interacciones TPACK - TEdU</title>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" as="style">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
@@ -14,66 +13,45 @@
             --unicomfa-orange: #FF6600;
             --unicomfa-green: #78BE20;
         }
-        .slide-container {
-            padding: 20px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f8fafc;
-        }
-            --unicomfa-blue: #0055A4;
-            --unicomfa-orange: #FF6600;
-            --unicomfa-green: #78BE20;
-        }
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #f8fafc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
             margin: 0;
             padding: 0;
-            overflow: hidden;
             background-color: white;
         }
         .slide {
-            width: 1280px;
-            height: 720px;
-            max-width: 1280px;
+            width: 100%;
             min-height: 100vh;
             background-color: white;
             color: #000000;
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
+            overflow-x: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            margin: 0 auto;	
         }
         .header-bar {
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
             height: 8px;
             background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
         }
+        .footer-logo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            height: 40px;
+        }
         
-        /* Estilos para las tarjetas de interacción */
+        /* Estilos actualizados para las tarjetas de interacción */
         .interaction-card {
-            border-radius: 10px;
+            border-radius: 12px;
             transition: all 0.3s ease;
             overflow: hidden;
             border: 3px solid;
             background-color: white;
-            margin-bottom: 16px;
-            will-change: transform, box-shadow;
+            margin-bottom: 20px;
         }
         .interaction-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
         .interaction-card.pck {
             border-color: var(--unicomfa-orange);
@@ -88,11 +66,9 @@
             border-color: #555;
         }
         .interaction-header {
-            padding: 12px 15px;
+            padding: 15px;
             color: white;
-            border-radius: 10px 10px 0 0;
-            display: flex;
-            align-items: center;
+            border-radius: 12px 12px 0 0;
         }
         .interaction-header.pck {
             background-color: rgba(255, 102, 0, 0.9);
@@ -107,49 +83,47 @@
             background-color: rgba(85, 85, 85, 0.9);
         }
         .interaction-content {
-            padding: 12px 15px;
+            padding: 15px;
             background-color: white;
         }
         .interaction-icon {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 12px;
+            margin-right: 15px;
             background-color: rgba(255, 255, 255, 0.3);
             color: white;
             font-weight: bold;
-            font-size: 1.2rem;
-            flex-shrink: 0;
+            font-size: 1.5rem;
         }
         .highlight-box {
             background-color: rgba(255, 255, 255, 0.7);
-            border-radius: 6px;
-            padding: 8px;
-            margin-bottom: 8px;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
             border: 1px solid #e2e8f0;
         }
         .highlight-box i {
             color: var(--unicomfa-orange);
-            margin-right: 6px;
+            margin-right: 8px;
         }
         .detail-item {
             display: flex;
             align-items: flex-start;
-            margin-top: 6px;
+            margin-top: 8px;
         }
         .detail-icon {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 8px;
+            margin-right: 10px;
             flex-shrink: 0;
-            font-size: 0.8rem;
         }
         .detail-icon.pck {
             background-color: rgba(255, 102, 0, 0.1);
@@ -169,15 +143,15 @@
         }
         .detail-text {
             color: #000000;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
         
         /* TPACK Diagram Styles */
         .tpack-container {
             position: relative;
             width: 100%;
-            max-width: 400px;
-            height: 400px;
+            max-width: 500px;
+            height: 500px;
             margin: 0 auto;
         }
         .tpack-circle {
@@ -198,29 +172,25 @@
             transform: scale(1.05);
         }
         .tpack-pk {
-            width: 180px;
-            height: 180px;
+            width: 240px;
+            height: 240px;
             background-color: rgba(255, 102, 0, 0.9);
-            top: 30px;
-            left: 30px;
-            font-size: 0.9rem;
+            top: 50px;
+            left: 50px;
         }
         .tpack-ck {
-            width: 180px;
-            height: 180px;
+            width: 240px;
+            height: 240px;
             background-color: rgba(120, 190, 32, 0.9);
-            top: 30px;
-            right: 30px;
-            font-size: 0.9rem;
+            top: 50px;
+            right: 50px;
         }
         .tpack-tk {
-            width: 180px;
-            height: 180px;
+            width: 240px;
+            height: 240px;
             background-color: rgba(0, 85, 164, 0.9);
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.9rem;
+            bottom: 50px;
+            left: 125px;
         }
         
         /* Highlighted intersection areas */
@@ -236,33 +206,32 @@
             opacity: 0.7;
         }
         .highlight-pck {
-            width: 60px;
-            height: 60px;
+            width: 75px;
+            height: 75px;
             background-color: var(--unicomfa-orange);
-            top: 90px;
-            right: 140px;
+            top: 125px;
+            right: 200px;
         }
         .highlight-tck {
-            width: 60px;
-            height: 60px;
+            width: 75px;
+            height: 75px;
             background-color: var(--unicomfa-green);
-            bottom: 110px;
-            right: 110px;
+            bottom: 160px;
+            right: 160px;
         }
         .highlight-tpk {
-            width: 60px;
-            height: 60px;
+            width: 75px;
+            height: 75px;
             background-color: var(--unicomfa-blue);
-            bottom: 110px;
-            left: 110px;
+            bottom: 160px;
+            left: 160px;
         }
         .highlight-tpack {
-            width: 60px;
-            height: 60px;
+            width: 75px;
+            height: 75px;
             background-color: #555;
-            top: 140px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 200px;
+            left: 210px;
         }
         
         /* Annotations */
@@ -271,37 +240,27 @@
             background: white;
             color: #333;
             border-radius: 5px;
-            padding: 8px;
-            font-size: 0.7rem;
+            padding: 10px;
+            font-size: 0.8rem;
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.3s ease;
-            width: 140px;
+            width: 160px;
             z-index: 20;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            border: 2px solid;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border: 3px solid;
         }
         .annotation.pck {
             border-color: var(--unicomfa-orange);
-            top: 70px;
-            right: 70px;
         }
         .annotation.tck {
             border-color: var(--unicomfa-green);
-            bottom: 80px;
-            right: 40px;
         }
         .annotation.tpk {
             border-color: var(--unicomfa-blue);
-            bottom: 80px;
-            left: 40px;
         }
         .annotation.tpack {
             border-color: #555;
-            top: 120px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 160px;
         }
         .intersection-highlight:hover + .annotation {
             opacity: 1;
@@ -316,13 +275,11 @@
             background-color: rgba(85, 85, 85, 0.9);
             color: white;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             font-weight: bold;
-            font-size: 0.9rem;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 210px;
+            left: 210px;
             z-index: 10;
             border: 2px solid rgba(255,255,255,0.3);
         }
@@ -332,201 +289,351 @@
             position: absolute;
             border-radius: 50%;
             border: 2px dashed rgba(0,0,0,0.2);
-            width: 105%;
-            height: 105%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            width: 520px;
+            height: 520px;
+            top: -10px;
+            left: -10px;
         }
         .context-label {
             position: absolute;
             color: #666;
             bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.8rem;
+            left: 210px;
+            font-size: 1rem;
         }
         
         /* Title underline */
         .title-underline {
             height: 2px;
-            width: 80px;
+            width: 96px;
             background-color: var(--unicomfa-blue);
-            margin-top: 6px;
+            margin-top: 8px;
         }
         
         /* Barra de desplazamiento personalizada */
         .scrollable-content::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
         }
         .scrollable-content::-webkit-scrollbar-track {
             background: #f1f1f1;
-            border-radius: 3px;
+            border-radius: 4px;
         }
         .scrollable-content::-webkit-scrollbar-thumb {
             background: #c1c1c1;
-            border-radius: 3px;
+            border-radius: 4px;
         }
         .scrollable-content::-webkit-scrollbar-thumb:hover {
             background: #a8a8a8;
         }
-
-        /* Responsive adjustments */
-        @media (min-width: 768px) {
+        
+        /* Media Queries para Responsividad */
+        @media (max-width: 1024px) {
+            .slide {
+                padding: 0 10px;
+            }
+            
+            .flex-col.px-16 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
             .tpack-container {
-                max-width: 500px;
-                height: 500px;
+                width: 100%;
+                max-width: 400px;
+                height: 400px;
             }
+            
             .tpack-pk, .tpack-ck, .tpack-tk {
-                width: 220px;
-                height: 220px;
-                font-size: 1rem;
+                width: 180px;
+                height: 180px;
+                font-size: 0.9rem;
             }
+            
             .tpack-pk {
                 top: 40px;
                 left: 40px;
             }
+            
             .tpack-ck {
                 top: 40px;
                 right: 40px;
             }
+            
             .tpack-tk {
                 bottom: 40px;
+                left: 100px;
             }
+            
+            .highlight-pck, .highlight-tck, .highlight-tpk, .highlight-tpack {
+                width: 60px;
+                height: 60px;
+            }
+            
             .highlight-pck {
-                top: 110px;
-                right: 170px;
+                top: 100px;
+                right: 160px;
             }
+            
             .highlight-tck {
-                bottom: 140px;
-                right: 140px;
+                bottom: 130px;
+                right: 130px;
             }
+            
             .highlight-tpk {
-                bottom: 140px;
-                left: 140px;
+                bottom: 130px;
+                left: 130px;
             }
+            
             .highlight-tpack {
-                top: 170px;
+                top: 160px;
+                left: 170px;
             }
-            .annotation {
-                font-size: 0.8rem;
-                width: 160px;
-                padding: 10px;
-            }
-            .annotation.pck {
-                top: 90px;
-                right: 90px;
-            }
-            .annotation.tck {
-                bottom: 120px;
-                right: 60px;
-            }
-            .annotation.tpk {
-                bottom: 120px;
-                left: 60px;
-            }
-            .annotation.tpack {
-                top: 150px;
-                width: 180px;
-            }
+            
             .tpack-center {
-                width: 70px;
-                height: 70px;
-                font-size: 1rem;
+                width: 60px;
+                height: 60px;
+                top: 170px;
+                left: 170px;
+                font-size: 0.8rem;
             }
-            .interaction-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 1.3rem;
+            
+            .context-border {
+                width: 420px;
+                height: 420px;
             }
-            .detail-icon {
-                width: 32px;
-                height: 32px;
-                font-size: 0.9rem;
-            }
-            .detail-text {
-                font-size: 0.9rem;
+            
+            .context-label {
+                left: 170px;
             }
         }
-
-        @media (min-width: 1024px) {
+        
+        @media (max-width: 768px) {
+            .flex.flex-1 {
+                flex-direction: column;
+            }
+            
+            .w-1\/2 {
+                width: 100%;
+            }
+            
+            .pl-8 {
+                padding-left: 0;
+            }
+            
             .tpack-container {
-                max-width: 500px;
-                height: 500px;
+                margin-bottom: 2rem;
+                max-width: 350px;
+                height: 350px;
             }
+            
             .tpack-pk, .tpack-ck, .tpack-tk {
-                width: 240px;
-                height: 240px;
+                width: 150px;
+                height: 150px;
+                font-size: 0.8rem;
             }
+            
+            .tpack-pk {
+                top: 30px;
+                left: 30px;
+            }
+            
+            .tpack-ck {
+                top: 30px;
+                right: 30px;
+            }
+            
+            .tpack-tk {
+                bottom: 30px;
+                left: 85px;
+            }
+            
+            .highlight-pck, .highlight-tck, .highlight-tpk, .highlight-tpack {
+                width: 50px;
+                height: 50px;
+            }
+            
             .highlight-pck {
-                top: 120px;
-                right: 190px;
+                top: 80px;
+                right: 130px;
             }
+            
             .highlight-tck {
-                bottom: 150px;
-                right: 150px;
+                bottom: 100px;
+                right: 100px;
             }
+            
             .highlight-tpk {
-                bottom: 150px;
+                bottom: 100px;
+                left: 100px;
+            }
+            
+            .highlight-tpack {
+                top: 130px;
                 left: 150px;
             }
-            .highlight-tpack {
-                top: 190px;
+            
+            .tpack-center {
+                width: 50px;
+                height: 50px;
+                top: 150px;
+                left: 150px;
+                font-size: 0.7rem;
             }
+            
+            .context-border {
+                width: 370px;
+                height: 370px;
+            }
+            
+            .context-label {
+                left: 150px;
+            }
+            
             .annotation {
-                font-size: 0.9rem;
-                width: 180px;
+                width: 140px;
+                font-size: 0.7rem;
+            }
+            
+            .text-4xl {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .tpack-container {
+                max-width: 300px;
+                height: 300px;
+            }
+            
+            .tpack-pk, .tpack-ck, .tpack-tk {
+                width: 120px;
+                height: 120px;
+                font-size: 0.7rem;
+            }
+            
+            .tpack-pk {
+                top: 25px;
+                left: 25px;
+            }
+            
+            .tpack-ck {
+                top: 25px;
+                right: 25px;
+            }
+            
+            .tpack-tk {
+                bottom: 25px;
+                left: 70px;
+            }
+            
+            .highlight-pck, .highlight-tck, .highlight-tpk, .highlight-tpack {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .highlight-pck {
+                top: 65px;
+                right: 105px;
+            }
+            
+            .highlight-tck {
+                bottom: 80px;
+                right: 80px;
+            }
+            
+            .highlight-tpk {
+                bottom: 80px;
+                left: 80px;
+            }
+            
+            .highlight-tpack {
+                top: 105px;
+                left: 130px;
+            }
+            
+            .tpack-center {
+                width: 40px;
+                height: 40px;
+                top: 130px;
+                left: 130px;
+                font-size: 0.6rem;
+            }
+            
+            .context-border {
+                width: 320px;
+                height: 320px;
+            }
+            
+            .context-label {
+                left: 130px;
+            }
+            
+            .interaction-header {
+                padding: 10px;
+            }
+            
+            .interaction-content {
+                padding: 10px;
+            }
+            
+            .interaction-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .text-xl {
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="slide-container">
-    <div class="slide">
+    <div class="slide flex flex-col">
         <!-- Header bar -->
-        <div class="header-bar w-full" style="margin-top: 8px;"></div>
+        <div class="header-bar w-full"></div>
         
         <!-- Main content -->
-        <div class="flex flex-col px-4 py-6 md:px-16 md:py-8 h-full">
+        <div class="flex flex-col px-16 py-8 h-full">
             <!-- Title -->
             <div class="mb-4">
-                <h1 class="text-2xl md:text-4xl font-bold text-gray-800">Las Interacciones TPACK: La Clave de la Integración</h1>
+                <h1 class="text-4xl font-bold text-gray-800">Las Interacciones TPACK: La Clave de la Integración</h1>
                 <div class="title-underline"></div>
             </div>
             
             <!-- Main content grid -->
-            <div class="flex flex-col md:flex-row flex-1 gap-4 md:gap-8">
+            <div class="flex flex-1">
                 <!-- Left column: TPACK Diagram -->
-                <div class="w-full md:w-1/2 flex items-center justify-center order-2 md:order-1">
+                <div class="w-1/2 flex items-center justify-center">
                     <div class="tpack-container">
                         <!-- TPACK Circles -->
                         <div class="tpack-circle tpack-pk">
-                            <span class="text-lg md:text-xl">PK</span>
-                            <span class="text-xs md:text-sm">Pedagógico</span>
+                            <span class="text-xl">PK</span>
+                            <span class="text-sm">Pedagógico</span>
                         </div>
                         
                         <div class="tpack-circle tpack-ck">
-                            <span class="text-lg md:text-xl">CK</span>
-                            <span class="text-xs md:text-sm">Contenido</span>
+                            <span class="text-xl">CK</span>
+                            <span class="text-sm">Contenido</span>
                         </div>
                         
                         <div class="tpack-circle tpack-tk">
-                            <span class="text-lg md:text-xl">TK</span>
-                            <span class="text-xs md:text-sm">Tecnológico</span>
+                            <span class="text-xl">TK</span>
+                            <span class="text-sm">Tecnológico</span>
                         </div>
                         
                         <!-- Intersections highlights with tooltips -->
                         <div class="intersection-highlight highlight-pck" data-intersection="PCK"></div>
-                        <div class="annotation pck">PCK: Pedagogía + Contenido<br>Cómo enseñar mejor un contenido específico</div>
+                        <div class="annotation pck" style="top: 100px; right: 100px;">PCK: Pedagogía + Contenido<br>Cómo enseñar mejor un contenido específico</div>
                         
                         <div class="intersection-highlight highlight-tck" data-intersection="TCK"></div>
-                        <div class="annotation tck">TCK: Tecnología + Contenido<br>Representación digital del contenido</div>
+                        <div class="annotation tck" style="bottom: 130px; right: 60px;">TCK: Tecnología + Contenido<br>Representación digital del contenido</div>
                         
                         <div class="intersection-highlight highlight-tpk" data-intersection="TPK"></div>
-                        <div class="annotation tpk">TPK: Tecnología + Pedagogía<br>Tecnología al servicio de la enseñanza</div>
+                        <div class="annotation tpk" style="bottom: 130px; left: 60px;">TPK: Tecnología + Pedagogía<br>Tecnología al servicio de la enseñanza</div>
                         
                         <div class="intersection-highlight highlight-tpack" data-intersection="TPACK"></div>
-                        <div class="annotation tpack">TPACK: Integración completa<br>Convergencia de los tres saberes</div>
+                        <div class="annotation tpack" style="top: 180px; left: 290px;">TPACK: Integración completa<br>Convergencia de los tres saberes</div>
                         
                         <!-- Center TPACK label -->
                         <div class="tpack-center">TPACK</div>
@@ -538,18 +645,18 @@
                 </div>
                 
                 <!-- Right column: Interaction descriptions -->
-                <div class="w-full md:w-1/2 order-1 md:order-2 space-y-4 overflow-y-auto scrollable-content" style="max-height: 60vh;">
+                <div class="w-1/2 pl-8 space-y-4 overflow-y-auto scrollable-content" style="max-height: 600px;">
                     <!-- PCK Description -->
                     <div class="interaction-card pck">
                         <div class="interaction-header pck flex items-center">
                             <div class="interaction-icon">PCK</div>
-                            <h2 class="text-lg md:text-xl font-bold">Pedagogía + Contenido</h2>
+                            <h2 class="text-xl font-bold">Pedagogía + Contenido</h2>
                         </div>
                         <div class="interaction-content">
-                            <p class="mb-3 text-sm md:text-base"><b>Saber cómo enseñar mejor</b> un contenido específico</p>
+                            <p class="mb-3"><b>Saber cómo enseñar mejor</b> un contenido específico</p>
                             
                             <div class="highlight-box">
-                                <p class="text-xs md:text-sm"><i class="fas fa-lightbulb"></i> El docente transforma el contenido disciplinar en formas pedagógicamente potentes y adaptadas a los estudiantes</p>
+                                <p class="text-sm"><i class="fas fa-lightbulb"></i> El docente transforma el contenido disciplinar en formas pedagógicamente potentes y adaptadas a los estudiantes</p>
                             </div>
                             
                             <div class="detail-item">
@@ -565,13 +672,13 @@
                     <div class="interaction-card tck">
                         <div class="interaction-header tck flex items-center">
                             <div class="interaction-icon">TCK</div>
-                            <h2 class="text-lg md:text-xl font-bold">Tecnología + Contenido</h2>
+                            <h2 class="text-xl font-bold">Tecnología + Contenido</h2>
                         </div>
                         <div class="interaction-content">
-                            <p class="mb-3 text-sm md:text-base">Usar tecnología para <b>representar o enriquecer</b> el contenido</p>
+                            <p class="mb-3">Usar tecnología para <b>representar o enriquecer</b> el contenido</p>
                             
                             <div class="highlight-box">
-                                <p class="text-xs md:text-sm"><i class="fas fa-lightbulb"></i> El docente selecciona tecnologías que mejor representen o transformen la experiencia con el contenido disciplinar</p>
+                                <p class="text-sm"><i class="fas fa-lightbulb"></i> El docente selecciona tecnologías que mejor representen o transformen la experiencia con el contenido disciplinar</p>
                             </div>
                             
                             <div class="detail-item">
@@ -587,13 +694,13 @@
                     <div class="interaction-card tpk">
                         <div class="interaction-header tpk flex items-center">
                             <div class="interaction-icon">TPK</div>
-                            <h2 class="text-lg md:text-xl font-bold">Tecnología + Pedagogía</h2>
+                            <h2 class="text-xl font-bold">Tecnología + Pedagogía</h2>
                         </div>
                         <div class="interaction-content">
-                            <p class="mb-3 text-sm md:text-base">Usar tecnología para <b>apoyar o transformar</b> estrategias de enseñanza</p>
+                            <p class="mb-3">Usar tecnología para <b>apoyar o transformar</b> estrategias de enseñanza</p>
                             
                             <div class="highlight-box">
-                                <p class="text-xs md:text-sm"><i class="fas fa-lightbulb"></i> El docente comprende cómo la enseñanza y el aprendizaje cambian cuando se utilizan determinadas tecnologías</p>
+                                <p class="text-sm"><i class="fas fa-lightbulb"></i> El docente comprende cómo la enseñanza y el aprendizaje cambian cuando se utilizan determinadas tecnologías</p>
                             </div>
                             
                             <div class="detail-item">
@@ -609,13 +716,13 @@
                     <div class="interaction-card tpack">
                         <div class="interaction-header tpack flex items-center">
                             <div class="interaction-icon">TPACK</div>
-                            <h2 class="text-lg md:text-xl font-bold">Integración Completa</h2>
+                            <h2 class="text-xl font-bold">Integración Completa</h2>
                         </div>
                         <div class="interaction-content">
-                            <p class="mb-3 text-sm md:text-base"><b>Convergencia consciente</b> de los tres saberes en la práctica real</p>
+                            <p class="mb-3"><b>Convergencia consciente</b> de los tres saberes en la práctica real</p>
                             
                             <div class="highlight-box">
-                                <p class="text-xs md:text-sm"><i class="fas fa-lightbulb"></i> Base operativa del TEdU: docentes capaces de tomar decisiones integradas sobre qué enseñar, cómo enseñarlo y con qué tecnología, de manera cohesiva</p>
+                                <p class="text-sm"><i class="fas fa-lightbulb"></i> Base operativa del TEdU: docentes capaces de tomar decisiones integradas sobre qué enseñar, cómo enseñarlo y con qué tecnología, de manera cohesiva</p>
                             </div>
                             
                             <div class="detail-item">
@@ -629,7 +736,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    </div>
+     </div>
 </body>
 </html>

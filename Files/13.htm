@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
@@ -11,236 +10,328 @@
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.min.js"></script>
 <style>
-        :root {
-            --unicomfa-blue: #0055A4;
-            --unicomfa-orange: #FF6600;
-            --unicomfa-green: #78BE20;
-        }
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #fff;
-        }
+    :root {
+        --unicomfa-blue: #0055A4;
+        --unicomfa-orange: #FF6600;
+        --unicomfa-green: #78BE20;
+    }
+    body {
+        font-family: 'Montserrat', sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #fff;
+    }
+    .slide {
+        width: 100%;
+        max-width: 1280px;
+        min-height: 100vh;
+        background-color: #fff;
+        color: #000000;
+        position: relative;
+        overflow: hidden;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .fixed-header {
+        position: fixed;
+        top: 0;
+        z-index: 10;
+        background: white;
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .content-container {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0 16px;
+        margin-top: 80px; /* Reducido espacio para el header fijo */
+        height: calc(100vh - 80px);
+    }
+    .header-bar {
+        height: 6px; /* Reducida altura de la barra */
+        background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
+    }
+    
+    /* Estilos actualizados para las tarjetas */
+    .objective-card {
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        border: 3px solid;
+        background-color: white;
+        overflow: hidden;
+        will-change: transform, box-shadow;
+        margin-bottom: 16px;
+    }
+    .objective-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    .objective-card.blue {
+        border-color: var(--unicomfa-blue);
+    }
+    .objective-card.green {
+        border-color: var(--unicomfa-green);
+    }
+    .objective-header {
+        padding: 12px 15px;
+        color: white;
+        border-radius: 10px 10px 0 0;
+    }
+    .objective-header.blue {
+        background-color: rgba(0, 85, 164, 0.9);
+    }
+    .objective-header.green {
+        background-color: rgba(120, 190, 32, 0.9);
+    }
+    .objective-content {
+        padding: 12px 15px;
+        background-color: white;
+    }
+    
+    /* Estilos para los items de unidad */
+    .unit-item {
+        transition: all 0.3s ease;
+        border: 3px solid;
+        border-radius: 10px;
+        background-color: white;
+        overflow: hidden;
+    }
+    .unit-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+    .unit-item.blue {
+        border-color: var(--unicomfa-blue);
+    }
+    .unit-item.orange {
+        border-color: var(--unicomfa-orange);
+    }
+    .unit-item.green {
+        border-color: var(--unicomfa-green);
+    }
+    .unit-header {
+        padding: 10px 12px;
+        display: flex;
+        align-items: center;
+        color: white;
+    }
+    .unit-header.blue {
+        background-color: rgba(0, 85, 164, 0.9);
+    }
+    .unit-header.orange {
+        background-color: rgba(255, 102, 0, 0.9);
+    }
+    .unit-header.green {
+        background-color: rgba(120, 190, 32, 0.9);
+    }
+    .unit-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        background-color: rgba(255, 255, 255, 0.3);
+        color: white;
+        flex-shrink: 0;
+    }
+    .unit-body {
+        padding: 10px 12px;
+        background-color: white;
+    }
+    .unit-body p {
+        color: #000000;
+    }
+    
+    /* Estilo para los elementos de dimensión */
+    .dimension-item {
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 6px;
+        padding: 8px;
+        margin-bottom: 6px;
+        border: 1px solid #e2e8f0;
+    }
+    .dimension-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 8px;
+        background-color: rgba(0, 85, 164, 0.1);
+        color: var(--unicomfa-blue);
+        flex-shrink: 0;
+    }
+    
+    /* Barra de desplazamiento personalizada */
+    .content-container::-webkit-scrollbar {
+        width: 6px;
+    }
+    .content-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+    }
+    .content-container::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 3px;
+    }
+    .content-container::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+
+    /* Responsive adjustments mejorados */
+    @media (max-width: 1024px) {
         .slide {
-            width: 100%;
-            max-width: 1280px;
-            min-height: 100vh;
-            background-color: #fff;
-            color: #000000;
-            position: relative;
-            overflow: hidden;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
+            max-width: 100%;
         }
         .fixed-header {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background: white;
-            width: 100%;
+            max-width: 100%;
         }
-        .content-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 0 16px;
-        }
-        .header-bar {
-            height: 8px;
-            background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
-        
-    margin-top: 20px;
-}
-        
-        /* Estilos actualizados para las tarjetas */
-        .objective-card {
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            border: 3px solid;
-            background-color: white;
-            overflow: hidden;
-            will-change: transform, box-shadow;
-        }
-        .objective-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-        .objective-card.blue {
-            border-color: var(--unicomfa-blue);
-        }
-        .objective-card.green {
-            border-color: var(--unicomfa-green);
-        }
-        .objective-header {
-            padding: 12px 15px;
-            color: white;
-            border-radius: 10px 10px 0 0;
-        }
-        .objective-header.blue {
-            background-color: rgba(0, 85, 164, 0.9);
-        }
-        .objective-header.green {
-            background-color: rgba(120, 190, 32, 0.9);
-        }
-        .objective-content {
-            padding: 12px 15px;
-            background-color: white;
-        }
-        
-        /* Estilos para los items de unidad */
-        .unit-item {
-            transition: all 0.3s ease;
-            border: 3px solid;
-            border-radius: 10px;
-            background-color: white;
-            overflow: hidden;
-        }
-        .unit-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-        .unit-item.blue {
-            border-color: var(--unicomfa-blue);
-        }
-        .unit-item.orange {
-            border-color: var(--unicomfa-orange);
-        }
-        .unit-item.green {
-            border-color: var(--unicomfa-green);
-        }
-        .unit-header {
-            padding: 10px 12px;
-            display: flex;
-            align-items: center;
-            color: white;
-        }
-        .unit-header.blue {
-            background-color: rgba(0, 85, 164, 0.9);
-        }
-        .unit-header.orange {
-            background-color: rgba(255, 102, 0, 0.9);
-        }
-        .unit-header.green {
-            background-color: rgba(120, 190, 32, 0.9);
+        .objective-header, .unit-header {
+            padding: 10px;
         }
         .unit-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
-            background-color: rgba(255, 255, 255, 0.3);
-            color: white;
-            flex-shrink: 0;
-        }
-        .unit-body {
-            padding: 10px 12px;
-            background-color: white;
-        }
-        .unit-body p {
-            color: #000000;
-        }
-        
-        /* Estilo para los elementos de dimensión */
-        .dimension-item {
-            background-color: rgba(255, 255, 255, 0.7);
-            border-radius: 6px;
-            padding: 8px;
-            margin-bottom: 6px;
-            border: 1px solid #e2e8f0;
+            width: 30px;
+            height: 30px;
+            font-size: 0.9rem;
         }
         .dimension-icon {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 8px;
-            background-color: rgba(0, 85, 164, 0.1);
-            color: var(--unicomfa-blue);
-            flex-shrink: 0;
+            width: 26px;
+            height: 26px;
         }
-        
-        /* Barra de desplazamiento personalizada */
-        .content-container::-webkit-scrollbar {
-            width: 6px;
+        .content-container {
+            margin-top: 75px; /* Ajustado para tablets */
+            height: calc(100vh - 75px);
         }
-        .content-container::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 3px;
-        }
-        .content-container::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 3px;
-        }
-        .content-container::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 1024px) {
-            .objective-header, .unit-header {
-                padding: 10px;
-            }
-            .unit-icon {
-                width: 30px;
-                height: 30px;
-                font-size: 0.9rem;
-            }
-            .dimension-icon {
-                width: 26px;
-                height: 26px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .grid-cols-2, .grid-cols-3 {
-                grid-template-columns: 1fr;
-            }
-            .objective-card {
-                margin-bottom: 16px;
-            }
-            .unit-item {
-                margin-bottom: 12px;
-            }
-            .dimension-item {
-                padding: 6px;
-            }
-        }
+    }
     
-        .scrollable-lienzo {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            margin-top: 16px;
-            margin-bottom: 24px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            overflow-y: auto;
-            max-height: 80vh;
+    @media (max-width: 768px) {
+        .content-container {
+            margin-top: 70px; /* Reducido para móviles */
+            height: calc(100vh - 70px);
+            padding: 0 12px;
         }
+        
+        .grid-cols-2, .grid-cols-3 {
+            grid-template-columns: 1fr;
+        }
+        
+        .mb-4.grid.grid-cols-1.md\:grid-cols-2 {
+            gap: 12px;
+        }
+        
+        .objective-card {
+            margin-bottom: 12px;
+        }
+        
+        .unit-item {
+            margin-bottom: 10px;
+        }
+        
+        .dimension-item {
+            padding: 6px;
+        }
+        
+        /* Ajustes para la cuadrícula de dimensiones */
+        .grid.grid-cols-1.sm\:grid-cols-2 {
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+        
+        /* Ajustes para el título */
+        .flex.flex-col.px-4.py-4.md\:px-16.md\:py-4 h1 {
+            font-size: 1.5rem;
+        }
+        
+        /* Ajustes para elementos de contenido */
+        .objective-header h2 {
+            font-size: 1.1rem;
+        }
+        .objective-content p, .objective-content li p {
+            font-size: 0.875rem;
+        }
+        
+        /* Header más compacto en móviles */
+        .header-title-container {
+            padding: 8px 16px !important;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .content-container {
+            margin-top: 65px; /* Mínimo espacio para móviles pequeños */
+            height: calc(100vh - 65px);
+            padding: 0 8px;
+        }
+        
+        .objective-header, .unit-header {
+            padding: 8px 10px;
+        }
+        
+        .objective-content, .unit-body {
+            padding: 8px 10px;
+        }
+        
+        .flex.flex-col.px-4.py-4.md\:px-16.md\:py-4 h1 {
+            font-size: 1.25rem;
+        }
+        
+        /* Header más compacto */
+        .header-bar {
+            height: 5px;
+        }
+        
+        .header-title-container {
+            padding: 6px 12px !important;
+        }
+        
+        /* Ajustes para el organigrama */
+        .flex.justify-center img {
+            max-width: 100% !important;
+        }
+    }
 
-        .scrollable-lienzo::-webkit-scrollbar {
-            width: 6px;
-        }
+    .scrollable-lienzo {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 16px;
+        margin-bottom: 24px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        overflow-y: auto;
+        max-height: 70vh;
+    }
 
-        .scrollable-lienzo::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
+    .scrollable-lienzo::-webkit-scrollbar {
+        width: 6px;
+    }
 
-        .scrollable-lienzo::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 3px;
-        }
+    .scrollable-lienzo::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
 
-        .scrollable-lienzo::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
-        }
-        </style>
+    .scrollable-lienzo::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 3px;
+    }
+
+    .scrollable-lienzo::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+    
+    /* Clase específica para el contenedor del título del header */
+    .header-title-container {
+        padding: 10px 16px;
+    }
+</style>
 </head>
 <body>
 <div class="slide">
@@ -249,13 +340,14 @@
 <!-- Header bar -->
 <div class="header-bar w-full"></div>
 <!-- Title -->
-<div class="flex flex-col px-4 py-4 md:px-16 md:py-4 mx-auto" style="max-width: 1200px;">
+<div class="header-title-container flex flex-col mx-auto" style="max-width: 1200px;">
 <h1 class="text-2xl md:text-4xl font-bold text-gray-800">Estructura Funcional del TEdU</h1>
 <div class="h-1 w-16 md:w-24 bg-gray-600 mt-2"></div>
 </div>
 </div>
 <!-- Contenedor del contenido con barra de desplazamiento -->
-<div class="content-container"><div class="scrollable-lienzo">
+<div class="content-container">
+<div class="scrollable-lienzo">
 <!-- Main content - Centrado horizontalmente -->
 <div class="flex flex-col mx-auto" style="max-width: 1200px; padding-top: 10px;">
 <!-- Need and Purpose Section -->
@@ -265,7 +357,7 @@
 <div class="objective-header blue">
 <h2 class="text-lg md:text-xl font-bold">
 <i class="fas fa-puzzle-piece mr-2"></i> Necesidad
-                            </h2>
+</h2>
 </div>
 <div class="objective-content">
 <p class="mb-3 text-sm md:text-base"><b>Garantizar gestión </b><b>eficiente y articulada</b> en cuatro dimensiones clave:</p>
@@ -314,7 +406,7 @@
 <div class="objective-header green">
 <h2 class="text-lg md:text-xl font-bold">
 <i class="fas fa-bullseye mr-2"></i> Objetivos de la Estructura
-                            </h2>
+</h2>
 </div>
 <div class="objective-content">
 <ul class="space-y-2 md:space-y-3">
@@ -337,44 +429,36 @@
 <!-- Organizational Chart -->
 <div class="flex-1 bg-gray-100 p-3 md:p-4 rounded-lg mb-4 border border-gray-200" style="min-height: 250px;">
 <h2 class="text-lg md:text-xl font-bold mb-3 text-center" style="color: var(--unicomfa-orange);">
-<i class="fas fa-sitemap mr-2"></i> Organigrama Funcional TEdU
-                    </h2>
-<div class="mermaid flex justify-center" id="orgChart" style="min-height: 200px;">
-                        flowchart TD
-                            A[Dirección General TEdU] --&gt; B[Unidad de Gestión de Modalidades]
-                            A --&gt; C[Unidad de Diseño y Producción de Contenidos]
-                            A --&gt; D[Unidad de Soporte Tecnológico y Plataformas]
-                            A --&gt; E[Unidad de Innovación Pedagógica TPACK]
-                            A -.-&gt; F[Comité Técnico-Pedagógico TEdU]
-                            
-                            style A fill:#FF6600,color:#fff,stroke:#FF6600
-                            style B fill:#0055A4,color:#fff,stroke:#0055A4
-                            style C fill:#0055A4,color:#fff,stroke:#0055A4
-                            style D fill:#0055A4,color:#fff,stroke:#0055A4
-                            style E fill:#0055A4,color:#fff,stroke:#0055A4
-                            style F fill:#78BE20,color:#fff,stroke:#78BE20
-                    </div>
+<i class="fas fa-sitemap mr-2"></i> Organigrama Funcional TEdU</h2>
+
+<div class="flex justify-center">
+  <img src="Organigrama.png" alt="Organigrama TEdU" style="max-width: 75%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
 </div>
-<div class="scrollable-lienzo"></div></div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
 <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            mermaid.initialize({
-                startOnLoad: true,
-                theme: 'default',
-                themeVariables: {
-                    primaryColor: '#FF6600',
-                    primaryTextColor: '#fff',
-                    primaryBorderColor: '#FF6600',
-                    lineColor: '#333',
-                    secondaryColor: '#0055A4',
-                    tertiaryColor: '#78BE20'
-                },
-                flowchart: {
-                    htmlLabels: true,
-                    curve: 'linear'
-                }
-            });
+    document.addEventListener('DOMContentLoaded', function() {
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#FF6600',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#FF6600',
+                lineColor: '#333',
+                secondaryColor: '#0055A4',
+                tertiaryColor: '#78BE20'
+            },
+            flowchart: {
+                htmlLabels: true,
+                curve: 'linear'
+            }
         });
-    </script>
+    });
+</script>
 </body>
 </html>

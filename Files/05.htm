@@ -21,11 +21,9 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
             margin: 0;
             padding: 0;
-            height: 100vh;
-            overflow: hidden;
             background-color: #f5f5f5;
         }
         .slide-container {
@@ -34,24 +32,22 @@
             width: 100%;
             padding: 20px 0;
             height: 100vh;
-            display: flex;
-            justify-content: center;
             align-items: flex-start;
             overflow: hidden;
         }
         .slide {
-            width: 1280px;
-            height: 720px;
+            width: 100%;
             max-width: 1280px;
-            height: 100vh;
+            height: auto;
+            min-height: 720px;
             background-color: #fff;
             color: #333;
             position: relative;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            border-radius: 8px;
             display: flex;
             flex-direction: column;
+            margin: 0 20px;
         }
         .header-bar {
             border-top-left-radius: 8px;
@@ -59,6 +55,18 @@
             height: 8px;
             background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
             flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            z-index: 30;
+        }
+        .fixed-header {
+            padding: 20px 16px 10px;
+            flex-shrink: 0;
+            background: white;
+            position: sticky;
+            top: 8px;
+            z-index: 20;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         .main-content {
             flex: 1;
@@ -139,49 +147,267 @@
         .main-content::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
-        /* Responsive adjustments */
+
+        /* Media Queries para Responsividad Mejorada */
         @media (max-width: 1024px) {
+            .slide {
+                margin: 0 15px;
+            }
+            
             .component-header {
                 padding: 12px;
             }
+            
             .component-icon {
                 width: 45px;
                 height: 45px;
                 font-size: 1.3rem;
                 margin-right: 10px;
             }
+            
             .component-header h2 {
                 font-size: 1.8rem;
             }
+            
             .component-header p {
                 font-size: 0.9rem;
             }
-        }
-        @media (max-width: 768px) {
-            .grid-cols-3 {
-                grid-template-columns: 1fr;
+            
+            .grid.grid-cols-1.md\:grid-cols-3 {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
             }
+            
+            /* CORRECCIÓN: Eliminamos las reglas específicas para la última tarjeta */
+            /* Todas las tarjetas ahora tendrán el mismo ancho */
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px 0;
+                align-items: flex-start;
+            }
+            
+            .slide-container {
+                padding: 10px 0;
+                height: 100vh;
+            }
+            
+            .slide {
+                margin: 0 10px;
+                min-height: auto;
+                max-height: 95vh;
+            }
+            
+            .main-content {
+                padding: 0 12px 12px;
+                overflow-y: auto;
+                max-height: calc(95vh - 140px);
+            }
+            
+            .grid.grid-cols-1.md\:grid-cols-3 {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            /* CORRECCIÓN: Eliminamos las reglas específicas para la última tarjeta */
             .component-card {
                 margin-bottom: 16px;
+                width: 100%; /* Aseguramos que todas ocupen el 100% */
             }
+            
             .component-icon {
                 width: 40px;
                 height: 40px;
                 font-size: 1.2rem;
             }
+            
             .component-header h2 {
                 font-size: 1.6rem;
             }
-            .pt-8 {
+            
+            .pt-6, .md\:pt-8 {
                 padding-top: 1.5rem;
             }
-            .pb-6 {
+            
+            .pb-4, .md\:pb-6 {
                 padding-bottom: 1rem;
             }
-            .px-16 {
+            
+            .px-4, .md\:px-16 {
                 padding-left: 1rem;
                 padding-right: 1rem;
             }
+            
+            .text-2xl, .md\:text-4xl {
+                font-size: 1.75rem;
+            }
+            
+            .component-content {
+                padding: 12px;
+            }
+            
+            .content-inner {
+                padding: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slide {
+                margin: 0 5px;
+                max-height: 92vh;
+            }
+            
+            .main-content {
+                padding: 0 8px 8px;
+                max-height: calc(92vh - 130px);
+            }
+            
+            .fixed-header {
+                padding: 15px 12px 8px;
+            }
+            
+            .component-header {
+                padding: 10px;
+            }
+            
+            .component-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+                margin-right: 8px;
+            }
+            
+            .component-header h2 {
+                font-size: 1.4rem;
+            }
+            
+            .component-header p {
+                font-size: 0.8rem;
+            }
+            
+            .component-content {
+                padding: 10px;
+            }
+            
+            .content-inner {
+                padding: 8px;
+            }
+            
+            .content-inner p {
+                font-size: 0.9rem;
+            }
+            
+            .text-xs, .md\:text-sm {
+                font-size: 0.8rem;
+            }
+            
+            .example-item {
+                padding: 6px !important;
+            }
+            
+            .w-5, .md\:w-6 {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .w-5.h-5, .md\:w-6.md\:h-6 {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .w-5.h-5 i, .md\:w-6.md\:h-6 i {
+                font-size: 0.6rem;
+            }
+            
+            .text-2xl.md\:text-3xl {
+                font-size: 1.5rem;
+            }
+            
+            .text-sm.md\:text-base {
+                font-size: 0.9rem;
+            }
+            
+            .h-1.w-16, .md\:w-24 {
+                width: 80px;
+            }
+            
+            .mx-4, .md\:mx-16 {
+                margin-left: 0.5rem;
+                margin-right: 0.5rem;
+            }
+            
+            .mb-6 {
+                margin-bottom: 1rem;
+            }
+            
+            .p-3, .md\:p-4 {
+                padding: 12px;
+            }
+            
+            .w-8, .md\:w-10 {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .text-base, .md\:text-lg {
+                font-size: 0.9rem;
+            }
+            
+            .text-xs, .md\:text-sm {
+                font-size: 0.75rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .slide {
+                margin: 0 3px;
+                max-height: 90vh;
+            }
+            
+            .main-content {
+                max-height: calc(90vh - 120px);
+            }
+            
+            .fixed-header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .component-header h2 {
+                font-size: 1.3rem;
+            }
+            
+            .component-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+            
+            .content-inner p {
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Mejoras de scroll para móviles */
+        .main-content {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+        
+        /* Asegurar que las tarjetas sean legibles en móviles */
+        .component-card {
+            min-height: 280px;
+        }
+        
+        @media (max-width: 480px) {
+            .component-card {
+                min-height: 320px;
+            }
+        }
+        
+        /* CORRECCIÓN ADICIONAL: Asegurar que todas las tarjetas tengan el mismo ancho */
+        .component-card {
+            width: 100%;
         }
     </style>
 </head>
@@ -191,14 +417,14 @@
             <!-- Fixed header bar -->
             <div class="header-bar w-full"></div>
             
+            <!-- Fixed title header -->
+            <div class="fixed-header">
+                <h1 class="text-2xl md:text-4xl font-bold text-gray-800">Componentes Base del TPACK</h1>
+                <div class="h-1 w-16 md:w-24 bg-gray-600 mt-2"></div>
+            </div>
+            
             <!-- Scrollable main content -->
             <div class="main-content">
-                <!-- Title -->
-                <div class="pt-6 pb-4 px-4 md:pt-8 md:pb-6 md:px-16">
-                    <h1 class="text-2xl md:text-4xl font-bold text-gray-800">Componentes Base del TPACK</h1>
-                    <div class="h-1 w-16 md:w-24 bg-gray-600 mt-2"></div>
-                </div>
-                
                 <!-- Component Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 px-4 md:px-16 pb-6 md:pb-8">
                     <!-- Technological Knowledge (TK) -->

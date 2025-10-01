@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fundamento Metodológico: TPACK - TEdU</title>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" as="style">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
@@ -18,42 +17,44 @@
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8fafc;
+            background-color: #f5f5f5;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
-        }
-        .slide-container {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            padding: 20px 0;
+            overflow: auto;
         }
         .slide {
-            width: 1280px;
-            height: 720px;
-            background-color: white;
+            width: 100%;
+            max-width: 1280px;
+            height: 100vh;
+            max-height: 720px;
+            background-color: #fff;
             color: #000000;
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
         .header-bar {
             height: 8px;
             background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
-            flex-shrink: 0;
-            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
         }
         .title-container {
-            padding: 20px 20px 10px;
-            flex-shrink: 0;
+            padding: 20px 40px 10px;
             background-color: white;
-            z-index: 10;
+            position: fixed;
+            top: 8px;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .footer-logo {
             position: absolute;
@@ -65,7 +66,7 @@
         .container-title {
             background-color: rgba(0, 0, 0, 0.9);
             color: white;
-            padding: 12px 15px;
+            padding: 15px;
             border-radius: 8px 8px 0 0;
             display: flex;
             align-items: center;
@@ -87,13 +88,12 @@
             color: white;
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            padding: 8px;
+            padding: 10px;
             margin-right: 10px;
-            font-size: 1.2rem;
         }
         .container-content {
             background-color: white;
-            padding: 15px;
+            padding: 20px;
             border-radius: 0 0 8px 8px;
             border: 3px solid;
             border-top: none;
@@ -110,7 +110,7 @@
         }
         .inner-content {
             background-color: rgba(255, 255, 255, 0.7);
-            padding: 12px;
+            padding: 15px;
             border-radius: 5px;
             margin-bottom: 10px;
         }
@@ -119,7 +119,6 @@
             transition: all 0.3s ease;
             margin-bottom: 20px;
             overflow: hidden;
-            will-change: transform, box-shadow;
         }
         .focus-box:hover {
             transform: translateY(-5px);
@@ -130,8 +129,7 @@
             position: relative;
             width: 100%;
             max-width: 500px;
-            height: 100%;
-            max-height: 500px;
+            height: 500px;
             margin: auto;
         }
         .tpack-circle {
@@ -152,89 +150,81 @@
             z-index: 10;
         }
         .tpack-heading {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 5px;
         }
         .tpack-subtext {
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: normal;
             text-align: center;
             max-width: 80%;
         }
         .tpack-pk {
-            width: 60%;
-            height: 60%;
-            max-width: 250px;
-            max-height: 250px;
+            width: 250px;
+            height: 250px;
             background-color: #FF6600;
-            top: 10%;
-            left: 5%;
+            top: 70px;
+            left: 20px;
             color: white;
         }
+        /* CORRECCIÓN: Ajuste del círculo verde (CK) para que esté más a la izquierda */
         .tpack-ck {
-            width: 60%;
-            height: 60%;
-            max-width: 250px;
-            max-height: 250px;
+            width: 250px;
+            height: 250px;
             background-color: #78BE20;
-            top: 10%;
-            right: 5%;
+            top: 70px;
+            left: 180px; /* Cambiado de 230px a 180px para mejor intersección */
             color: white;
         }
         .tpack-tk {
-            width: 60%;
-            height: 60%;
-            max-width: 250px;
-            max-height: 250px;
+            width: 250px;
+            height: 250px;
             background-color: #0055A4;
-            bottom: 5%;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 20px;
+            left: 100px; /* Ajustado para mejor alineación con los otros círculos */
             color: white;
         }
+        /* CORRECCIÓN: Ajuste del círculo TPACK para que esté en el centro exacto */
         .tpack-center {
-            width: 14%;
-            height: 14%;
-            max-width: 70px;
-            max-height: 70px;
+            width: 70px;
+            height: 70px;
             background-color: rgba(255, 255, 255, 0.95);
             color: #222;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 195px; /* Posicionado manualmente en el centro de las intersecciones */
+            left: 185px; /* CORREGIDO: Aumentado de 150px a 185px para centrar */
             z-index: 3;
             border: 2px solid #ddd;
         }
         .circle-label {
             position: absolute;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 600;
         }
+        /* Ajuste de etiquetas para la nueva posición de los círculos */
         .label-tpck {
-            top: 15%;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 80px;
+            left: 240px;
             color: var(--unicomfa-blue);
         }
         .label-tck {
-            bottom: 30%;
-            right: 20%;
+            bottom: 210px;
+            left: 250px; /* Ajustada para la nueva posición del CK */
             color: #FFFF00;
         }
         .label-tpk {
-            bottom: 30%;
-            left: 20%;
+            bottom: 210px;
+            left: 130px; /* Ajustada para la nueva posición del TK */
             color: #FFFF00;
         }
         .label-pck {
-            top: 25%;
-            right: 25%;
+            top: 150px;
+            left: 200px; /* Ajustada para la nueva posición del CK */
             color: #FFFF00;
         }
         /* Knowledge Component Cards */
         .knowledge-card {
-            border-radius: 8px;
-            padding: 12px;
+            border-radius: 10px;
+            padding: 15px;
             transition: all 0.3s ease;
             height: 100%;
             display: flex;
@@ -252,28 +242,28 @@
             border-color: var(--unicomfa-green);
         }
         .knowledge-card:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
         }
         .knowledge-icon {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 10px;
-            font-size: 1.5rem;
+            margin: 0 auto 15px;
+            font-size: 1.8rem;
             color: white;
         }
         .icon-circle {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 8px;
+            margin-right: 10px;
             transition: all 0.3s ease;
         }
         .focus-box:hover .icon-circle {
@@ -284,18 +274,18 @@
             display: flex;
             flex: 1;
             overflow: hidden;
-            flex-direction: column;
-            padding: 0 16px 16px;
+            padding-top: 120px;
         }
         .left-column {
-            width: 100%;
+            width: 40%;
+            padding: 0 20px 20px;
             overflow-y: auto;
         }
         .right-column {
-            width: 100%;
+            width: 60%;
             display: flex;
-            height: auto;
-            min-height: 300px;
+            padding: 20px;
+            height: calc(100% - 80px);
         }
         .tpack-wrapper {
             display: flex;
@@ -310,217 +300,513 @@
             align-items: flex-start;
             margin-bottom: 10px;
             background-color: rgba(255, 255, 255, 0.7);
-            padding: 8px;
+            padding: 10px;
             border-radius: 5px;
         }
         .content-item i {
             color: inherit;
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            padding: 6px;
-            margin-right: 8px;
-            font-size: 0.9rem;
+            padding: 8px;
+            margin-right: 10px;
         }
-        /* Context Border */
-        .context-border {
-            position: absolute;
-            border-radius: 50%;
-            border: 3px dashed rgba(0,0,0,0.2);
-            width: 105%;
-            height: 105%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        
+        /* MEDIA QUERIES PARA RESPONSIVE */
+        @media (max-width: 1024px) {
+            .slide {
+                max-width: 95%;
+                max-height: 95vh;
+            }
+            
+            .tpack-container {
+                max-width: 450px;
+                height: 450px;
+            }
+            
+            .tpack-pk, .tpack-ck, .tpack-tk {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .tpack-pk {
+                top: 60px;
+                left: 15px;
+            }
+            
+            /* Ajuste para CK en tablets */
+            .tpack-ck {
+                top: 60px;
+                left: 165px; /* Ajustado para mantener la intersección */
+            }
+            
+            .tpack-tk {
+                bottom: 15px;
+                left: 90px; /* Ajustado para mantener la intersección */
+            }
+            
+            /* CORRECCIÓN: Ajuste del círculo TPACK en tablets */
+            .tpack-center {
+                top: 175px;
+                left: 170px; /* CORREGIDO: Aumentado de 135px a 170px */
+            }
+            
+            /* Ajuste de etiquetas para tablets */
+            .label-pck {
+                top: 140px;
+                left: 180px;
+            }
+            
+            .label-tck {
+                bottom: 190px;
+                left: 220px;
+            }
+            
+            .label-tpk {
+                bottom: 190px;
+                left: 115px;
+            }
         }
-        .context-label {
-            position: absolute;
-            color: #666;
-            font-size: 0.9rem;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        /* Responsive adjustments */
-        @media (min-width: 768px) {
-            .main-content {
-                flex-direction: row;
-                padding: 0 30px 20px;
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+                overflow: auto;
             }
-            .left-column {
-                width: 40%;
-                padding-right: 20px;
+            
+            .slide {
+                max-width: 100%;
+                max-height: none;
+                height: auto;
+                min-height: 100vh;
+                border-radius: 0;
+                box-shadow: none;
             }
-            .right-column {
-                width: 60%;
-                height: calc(100% - 80px);
-                padding-left: 20px;
-            }
+            
             .title-container {
-                padding: 20px 30px 10px;
+                padding: 15px 15px 5px;
+                position: relative;
+                top: 0;
             }
-            .container-title i {
-                padding: 10px;
+            
+            .main-content {
+                flex-direction: column;
+                padding-top: 0;
+            }
+            
+            .right-column {
+                width: 100%;
+                height: auto;
+                order: 1;
+                padding: 20px 15px;
+                margin-bottom: 40px;
+            }
+            
+            .left-column {
+                width: 100%;
+                order: 2;
+                padding: 0 15px 20px;
+            }
+            
+            .tpack-container {
+                max-width: 100%;
+                height: 350px;
+            }
+            
+            .tpack-pk, .tpack-ck, .tpack-tk {
+                width: 170px;
+                height: 170px;
+            }
+            
+            .tpack-pk {
+                top: 45px;
+                left: 10px;
+            }
+            
+            /* Ajuste para CK en móviles */
+            .tpack-ck {
+                top: 45px;
+                left: 130px; /* Ajustado para mantener la intersección */
+            }
+            
+            .tpack-tk {
+                bottom: 10px;
+                left: 70px; /* Ajustado para mantener la intersección */
+            }
+            
+            /* CORRECCIÓN: Ajuste del círculo TPACK en móviles */
+            .tpack-center {
+                top: 135px;
+                left: 130px; /* CORREGIDO: Aumentado de 105px a 130px */
+                width: 60px;
+                height: 60px;
+            }
+            
+            .tpack-heading {
                 font-size: 1.4rem;
             }
-            .tpack-pk {
-                top: 15%;
-                left: 10%;
+            
+            .tpack-subtext {
+                font-size: 0.8rem;
             }
-            .tpack-ck {
-                top: 15%;
-                right: 10%;
+            
+            .circle-label {
+                font-size: 0.7rem;
             }
-            .tpack-tk {
-                bottom: 10%;
-                left: 50%;
-            }
-            .label-tpck {
-                top: 20%;
-                left: 50%;
-            }
-            .label-tck {
-                bottom: 35%;
-                right: 25%;
-            }
-            .label-tpk {
-                bottom: 35%;
-                left: 25%;
-            }
+            
+            /* Ajuste de etiquetas para móviles */
             .label-pck {
-                top: 30%;
-                right: 30%;
+                top: 110px;
+                left: 150px;
+            }
+            
+            .label-tck {
+                bottom: 150px;
+                left: 170px;
+            }
+            
+            .label-tpk {
+                bottom: 150px;
+                left: 90px;
+            }
+            
+            /* Ajuste específico para la línea punteada del contexto */
+            .tpack-container .absolute.rounded-full {
+                width: 370px !important;
+                height: 370px !important;
+                top: -10px !important;
+                left: -10px !important;
+            }
+            
+            /* Ajuste de posición de la etiqueta CONTEXTO */
+            .tpack-container .absolute.text-gray-500 {
+                bottom: -25px !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                font-size: 0.9rem !important;
+            }
+            
+            .container-title {
+                padding: 12px;
+            }
+            
+            .container-title h2 {
+                font-size: 1.3rem;
+            }
+            
+            .container-content {
+                padding: 15px;
+            }
+            
+            .knowledge-card {
+                padding: 12px;
+            }
+            
+            .knowledge-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.4rem;
             }
         }
-        @media (min-width: 1024px) {
+        
+        @media (max-width: 480px) {
+            .tpack-container {
+                height: 300px;
+            }
+            
+            .tpack-pk, .tpack-ck, .tpack-tk {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .tpack-pk {
+                top: 40px;
+                left: 5px;
+            }
+            
+            /* Ajuste para CK en móviles pequeños */
+            .tpack-ck {
+                top: 40px;
+                left: 105px; /* Ajustado para mantener la intersección */
+            }
+            
+            .tpack-tk {
+                bottom: 5px;
+                left: 55px; /* Ajustado para mantener la intersección */
+            }
+            
+            /* CORRECCIÓN: Ajuste del círculo TPACK en móviles pequeños */
+            .tpack-center {
+                top: 110px;
+                left: 100px; /* CORREGIDO: Aumentado de 80px a 100px */
+                width: 50px;
+                height: 50px;
+            }
+            
             .tpack-heading {
+                font-size: 1.2rem;
+            }
+            
+            .tpack-subtext {
+                font-size: 0.7rem;
+            }
+            
+            .circle-label {
+                font-size: 0.6rem;
+            }
+            
+            /* Ajuste de etiquetas para móviles pequeños */
+            .label-pck {
+                top: 90px;
+                left: 120px;
+            }
+            
+            .label-tck {
+                bottom: 130px;
+                left: 135px;
+            }
+            
+            .label-tpk {
+                bottom: 130px;
+                left: 70px;
+            }
+            
+            /* Ajuste específico para la línea punteada del contexto en móviles pequeños */
+            .tpack-container .absolute.rounded-full {
+                width: 320px !important;
+                height: 320px !important;
+                top: -10px !important;
+                left: -10px !important;
+            }
+            
+            /* Ajuste de posición de la etiqueta CONTEXTO en móviles pequeños */
+            .tpack-container .absolute.text-gray-500 {
+                bottom: -25px !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                font-size: 0.8rem !important;
+            }
+            
+            .title-container h1 {
                 font-size: 1.8rem;
             }
-            .tpack-subtext {
+            
+            .container-title h2 {
+                font-size: 1.1rem;
+            }
+            
+            .container-content {
+                padding: 12px;
+            }
+            
+            .content-item {
+                padding: 8px;
+            }
+            
+            .content-item p {
+                font-size: 0.9rem;
+            }
+            
+            /* Aumentamos aún más el espacio después del gráfico en móviles pequeños */
+            .right-column {
+                margin-bottom: 50px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .tpack-container {
+                height: 270px;
+            }
+            
+            .tpack-pk, .tpack-ck, .tpack-tk {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .tpack-pk {
+                top: 35px;
+                left: 5px;
+            }
+            
+            /* Ajuste para CK en móviles muy pequeños */
+            .tpack-ck {
+                top: 35px;
+                left: 90px; /* Ajustado para mantener la intersección */
+            }
+            
+            .tpack-tk {
+                bottom: 5px;
+                left: 47px; /* Ajustado para mantener la intersección */
+            }
+            
+            /* CORRECCIÓN: Ajuste del círculo TPACK en móviles muy pequeños */
+            .tpack-center {
+                top: 95px;
+                left: 85px; /* CORREGIDO: Aumentado de 68px a 85px */
+                width: 45px;
+                height: 45px;
+            }
+            
+            .tpack-heading {
                 font-size: 1rem;
+            }
+            
+            .tpack-subtext {
+                font-size: 0.65rem;
+            }
+            
+            .circle-label {
+                font-size: 0.55rem;
+            }
+            
+            /* Ajuste de etiquetas para móviles muy pequeños */
+            .label-pck {
+                top: 75px;
+                left: 105px;
+            }
+            
+            .label-tck {
+                bottom: 110px;
+                left: 115px;
+            }
+            
+            .label-tpk {
+                bottom: 110px;
+                left: 60px;
+            }
+            
+            /* Ajuste específico para la línea punteada del contexto en móviles muy pequeños */
+            .tpack-container .absolute.rounded-full {
+                width: 280px !important;
+                height: 280px !important;
+                top: -5px !important;
+                left: -5px !important;
+            }
+            
+            /* Aumentamos aún más el espacio después del gráfico en móviles muy pequeños */
+            .right-column {
+                margin-bottom: 60px;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="slide-container">
-        <div class="slide">
-            <!-- Barra de colores -->
-            <div class="header-bar"></div>
-            
-            <!-- Header fijo -->
-            <div class="title-container">
-                <h1 class="text-4xl font-bold text-gray-800">Fundamento Metodológico: TPACK</h1>
-                <div class="h-1 w-24 bg-gray-800 mt-2"></div>
-            </div>
-            
-            <!-- Contenido principal -->
-            <div class="main-content">
-                <!-- Left column (scrollable) -->
-                <div class="left-column">
-                    <!-- What is TPACK -->
-                    <div class="focus-box">
-                        <div class="container-title blue">
-                            <i class="fas fa-question-circle"></i>
-                            <h2 class="text-2xl font-bold">¿Qué es TPACK?</h2>
-                        </div>
-                        <div class="container-content blue">
-                            <div class="inner-content">
-                                <p class="mb-2"><span class="font-bold text-lg">T</span>echnological <span class="font-bold text-lg">P</span>edagogical <span class="font-bold text-lg">C</span>ontent <span class="font-bold text-lg">K</span>nowledge</p>
-                                <p class="mb-4 italic">(Conocimiento Tecnológico Pedagógico del Contenido)</p>
-                            </div>
-                            <div class="content-item">
-                                <i class="fas fa-users"></i>
-                                <div>
-                                    <p>Modelo desarrollado por <span class="font-semibold">Mishra y Koehler (2006)</span></p>
-                                    <p class="text-sm">Integra tres conocimientos fundamentales para la enseñanza efectiva con tecnología</p>
-                                </div>
-                            </div>
-                        </div>
+    <div class="slide">
+        <!-- Header bar -->
+        <div class="header-bar w-full"></div>
+        
+        <!-- Fixed title section -->
+        <div class="title-container">
+            <h1 class="text-4xl font-bold text-gray-800">Fundamento Metodológico: TPACK</h1>
+            <div class="h-1 w-24 bg-gray-600 mt-2"></div>
+        </div>
+        
+        <!-- Main content container -->
+        <div class="main-content">
+            <!-- Left column (scrollable) -->
+            <div class="left-column">
+                <!-- What is TPACK -->
+                <div class="focus-box">
+                    <div class="container-title blue">
+                        <i class="fas fa-question-circle"></i>
+                        <h2 class="text-2xl font-bold">¿Qué es TPACK?</h2>
                     </div>
-                    
-                    <!-- Purpose in TEdU -->
-                    <div class="focus-box">
-                        <div class="container-title orange">
-                            <i class="fas fa-bullseye"></i>
-                            <h2 class="text-2xl font-bold">Propósito en TEdU</h2>
+                    <div class="container-content blue">
+                        <div class="inner-content">
+                            <p class="mb-2"><span class="font-bold text-lg">T</span>echnological <span class="font-bold text-lg">P</span>edagogical <span class="font-bold text-lg">C</span>ontent <span class="font-bold text-lg">K</span>nowledge</p>
+                            <p class="mb-4 italic">(Conocimiento Tecnológico Pedagógico del Contenido)</p>
                         </div>
-                        <div class="container-content orange">
-                            <ul class="space-y-3">
-                                <li class="content-item">
-                                    <i class="fas fa-cog"></i>
-                                    <p>Guiar la <span class="font-semibold">integración efectiva de las TIC</span> en todas las modalidades educativas</p>
-                                </li>
-                                <li class="content-item">
-                                    <i class="fas fa-magic"></i>
-                                    <p>Diseñar <span class="font-semibold">experiencias de aprendizaje significativas</span> y pertinentes</p>
-                                </li>
-                                <li class="content-item">
-                                    <i class="fas fa-chart-line"></i>
-                                    <p>Potenciar la <span class="font-semibold">efectividad docente</span> en entornos educativos digitales</p>
-                                </li>
-                                <li class="content-item">
-                                    <i class="fas fa-tasks"></i>
-                                    <p>Establecer un <span class="font-semibold">marco común</span> para todas las modalidades TEdU</p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- The 3 Base Components -->
-                    <div class="grid grid-cols-3 gap-3 mb-6">
-                        <div class="knowledge-card orange">
-                            <div class="knowledge-icon" style="background-color: var(--unicomfa-orange);">
-                                <i class="fas fa-brain"></i>
+                        <div class="content-item">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <p>Modelo desarrollado por <span class="font-semibold">Mishra y Koehler (2006)</span></p>
+                                <p class="text-sm">Integra tres conocimientos fundamentales para la enseñanza efectiva con tecnología</p>
                             </div>
-                            <h3 class="text-center font-semibold mb-1">PK</h3>
-                            <p class="text-xs text-center">Conocimiento Pedagógico<br>Estrategias y métodos de enseñanza</p>
-                        </div>
-                        <div class="knowledge-card green">
-                            <div class="knowledge-icon" style="background-color: var(--unicomfa-green);">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <h3 class="text-center font-semibold mb-1">CK</h3>
-                            <p class="text-xs text-center">Conocimiento del Contenido<br>Dominio de la materia</p>
-                        </div>
-                        <div class="knowledge-card blue">
-                            <div class="knowledge-icon" style="background-color: var(--unicomfa-blue);">
-                                <i class="fas fa-laptop-code"></i>
-                            </div>
-                            <h3 class="text-center font-semibold mb-1">TK</h3>
-                            <p class="text-xs text-center">Conocimiento Tecnológico<br>Manejo de herramientas digitales</p>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Right column (static TPACK diagram) -->
-                <div class="right-column">
-                    <div class="tpack-wrapper">
-                        <div class="tpack-container">
-                            <!-- TPACK Circles -->
-                            <div class="tpack-circle tpack-pk">
-                                <span class="tpack-heading">PK</span>
-                                <span class="tpack-subtext">Conocimiento Pedagógico</span>
-                            </div>
-                            <div class="tpack-circle tpack-ck">
-                                <span class="tpack-heading">CK</span>
-                                <span class="tpack-subtext">Conocimiento del Contenido</span>
-                            </div>
-                            <div class="tpack-circle tpack-tk">
-                                <span class="tpack-heading">TK</span>
-                                <span class="tpack-subtext">Conocimiento Tecnológico</span>
-                            </div>
-                            <div class="tpack-circle tpack-center">
-                                <span class="text-lg font-bold">TPACK</span>
-                            </div>
-                            <!-- Intersection Labels -->
-                            <div class="circle-label label-pck">PCK</div>
-                            <div class="circle-label label-tck">TCK</div>
-                            <div class="circle-label label-tpk">TPK</div>
-                            <!-- Context Border -->
-                            <div class="context-border"></div>
-                            <div class="context-label">CONTEXTO</div>
+                <!-- Purpose in TEdU -->
+                <div class="focus-box">
+                    <div class="container-title orange">
+                        <i class="fas fa-bullseye"></i>
+                        <h2 class="text-2xl font-bold">Propósito en TEdU</h2>
+                    </div>
+                    <div class="container-content orange">
+                        <ul class="space-y-3">
+                            <li class="content-item">
+                                <i class="fas fa-cog"></i>
+                                <p>Guiar la <span class="font-semibold">integración efectiva de las TIC</span> en todas las modalidades educativas</p>
+                            </li>
+                            <li class="content-item">
+                                <i class="fas fa-magic"></i>
+                                <p>Diseñar <span class="font-semibold">experiencias de aprendizaje significativas</span> y pertinentes</p>
+                            </li>
+                            <li class="content-item">
+                                <i class="fas fa-chart-line"></i>
+                                <p>Potenciar la <span class="font-semibold">efectividad docente</span> en entornos educativos digitales</p>
+                            </li>
+                            <li class="content-item">
+                                <i class="fas fa-tasks"></i>
+                                <p>Establecer un <span class="font-semibold">marco común</span> para todas las modalidades TEdU</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- The 3 Base Components -->
+                <div class="grid grid-cols-3 gap-3 mb-6">
+                    <div class="knowledge-card orange">
+                        <div class="knowledge-icon" style="background-color: var(--unicomfa-orange);">
+                            <i class="fas fa-brain"></i>
                         </div>
+                        <h3 class="text-center font-semibold mb-1">PK</h3>
+                        <p class="text-xs text-center">Conocimiento Pedagógico<br>Estrategias y métodos de enseñanza</p>
+                    </div>
+                    <div class="knowledge-card green">
+                        <div class="knowledge-icon" style="background-color: var(--unicomfa-green);">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3 class="text-center font-semibold mb-1">CK</h3>
+                        <p class="text-xs text-center">Conocimiento del Contenido<br>Dominio de la materia</p>
+                    </div>
+                    <div class="knowledge-card blue">
+                        <div class="knowledge-icon" style="background-color: var(--unicomfa-blue);">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-center font-semibold mb-1">TK</h3>
+                        <p class="text-xs text-center">Conocimiento Tecnológico<br>Manejo de herramientas digitales</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right column (static TPACK diagram) -->
+            <div class="right-column">
+                <div class="tpack-wrapper">
+                    <div class="tpack-container">
+                        <!-- TPACK Circles -->
+                        <div class="tpack-circle tpack-pk">
+                            <span class="tpack-heading">PK</span>
+                            <span class="tpack-subtext">Conocimiento Pedagógico</span>
+                        </div>
+                        <div class="tpack-circle tpack-ck">
+                            <span class="tpack-heading">CK</span>
+                            <span class="tpack-subtext">Conocimiento del Contenido</span>
+                        </div>
+                        <div class="tpack-circle tpack-tk">
+                            <span class="tpack-heading">TK</span>
+                            <span class="tpack-subtext">Conocimiento Tecnológico</span>
+                        </div>
+                        <div class="tpack-circle tpack-center">
+                            <span class="text-lg font-bold">TPACK</span>
+                        </div>
+                        <!-- Intersection Labels -->
+                        <div class="circle-label label-pck">PCK</div>
+                        <div class="circle-label label-tck">TCK</div>
+                        <div class="circle-label label-tpk">TPK</div>
+                        <!-- Context Border -->
+                        <div class="absolute rounded-full border-4 border-dashed border-gray-500" style="width: 520px; height: 520px; top: -10px; left: -10px;"></div>
+                        <div class="absolute text-gray-500" style="bottom: -20px; left: 210px; font-size: 1rem;">CONTEXTO</div>
                     </div>
                 </div>
             </div>

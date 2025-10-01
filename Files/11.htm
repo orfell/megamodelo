@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-<title>Modalidad Dual - TEdU</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.min.js"></script>
-<style>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Modalidad Dual - TEdU</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.min.js"></script>
+    <style>
         :root {
             --unicomfa-blue: #0055A4;
             --unicomfa-orange: #FF6600;
@@ -27,7 +26,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
         }
         .presentation-container {
             padding: 20px 0;
@@ -42,6 +41,9 @@
             flex-shrink: 0;
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
+            position: sticky;
+            top: 0;
+            z-index: 30;
         }
     
         .slide {
@@ -207,10 +209,369 @@
         /* Fixed header */
         .fixed-header {
             position: sticky;
-            top: 0;
+            top: 8px;
             background-color: white;
             z-index: 20;
             padding-bottom: 10px;
+            padding-top: 15px;
+        }
+
+        /* Media Queries para Responsividad */
+        @media (max-width: 1300px) {
+            .presentation-container, .slide {
+                width: 95vw;
+            }
+            
+            .slide {
+                height: 95vh;
+            }
+            
+            :root {
+                --content-padding: 40px;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .presentation-container, .slide {
+                width: 98vw;
+            }
+            
+            .slide {
+                height: 96vh;
+            }
+            
+            .flex.flex-1 {
+                flex-direction: column;
+            }
+            
+            .w-1\/2 {
+                width: 100%;
+                padding: 0 !important;
+            }
+            
+            .pr-8, .pl-8 {
+                padding-right: 0;
+                padding-left: 0;
+            }
+            
+            .fixed-header h1 {
+                font-size: 2rem;
+            }
+            
+            .container-title h2 {
+                font-size: 1.3rem;
+            }
+            
+            .feature-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+                margin-right: 12px;
+            }
+            
+            :root {
+                --content-padding: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px 0;
+                align-items: flex-start;
+            }
+            
+            .presentation-container {
+                padding: 10px 0;
+            }
+            
+            .slide {
+                width: 98vw;
+                height: 96vh;
+                margin: 0 10px;
+            }
+            
+            .slide-content {
+                padding: 0 20px 15px 20px;
+                overflow-y: auto;
+                max-height: calc(96vh - 140px);
+            }
+            
+            .fixed-header {
+                padding: 15px 20px 8px 20px;
+            }
+            
+            .fixed-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .w-12.h-12 {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .w-12.h-12 i {
+                font-size: 1.5rem;
+            }
+            
+            .container-title {
+                padding: 10px 12px;
+            }
+            
+            .container-title i {
+                width: 32px;
+                height: 32px;
+                margin-right: 10px;
+            }
+            
+            .container-title h2 {
+                font-size: 1.2rem;
+            }
+            
+            .content-box {
+                padding: 12px;
+            }
+            
+            .inner-content {
+                padding: 10px;
+            }
+            
+            .feature-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                margin-right: 10px;
+            }
+            
+            .dual-circle {
+                width: 100px;
+                height: 100px;
+                font-size: 1.5rem;
+            }
+            
+            .dual-connector {
+                width: 80px;
+                left: 100px;
+                top: 50px;
+            }
+            
+            .grid.grid-cols-4 {
+                grid-template-columns: 1fr;
+                font-size: 0.8rem;
+            }
+            
+            .grid.grid-cols-4 > div {
+                border-bottom: 1px solid #e5e7eb;
+            }
+            
+            .table-header {
+                background-color: #f8fafc !important;
+                font-weight: 700;
+                border-bottom: 2px solid #e5e7eb;
+                color: #1f2937 !important;
+            }
+            
+            .grid.grid-cols-4 .p-2 {
+                padding: 8px;
+            }
+            
+            /* Ajustes para el diagrama mermaid en móviles */
+            #dualFlowchart {
+                transform: scale(0.8);
+                transform-origin: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slide {
+                width: 98vw;
+                height: 95vh;
+                margin: 0 5px;
+            }
+            
+            .slide-content {
+                max-height: calc(95vh - 130px);
+                padding: 0 15px 12px 15px;
+            }
+            
+            .fixed-header {
+                padding: 12px 15px 6px 15px;
+            }
+            
+            .fixed-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .w-12.h-12 {
+                width: 40px;
+                height: 40px;
+                margin-right: 12px;
+            }
+            
+            .w-12.h-12 i {
+                font-size: 1.3rem;
+            }
+            
+            .h-1.w-24 {
+                width: 80px;
+            }
+            
+            .container-title h2 {
+                font-size: 1.1rem;
+            }
+            
+            .container-title i {
+                width: 30px;
+                height: 30px;
+                margin-right: 8px;
+            }
+            
+            .container-title i::before {
+                font-size: 0.9rem;
+            }
+            
+            .feature-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+                margin-right: 8px;
+            }
+            
+            .inner-content p.text-lg {
+                font-size: 1rem;
+            }
+            
+            .dual-circle {
+                width: 80px;
+                height: 80px;
+                font-size: 1.2rem;
+            }
+            
+            .dual-connector {
+                width: 60px;
+                left: 80px;
+                top: 40px;
+            }
+            
+            .flex.items-start .w-8.h-8 {
+                width: 30px;
+                height: 30px;
+                margin-right: 10px;
+            }
+            
+            .flex.items-start .w-8.h-8 i {
+                font-size: 0.8rem;
+            }
+            
+            .space-y-3 > li {
+                margin-bottom: 12px;
+            }
+            
+            .text-sm {
+                font-size: 0.85rem;
+            }
+            
+            /* Ajustes adicionales para visualización dual en móviles */
+            .relative.flex.justify-center.mb-6 {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .dual-circle.mr-16 {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .dual-connector {
+                width: 6px;
+                height: 60px;
+                top: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .dual-connector::before {
+                left: -5px;
+                top: -5px;
+            }
+            
+            .dual-connector::after {
+                left: -5px;
+                top: auto;
+                bottom: -5px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .fixed-header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .container-title h2 {
+                font-size: 1rem;
+            }
+            
+            .feature-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+            
+            .inner-content p {
+                font-size: 0.9rem;
+            }
+            
+            .dual-circle {
+                width: 70px;
+                height: 70px;
+                font-size: 1rem;
+            }
+            
+            .dual-connector {
+                height: 50px;
+                top: 70px;
+            }
+        }
+        
+        /* Mejoras de scroll para móviles */
+        .slide-content {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+        
+        /* Asegurar que la tabla TPACK sea legible en móviles */
+        @media (max-width: 768px) {
+            .rounded-lg.overflow-hidden {
+                overflow-x: auto;
+            }
+            
+            .grid.grid-cols-4 {
+                display: block;
+            }
+            
+            .grid.grid-cols-4 > div {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .grid.grid-cols-4 > div > div {
+                border-bottom: 1px solid #e5e7eb;
+                padding: 8px;
+            }
+            
+            .table-header {
+                font-weight: 700;
+                background-color: #f1f5f9 !important;
+            }
+        }
+        
+        /* Asegurar que todas las cajas tengan el mismo comportamiento */
+        .content-box {
+            width: 100%;
+        }
+        
+        /* Ajustes específicos para el diagrama mermaid */
+        #dualFlowchart {
+            min-height: 120px;
         }
     </style>
 </head>

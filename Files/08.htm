@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Modalidad Virtual - TEdU</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
-<style>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Modalidad Virtual - TEdU</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+    <style>
         :root {
             --unicomfa-blue: #0055A4;
             --unicomfa-orange: #FF6600;
@@ -23,7 +22,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
         }
         .slide-container {
             padding: 20px 0;
@@ -39,6 +38,9 @@
             flex-shrink: 0;
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
+            position: sticky;
+            top: 0;
+            z-index: 30;
         }
     
         .slide {
@@ -56,6 +58,10 @@
         .slide-header {
             flex-shrink: 0;
             padding: 20px 16px 10px 16px;
+            background: white;
+            position: sticky;
+            top: 8px;
+            z-index: 20;
         }
         .slide-content {
             flex-grow: 1;
@@ -161,6 +167,274 @@
         }
         .slide-content::-webkit-scrollbar-thumb:hover {
             background: #555;
+        }
+
+        /* Media Queries para Responsividad */
+        @media (max-width: 1300px) {
+            .slide {
+                width: 95vw;
+                height: 95vh;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .slide {
+                width: 98vw;
+                height: 96vh;
+            }
+            
+            .flex.flex-1 {
+                flex-direction: column;
+            }
+            
+            .w-1\/2 {
+                width: 100%;
+                padding: 0 !important;
+            }
+            
+            .pr-8, .pl-8 {
+                padding-right: 0;
+                padding-left: 0;
+            }
+            
+            .slide-header h1 {
+                font-size: 2rem;
+            }
+            
+            .container-title h2 {
+                font-size: 1.3rem;
+            }
+            
+            .feature-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+                margin-right: 12px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px 0;
+                align-items: flex-start;
+            }
+            
+            .slide-container {
+                padding: 10px 0;
+                height: 100vh;
+            }
+            
+            .slide {
+                width: 98vw;
+                height: 96vh;
+                margin: 0 10px;
+            }
+            
+            .slide-content {
+                padding: 0 12px 15px 12px;
+                overflow-y: auto;
+                max-height: calc(96vh - 140px);
+            }
+            
+            .slide-header {
+                padding: 15px 12px 8px 12px;
+            }
+            
+            .slide-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .w-12.h-12 {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .w-12.h-12 i {
+                font-size: 1.5rem;
+            }
+            
+            .container-title {
+                padding: 10px 12px;
+            }
+            
+            .container-title i {
+                width: 32px;
+                height: 32px;
+                margin-right: 10px;
+            }
+            
+            .container-title h2 {
+                font-size: 1.2rem;
+            }
+            
+            .container-content {
+                padding: 12px;
+            }
+            
+            .inner-content {
+                padding: 10px;
+            }
+            
+            .feature-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                margin-right: 10px;
+            }
+            
+            .grid.grid-cols-4 {
+                grid-template-columns: 1fr;
+                font-size: 0.8rem;
+            }
+            
+            .grid.grid-cols-4 > div {
+                border-bottom: 1px solid #e5e7eb;
+            }
+            
+            .table-header {
+                background-color: #f8fafc !important;
+                font-weight: 700;
+                border-bottom: 2px solid #e5e7eb;
+            }
+            
+            .grid.grid-cols-4 .p-2 {
+                padding: 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slide {
+                width: 98vw;
+                height: 95vh;
+                margin: 0 5px;
+            }
+            
+            .slide-content {
+                max-height: calc(95vh - 130px);
+                padding: 0 8px 12px 8px;
+            }
+            
+            .slide-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .w-12.h-12 {
+                width: 40px;
+                height: 40px;
+                margin-right: 12px;
+            }
+            
+            .w-12.h-12 i {
+                font-size: 1.3rem;
+            }
+            
+            .h-1.w-24 {
+                width: 80px;
+            }
+            
+            .container-title h2 {
+                font-size: 1.1rem;
+            }
+            
+            .container-title i {
+                width: 30px;
+                height: 30px;
+                margin-right: 8px;
+            }
+            
+            .container-title i::before {
+                font-size: 0.9rem;
+            }
+            
+            .feature-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+                margin-right: 8px;
+            }
+            
+            .inner-content p.text-lg {
+                font-size: 1rem;
+            }
+            
+            .grid.grid-cols-2.gap-2 {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .bg-gray-100.p-2.rounded {
+                padding: 10px;
+            }
+            
+            .flex.items-start .w-8.h-8 {
+                width: 30px;
+                height: 30px;
+                margin-right: 10px;
+            }
+            
+            .flex.items-start .w-8.h-8 i {
+                font-size: 0.8rem;
+            }
+            
+            .space-y-3 > li {
+                margin-bottom: 12px;
+            }
+            
+            .text-sm {
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .slide-header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .container-title h2 {
+                font-size: 1rem;
+            }
+            
+            .feature-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+            
+            .inner-content p {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Mejoras de scroll para móviles */
+        .slide-content {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+        
+        /* Asegurar que la tabla TPACK sea legible en móviles */
+        @media (max-width: 768px) {
+            .rounded-lg.overflow-hidden {
+                overflow-x: auto;
+            }
+            
+            .grid.grid-cols-4 {
+                display: block;
+            }
+            
+            .grid.grid-cols-4 > div {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .grid.grid-cols-4 > div > div {
+                border-bottom: 1px solid #e5e7eb;
+                padding: 8px;
+            }
+            
+            .table-header {
+                font-weight: 700;
+                background-color: #f1f5f9 !important;
+            }
         }
     </style>
 </head>
@@ -384,6 +658,7 @@
 <div class="p-2 tpack-cell bg-gray-50">
                                                 Cuestionarios adaptativos, e-portafolios
                                             </div>
+</div>
 </div>
 </div>
 </div>

@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Modelo de Negocios y Sostenibilidad - TEdU</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo de Negocios y Sostenibilidad - TEdU</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
         :root {
             --unicomfa-blue: #0055A4;
             --unicomfa-orange: #FF6600;
@@ -23,10 +22,12 @@
             justify-content: center;
             background-color: white;
             align-items: flex-start;
+            min-height: 100vh;
         }
         .slide {
-            width: 1280px;
-            height: 100vh;
+            width: 100%;
+            max-width: 1280px;
+            min-height: 100vh;
             background-color: white;
             color: #000000;
             position: relative;
@@ -38,6 +39,11 @@
             height: 8px;
             background: linear-gradient(to right, var(--unicomfa-blue) 33%, var(--unicomfa-orange) 33%, var(--unicomfa-orange) 66%, var(--unicomfa-green) 66%);
             flex-shrink: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
         }
         .footer-logo {
             position: absolute;
@@ -177,329 +183,463 @@
             -webkit-text-fill-color: transparent;
         }
         
-        /* ESTRUCTURA */
+        /* ESTRUCTURA CORREGIDA - PADDING TOP AUMENTADO */
         .scroll-container {
             flex: 1;
             overflow-y: auto;
-            padding: 0 16px 16px;
+            padding: 120px 16px 16px; /* Aumentado de 0 a 120px para espacio del header fijo */
+            margin-top: 0;
         }
         .fixed-header {
             padding: 16px 16px 0;
             background: white;
             z-index: 10;
+            position: fixed;
+            top: 8px;
+            left: 0;
+            right: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        /* MEDIA QUERIES PARA RESPONSIVE */
+        @media (max-width: 1024px) {
+            .slide {
+                max-width: 95%;
+                max-height: 95vh;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+                overflow: auto;
+            }
+            
+            .slide {
+                max-width: 100%;
+                max-height: none;
+                height: auto;
+                min-height: 100vh;
+                border-radius: 0;
+            }
+            
+            .fixed-header {
+                padding: 10px 10px 0;
+            }
+            
+            .fixed-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .scroll-container {
+                padding: 120px 10px 10px; /* Aumentado para móviles también */
+            }
+            
+            /* CANVAS ADAPTADO PARA MÓVILES */
+            .canvas-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .canvas-cell {
+                width: 100%;
+            }
+            
+            .canvas-title {
+                font-size: 1rem;
+                padding: 10px;
+            }
+            
+            .canvas-content {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+            
+            /* LÍNEAS DE DESARROLLO ADAPTADAS */
+            .development-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 10px;
+            }
+            
+            .development-card {
+                padding: 10px;
+            }
+            
+            .development-card h4 {
+                font-size: 0.8rem;
+            }
+            
+            /* VISIÓN 2030 */
+            .vision-content p {
+                font-size: 1rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .fixed-header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .container-box .container-title {
+                font-size: 0.9rem;
+            }
+            
+            .canvas-title {
+                font-size: 0.9rem;
+            }
+            
+            .canvas-content {
+                font-size: 0.8rem;
+            }
+            
+            .development-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .vision-content p {
+                font-size: 0.9rem !important;
+            }
+            
+            .inner-content p {
+                font-size: 0.9rem !important;
+            }
+            
+            .scroll-container {
+                padding: 110px 10px 10px; /* Ajuste fino para móviles pequeños */
+            }
         }
     </style>
 </head>
-<body style="background-color: #f3f4f6; margin: 0; padding: 0; overflow: hidden; display: flex; justify-content: center; align-items: flex-start;">
-<div class="slide" style="margin-top: 20px; border-radius: 12px"><div class="header-bar w-full"></div>
-<!-- Header bar -->
-
-<!-- Fixed title section -->
-<div class="fixed-header">
-<!-- Title (left-aligned) -->
-<div class="mb-4 text-left">
-<h1 class="text-4xl font-bold text-gray-900">Modelo de Negocios y Sostenibilidad</h1>
-<div class="h-1 w-24 bg-gray-800 mt-2"></div>
-</div>
-</div>
-<!-- Scrollable main content -->
-<div class="scroll-container">
-<!-- Introduction (centered) -->
-<div class="container-box orange-container mb-4 mx-auto max-w-5xl">
-<div class="container-title">
-<div class="title-icon">
-<i class="fas fa-chart-line text-white"></i>
-</div>
-<h2>Enfoque</h2>
-</div>
-<div class="container-content">
-<div class="inner-content">
-<p class="text-gray-900">
-<span class="font-semibold">Alinear recursos y capacidades</span> con una propuesta de valor clara: 
+<body>
+    <div class="slide">
+        <!-- Header bar -->
+        <div class="header-bar w-full"></div>
+        
+        <!-- Fixed title section -->
+        <div class="fixed-header">
+            <!-- Title (left-aligned) -->
+            <div class="mb-4 text-left">
+                <h1 class="text-4xl font-bold text-gray-900">Modelo de Negocios y Sostenibilidad</h1>
+                <div class="h-1 w-24 bg-gray-800 mt-2"></div>
+            </div>
+        </div>
+        
+        <!-- Scrollable main content -->
+        <div class="scroll-container">
+            <!-- Introduction (centered) -->
+            <div class="container-box orange-container mb-4 mx-auto max-w-5xl">
+                <div class="container-title">
+                    <div class="title-icon">
+                        <i class="fas fa-chart-line text-white"></i>
+                    </div>
+                    <h2>Enfoque</h2>
+                </div>
+                <div class="container-content">
+                    <div class="inner-content">
+                        <p class="text-gray-900">
+                            <span class="font-semibold">Alinear recursos y capacidades</span> con una propuesta de valor clara: 
                             <span class="font-semibold">educación con valor y sostenibilidad</span>
-</p>
-</div>
-</div>
-</div>
-<!-- Business Canvas Model -->
-<div class="mb-4 w-full">
-<h2 class="text-lg font-bold mb-2 text-left" style="color: var(--unicomfa-orange);">
-<i class="fas fa-th-large mr-2"></i> Modelo Canvas Adaptado
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Business Canvas Model -->
+            <div class="mb-4 w-full">
+                <h2 class="text-lg font-bold mb-2 text-left" style="color: var(--unicomfa-orange);">
+                    <i class="fas fa-th-large mr-2"></i> Modelo Canvas Adaptado
                 </h2>
-<div class="grid grid-cols-12 gap-2">
-<!-- Key Partners - Borde azul -->
-<div class="canvas-cell blue-container col-span-2" style="border-color: var(--unicomfa-blue);">
-<div class="container-title">
-<i class="fas fa-handshake mr-2"></i> <b>Aliados Clave</b>
-</div>
-<div class="canvas-content">
-<ul class="space-y-1">
-<li class="flex items-start">
-<i class="fas fa-check-circle text-blue-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>MEN / MinTIC</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-blue-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Empresas regionales</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-blue-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Otras IES</b></span>
-</li>
-</ul>
-</div>
-</div>
-<!-- Key Activities - Borde azul -->
-<div class="canvas-cell blue-container col-span-2" style="border-color: var(--unicomfa-blue);">
-<div class="container-title">
-<i class="fas fa-tasks mr-2"></i> <b>Actividades Clave</b>
-</div>
-<div class="canvas-content">
-<ul class="space-y-1">
-<li class="flex items-start">
-<i class="fas fa-check-circle text-blue-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Diseño instruccional</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-blue-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Producción contenidos</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-blue-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Soporte técnico</b></span>
-</li>
-</ul>
-</div>
-</div>
-<!-- Value Proposition - Borde naranja -->
-<div class="canvas-cell orange-container col-span-4" style="border-color: var(--unicomfa-orange);">
-<div class="container-title">
-<i class="fas fa-gem mr-2"></i> <b>Propuesta de Valor</b>
-</div>
-<div class="canvas-content">
-<ul class="space-y-1">
-<li class="flex items-start">
-<i class="fas fa-door-open text-orange-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Acceso flexible y equitativo</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-brain text-orange-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Aprendizaje significativo con tecnología/IA</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-map-marked-alt text-orange-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Inclusión territorial estratégica</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-industry text-orange-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Vinculación efectiva sector productivo</b></span>
-</li>
-</ul>
-</div>
-</div>
-<!-- Customer Relationships - Borde naranja -->
-<div class="canvas-cell orange-container col-span-2" style="border-color: var(--unicomfa-orange);">
-<div class="container-title">
-<i class="fas fa-heart mr-2"></i> <b>Relaciones</b>
-</div>
-<div class="canvas-content">
-<ul class="space-y-1">
-<li class="flex items-start">
-<i class="fas fa-check-circle text-orange-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Personalización</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-orange-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Acompañamiento</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-orange-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Multi-canal</b></span>
-</li>
-</ul>
-</div>
-</div>
-<!-- Customer Segments - Borde naranja -->
-<div class="canvas-cell orange-container col-span-2" style="border-color: var(--unicomfa-orange);">
-<div class="container-title">
-<i class="fas fa-users mr-2"></i> <b>Segmentos</b>
-</div>
-<div class="canvas-content">
-<ul class="space-y-1">
-<li class="flex items-start">
-<i class="fas fa-check-circle text-orange-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Estudiantes</b> (urbanos/rurales)</span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-orange-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Empresas</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-orange-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Gobierno</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-orange-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>IES</b></span>
-</li>
-</ul>
-</div>
-</div>
-<!-- Key Resources - Borde verde -->
-<div class="canvas-cell green-container col-span-2" style="border-color: var(--unicomfa-green);">
-<div class="container-title">
-<i class="fas fa-cogs mr-2"></i> <b>Recursos Clave</b>
-</div>
-<div class="canvas-content">
-<ul class="space-y-1">
-<li class="flex items-start">
-<i class="fas fa-check-circle text-green-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Talento especializado</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-green-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Plataformas tecnológicas</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-green-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Contenidos digitales</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-green-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Inteligencia Artificial</b></span>
-</li>
-</ul>
-</div>
-</div>
-<!-- Channels - Borde verde -->
-<div class="canvas-cell green-container col-span-2" style="border-color: var(--unicomfa-green);">
-<div class="container-title">
-<i class="fas fa-broadcast-tower mr-2"></i> Canales
+                
+                <div class="canvas-grid md:grid md:grid-cols-12 md:gap-2">
+                    <!-- Key Partners - Borde azul -->
+                    <div class="canvas-cell blue-container md:col-span-2" style="border-color: var(--unicomfa-blue);">
+                        <div class="container-title">
+                            <i class="fas fa-handshake mr-2"></i> <b>Aliados Clave</b>
                         </div>
-<div class="canvas-content">
-<ul class="space-y-1">
-<li class="flex items-start">
-<i class="fas fa-check-circle text-green-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Plataforma digital</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-green-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Sede principal/regionales</b></span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-green-500 text-xs mt-1 mr-1"></i>
-<span class="text-gray-700"><b>Aliados estratégicos</b></span>
-</li>
-</ul>
-</div>
-</div>
-<!-- Cost Structure - Borde verde -->
-<div class="canvas-cell green-container col-span-4" style="border-color: var(--unicomfa-green);">
-<div class="container-title">
-<i class="fas fa-file-invoice-dollar mr-2"></i> <b>Estructura de Costos</b>
-</div>
-<div class="canvas-content">
-<div class="grid grid-cols-3 gap-1">
-<div class="text-center p-1 rounded bg-gray-100">
-<i class="fas fa-user-tie text-green-500 text-xs"></i>
-<p class="text-xs text-gray-700"><b>Personal</b></p>
-</div>
-<div class="text-center p-1 rounded bg-gray-100">
-<i class="fas fa-server text-green-500 text-xs"></i>
-<p class="text-xs text-gray-700"><b>Infraestructura</b></p>
-</div>
-<div class="text-center p-1 rounded bg-gray-100">
-<i class="fas fa-tools text-green-500 text-xs"></i>
-<p class="text-xs text-gray-700"><b>Operación</b></p>
-</div>
-</div>
-</div>
-</div>
-<!-- Revenue Streams - Borde verde -->
-<div class="canvas-cell green-container col-span-4" style="border-color: var(--unicomfa-green);">
-<div class="container-title">
-<i class="fas fa-money-bill-wave mr-2"></i> <b>Fuentes de Ingreso</b>
-</div>
-<div class="canvas-content">
-<div class="grid grid-cols-3 gap-1">
-<div class="text-center p-1 rounded bg-gray-100">
-<i class="fas fa-graduation-cap text-green-500 text-xs"></i>
-<p class="text-xs text-gray-700"><b>Matrículas</b></p>
-</div>
-<div class="text-center p-1 rounded bg-gray-100">
-<i class="fas fa-book text-green-500 text-xs"></i>
-<p class="text-xs text-gray-700"><b>Educación continua</b></p>
-</div>
-<div class="text-center p-1 rounded bg-gray-100">
-<i class="fas fa-handshake text-green-500 text-xs"></i>
-<p class="text-xs text-gray-700"><b>Alianzas</b></p>
-</div>
-<div class="text-center p-1 rounded bg-gray-100">
-<i class="fas fa-chalkboard-teacher text-green-500 text-xs"></i>
-<p class="text-xs text-gray-700"><b>Consultoría</b></p>
-</div>
-<div class="text-center p-1 rounded bg-gray-100">
-<i class="fas fa-code text-green-500 text-xs"></i>
-<p class="text-xs text-gray-700"><b>Bootcamps</b></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Development Lines -->
-<div class="mb-3 w-full">
-<h2 class="text-lg font-bold mb-2 text-left" style="color: var(--unicomfa-green);">
-<i class="fas fa-arrows-alt mr-2"></i> <b>Líneas de Desarrollo</b>
-</h2>
-<div class="grid grid-cols-5 gap-2">
-<div class="development-card blue-container p-2" style="border-color: var(--unicomfa-blue);">
-<div class="text-center">
-<i class="fas fa-university text-blue-500 text-xl mb-1"></i>
-<h4 class="text-xs font-medium text-gray-700"><b>Educación formal multimodal</b></h4>
-</div>
-</div>
-<div class="development-card orange-container p-2" style="border-color: var(--unicomfa-orange);">
-<div class="text-center">
-<i class="fas fa-certificate text-orange-500 text-xl mb-1"></i>
-<h4 class="text-xs font-medium text-gray-700"><b>Educación continua</b></h4>
-</div>
-</div>
-<div class="development-card green-container p-2" style="border-color: var(--unicomfa-green);">
-<div class="text-center">
-<i class="fas fa-laptop-code text-green-500 text-xl mb-1"></i>
-<h4 class="text-xs font-medium text-gray-700"><b>Servicios tecno-pedagógicos</b></h4>
-</div>
-</div>
-<div class="development-card blue-container p-2" style="border-color: var(--unicomfa-blue);">
-<div class="text-center">
-<i class="fas fa-landmark text-blue-500 text-xl mb-1"></i>
-<h4 class="text-xs font-medium text-gray-700"><b>Programas sector público</b></h4>
-</div>
-</div>
-<div class="development-card orange-container p-2" style="border-color: var(--unicomfa-orange);">
-<div class="text-center">
-<i class="fas fa-puzzle-piece text-orange-500 text-xl mb-1"></i>
-<h4 class="text-xs font-medium text-gray-700"><b>REA/RED comercializables</b></h4>
-</div>
-</div>
-</div>
-</div>
-<!-- Vision 2030 -->
-<div class="vision-container mb-4" style="border-color: var(--unicomfa-green);">
-<div class="vision-title">
-<i class="vision-icon fas fa-eye"></i>
-<span>Visión 2030</span>
-</div>
-<div class="vision-content">
-<p class="text-lg">
-<span class="font-bold">Centro autosostenible de innovación educativa</span>, 
-                        articulado con PEI y <span class="font-bold text-blue-800">ODS 4</span>
-<span class="text-xs">(Educación de Calidad)</span>
-</p>
-</div>
-</div>
-</div>
-</div>
+                        <div class="canvas-content">
+                            <ul class="space-y-1">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>MEN / MinTIC</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Empresas regionales</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Otras IES</b></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Key Activities - Borde azul -->
+                    <div class="canvas-cell blue-container md:col-span-2" style="border-color: var(--unicomfa-blue);">
+                        <div class="container-title">
+                            <i class="fas fa-tasks mr-2"></i> <b>Actividades Clave</b>
+                        </div>
+                        <div class="canvas-content">
+                            <ul class="space-y-1">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Diseño instruccional</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Producción contenidos</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Soporte técnico</b></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Value Proposition - Borde naranja -->
+                    <div class="canvas-cell orange-container md:col-span-4" style="border-color: var(--unicomfa-orange);">
+                        <div class="container-title">
+                            <i class="fas fa-gem mr-2"></i> <b>Propuesta de Valor</b>
+                        </div>
+                        <div class="canvas-content">
+                            <ul class="space-y-1">
+                                <li class="flex items-start">
+                                    <i class="fas fa-door-open text-orange-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Acceso flexible y equitativo</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-brain text-orange-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Aprendizaje significativo con tecnología/IA</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-map-marked-alt text-orange-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Inclusión territorial estratégica</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-industry text-orange-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Vinculación efectiva sector productivo</b></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Customer Relationships - Borde naranja -->
+                    <div class="canvas-cell orange-container md:col-span-2" style="border-color: var(--unicomfa-orange);">
+                        <div class="container-title">
+                            <i class="fas fa-heart mr-2"></i> <b>Relaciones</b>
+                        </div>
+                        <div class="canvas-content">
+                            <ul class="space-y-1">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-orange-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Personalización</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-orange-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Acompañamiento</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-orange-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Multi-canal</b></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Customer Segments - Borde naranja -->
+                    <div class="canvas-cell orange-container md:col-span-2" style="border-color: var(--unicomfa-orange);">
+                        <div class="container-title">
+                            <i class="fas fa-users mr-2"></i> <b>Segmentos</b>
+                        </div>
+                        <div class="canvas-content">
+                            <ul class="space-y-1">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-orange-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Estudiantes</b> (urbanos/rurales)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-orange-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray700"><b>Empresas</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-orange-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Gobierno</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-orange-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>IES</b></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Key Resources - Borde verde -->
+                    <div class="canvas-cell green-container md:col-span-2" style="border-color: var(--unicomfa-green);">
+                        <div class="container-title">
+                            <i class="fas fa-cogs mr-2"></i> <b>Recursos Clave</b>
+                        </div>
+                        <div class="canvas-content">
+                            <ul class="space-y-1">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Talento especializado</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Plataformas tecnológicas</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Contenidos digitales</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Inteligencia Artificial</b></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Channels - Borde verde -->
+                    <div class="canvas-cell green-container md:col-span-2" style="border-color: var(--unicomfa-green);">
+                        <div class="container-title">
+                            <i class="fas fa-broadcast-tower mr-2"></i> Canales
+                        </div>
+                        <div class="canvas-content">
+                            <ul class="space-y-1">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Plataforma digital</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Sede principal/regionales</b></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 text-xs mt-1 mr-1"></i>
+                                    <span class="text-gray-700"><b>Aliados estratégicos</b></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Cost Structure - Borde verde -->
+                    <div class="canvas-cell green-container md:col-span-4" style="border-color: var(--unicomfa-green);">
+                        <div class="container-title">
+                            <i class="fas fa-file-invoice-dollar mr-2"></i> <b>Estructura de Costos</b>
+                        </div>
+                        <div class="canvas-content">
+                            <div class="grid grid-cols-3 gap-1">
+                                <div class="text-center p-1 rounded bg-gray-100">
+                                    <i class="fas fa-user-tie text-green-500 text-xs"></i>
+                                    <p class="text-xs text-gray-700"><b>Personal</b></p>
+                                </div>
+                                <div class="text-center p-1 rounded bg-gray-100">
+                                    <i class="fas fa-server text-green-500 text-xs"></i>
+                                    <p class="text-xs text-gray-700"><b>Infraestructura</b></p>
+                                </div>
+                                <div class="text-center p-1 rounded bg-gray-100">
+                                    <i class="fas fa-tools text-green-500 text-xs"></i>
+                                    <p class="text-xs text-gray-700"><b>Operación</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Revenue Streams - Borde verde -->
+                    <div class="canvas-cell green-container md:col-span-4" style="border-color: var(--unicomfa-green);">
+                        <div class="container-title">
+                            <i class="fas fa-money-bill-wave mr-2"></i> <b>Fuentes de Ingreso</b>
+                        </div>
+                        <div class="canvas-content">
+                            <div class="grid grid-cols-3 gap-1">
+                                <div class="text-center p-1 rounded bg-gray-100">
+                                    <i class="fas fa-graduation-cap text-green-500 text-xs"></i>
+                                    <p class="text-xs text-gray-700"><b>Matrículas</b></p>
+                                </div>
+                                <div class="text-center p-1 rounded bg-gray-100">
+                                    <i class="fas fa-book text-green-500 text-xs"></i>
+                                    <p class="text-xs text-gray-700"><b>Educación continua</b></p>
+                                </div>
+                                <div class="text-center p-1 rounded bg-gray-100">
+                                    <i class="fas fa-handshake text-green-500 text-xs"></i>
+                                    <p class="text-xs text-gray-700"><b>Alianzas</b></p>
+                                </div>
+                                <div class="text-center p-1 rounded bg-gray-100">
+                                    <i class="fas fa-chalkboard-teacher text-green-500 text-xs"></i>
+                                    <p class="text-xs text-gray-700"><b>Consultoría</b></p>
+                                </div>
+                                <div class="text-center p-1 rounded bg-gray-100">
+                                    <i class="fas fa-code text-green-500 text-xs"></i>
+                                    <p class="text-xs text-gray-700"><b>Bootcamps</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Development Lines -->
+            <div class="mb-3 w-full">
+                <h2 class="text-lg font-bold mb-2 text-left" style="color: var(--unicomfa-green);">
+                    <i class="fas fa-arrows-alt mr-2"></i> <b>Líneas de Desarrollo</b>
+                </h2>
+                
+                <div class="development-grid grid grid-cols-5 gap-2">
+                    <div class="development-card blue-container p-2" style="border-color: var(--unicomfa-blue);">
+                        <div class="text-center">
+                            <i class="fas fa-university text-blue-500 text-xl mb-1"></i>
+                            <h4 class="text-xs font-medium text-gray-700"><b>Educación formal multimodal</b></h4>
+                        </div>
+                    </div>
+                    
+                    <div class="development-card orange-container p-2" style="border-color: var(--unicomfa-orange);">
+                        <div class="text-center">
+                            <i class="fas fa-certificate text-orange-500 text-xl mb-1"></i>
+                            <h4 class="text-xs font-medium text-gray-700"><b>Educación continua</b></h4>
+                        </div>
+                    </div>
+                    
+                    <div class="development-card green-container p-2" style="border-color: var(--unicomfa-green);">
+                        <div class="text-center">
+                            <i class="fas fa-laptop-code text-green-500 text-xl mb-1"></i>
+                            <h4 class="text-xs font-medium text-gray-700"><b>Servicios tecno-pedagógicos</b></h4>
+                        </div>
+                    </div>
+                    
+                    <div class="development-card blue-container p-2" style="border-color: var(--unicomfa-blue);">
+                        <div class="text-center">
+                            <i class="fas fa-landmark text-blue-500 text-xl mb-1"></i>
+                            <h4 class="text-xs font-medium text-gray-700"><b>Programas sector público</b></h4>
+                        </div>
+                    </div>
+                    
+                    <div class="development-card orange-container p-2" style="border-color: var(--unicomfa-orange);">
+                        <div class="text-center">
+                            <i class="fas fa-puzzle-piece text-orange-500 text-xl mb-1"></i>
+                            <h4 class="text-xs font-medium text-gray-700"><b>REA/RED comercializables</b></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vision 2030 -->
+            <div class="vision-container mb-4" style="border-color: var(--unicomfa-green);">
+                <div class="vision-title">
+                    <i class="vision-icon fas fa-eye"></i>
+                    <span>Visión 2030</span>
+                </div>
+                <div class="vision-content">
+                    <p class="text-lg">
+                        <span class="font-bold">Centro autosostenible de innovación educativa</span>, 
+                        articulado con PEI y <span class="font-bold text-blue-800">ODS 4</span> 
+                        <span class="text-xs">(Educación de Calidad)</span>
+                    </p>
+                </div>
+            </div>
+        </div> <!-- Cierre del scroll-container -->
+    </div> <!-- Cierre del slide -->
 </body>
 </html>
